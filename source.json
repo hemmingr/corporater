@@ -1,8 +1,6 @@
-{
-  "object": "o",
-  "id": 100,
-  "action": "change",
-  "parameters": {
-    "name": "hemmjag"
-  }
-}
+[
+    {
+        "id":"expressionContent",
+        "expression":"o.100.change(name := 'hemmiiii')\n//o.100.change(name := r.github.content)\n//source(r.resourceGetSetup.content)\n"
+    }
+]
