@@ -1,4 +1,6 @@
-# Test Extended plugin/script repository
+# DASB repository
 
 
-This repo is used as an Extended Repository
+This repo is used as a Repository for DASB 
+
+DASB - Deployment Automation Script Bundle
