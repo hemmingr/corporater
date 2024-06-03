@@ -1,4 +1,4 @@
 [ {
   "id" : "expressionContent",
-  "expression" : "o.102.change(name := 'hemmingdefaultfff')\n//o.100.change(name := r.github.content)\n//source(r.resourceGetSetup.content)\n"
+  "expression" : "o.102.change(name := 'jsontest')"
 } ]
