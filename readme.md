@@ -12,5 +12,5 @@ This is a repository for DEPLOY (BMP Deployment framework)
 **Filetype**<br>
 
 - dasb (Deployment Automation Script Bundle)
-- setup (Setup file)
+- setup (Initial Setup file)
 - sop (Standard Operating Procedure)
