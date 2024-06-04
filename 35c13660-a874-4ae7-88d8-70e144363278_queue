@@ -1,1 +1,6 @@
-dd
+[ {
+  "operation" : "update",
+  "organization" : "102",
+  "id" : "expressionContent",
+  "expression" : "o.102.change(name := 'jsontest')"
+} ]
