@@ -1,10 +1,8 @@
 # DEPLOY repository
 
 
-This repo is used as a Repository for DASB 
+This repo is used as a Repository for DEPLOY (BMP Deployment framework)
 
-**DASB** - Deployment Automation Script Bundle<br>
-**SOP** - Standard Operating Procedure<br>
 
 ## File Naming & Structure
 
@@ -13,5 +11,6 @@ This repo is used as a Repository for DASB
 **UID** - Unique Identifier<br><br>
 **Filetype**<br>
 
-- DASB, Deployment Automation Script Bundle
-- Setup file
+- dasb (Deployment Automation Script Bundle)
+- setup (Setup file)
+- sop (Standard Operating Procedure)
