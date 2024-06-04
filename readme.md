@@ -10,8 +10,8 @@ This repo is used as a Repository for DASB
 
 {UID}_{filetype]
 
-**UID** - Unique Identifier<br>
-**Filetype**<br>
+**UID** - Unique Identifier<br><br>
+**Filetype**<br><br><br>
 
 - DASB, Deployment Automation Script Bundle
 - Setup file
