@@ -11,7 +11,7 @@ This repo is used as a Repository for DASB
 {UID}_{filetype]
 
 **UID** - Unique Identifier<br><br>
-**Filetype**<br><br><br>
+**Filetype**<br>
 
 - DASB, Deployment Automation Script Bundle
 - Setup file
