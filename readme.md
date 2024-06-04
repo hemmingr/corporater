@@ -1,7 +1,7 @@
 # DEPLOY repository
 
 
-This repo is used as a Repository for DEPLOY (BMP Deployment framework)
+This is a repository for DEPLOY (BMP Deployment framework)
 
 
 ## File Naming & Structure
