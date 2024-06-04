@@ -8,7 +8,7 @@ This is a repository for DEPLOY (BMP Deployment framework)
 
 `[{UID}_]{filetype}_{purpose}_{short description}`<br>
 
-**UID** - Instance Unique Identifier<br> (Used for filetering based on instance)<br><br>
+**UID** - Instance Unique Identifier (Used for filtering on instance)<br><br>
 **Filetype**<br>
 
 - dasb (Deployment Automation Script Bundle)
