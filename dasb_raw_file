@@ -1,4 +1,4 @@
-t.categoryResourcesDeploy.add(FileResource, name := 'Transformer Test.xlsx', content := 'Transformer Test.xlsx;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;H4sIAAAAAAAA/+16ZVRb69Z1cC1OcZfiXqQUl+KhWCkUdwgECFCsuGuLU9yd4u7u7u5SvLh/9Nz7
+t.categoryResourcesDownloads.add(FileResource, name := 'Transformer Test.xlsx', content := 'Transformer Test.xlsx;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;H4sIAAAAAAAA/+16ZVRb69Z1cC1OcZfiXqQUl+KhWCkUdwgECFCsuGuLU9yd4u7u7u5SvLh/9Nz7
 vuec3t7f74/vzD3Gk72TsVb2yJjzmStrbUVZGFgcADwAEQAAUAD0D5NMtaEAgM+wAAA2ABFaUwxs
 ZWdkZaej4mRtBNFicbQEkafDQtOlAqAB/+D/axRG9Su0s2FIXErdiW0wyyyUCSO+PPDqxmJ4K9jS
 EdmVb6CZbGb2mBx4iyGahmvOU4o1vODCcTJoWmZlWeUV0FWvhBrs2dOiqk3Ew9rZvU/TjEcQYavx
