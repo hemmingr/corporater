@@ -1,0 +1,29 @@
+name: Deploy Files to GitHub Pages
+
+on:
+  workflow_dispatch:
+    inputs:
+      host_name:
+        description: 'Host name to deploy files for'
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Build and Deploy to GitHub Pages
+        env:
+          HOST_NAME: ${{ github.event.inputs.host_name }}
+        run: |
+          mkdir public
+          cp -r ./* public/
+          mv public/$HOST_NAME/* public/
+          echo "$HOST_NAME.github.io" > public/CNAME
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add public
+          git commit -m "Deploy $HOST_NAME files to GitHub Pages"
+          git push --force "https://${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.git" main:gh-pages
