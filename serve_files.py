@@ -6,9 +6,9 @@ def identify_server():
 
 def serve_files(server_id):
     files_to_serve = {
-        'server_dev': 'server_dev/install1.txt',
-        'server_qa': 'server_qa/install2.txt',
-        'server_prod': 'server_prod/install3.txt',
+        'server_dev': 'server_dev/install.txt',
+        'server_qa': 'server_qa/install.txt',
+        'server_prod': 'server_prod/install.txt',
         'default': 'default/file.txt'
     }
     file_path = files_to_serve.get(server_id, files_to_serve['default'])
