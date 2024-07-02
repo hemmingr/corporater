@@ -1,6 +1,6 @@
 import os
 
-def identify_user():
+def identify_server():
     user_type = os.getenv('SERVER_ID', 'default')
     return server_id
 
