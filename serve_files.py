@@ -8,7 +8,7 @@ def serve_files(server_id):
     files_to_serve = {
         'server_dev': 'server_dev/file1.txt',
         'server_qa': 'server_qa/file2.txt',
-        'servr_prod': 'server_prod/file3.txt',
+        'server_prod': 'server_prod/file3.txt',
         'default': 'default/file.txt'
     }
     file_path = files_to_serve.get(server_id, files_to_serve['default'])
