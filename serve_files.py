@@ -1,7 +1,7 @@
 import os
 
 def identify_server():
-    user_type = os.getenv('SERVER_ID', 'default')
+    server_id = os.getenv('SERVER_ID', 'default')
     return server_id
 
 def serve_files(server_id):
