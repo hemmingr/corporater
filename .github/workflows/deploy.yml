@@ -14,16 +14,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       
-      - name: Build and Deploy to GitHub Pages
-        env:
-          HOST_NAME: ${{ github.event.inputs.host_name }}
+      - name: Prepare files for deployment
         run: |
           mkdir public
-          cp -r ./* public/
-          mv public/$HOST_NAME/* public/
-          echo "$HOST_NAME.github.io" > public/CNAME
+          cp -r ./${{ github.event.inputs.host_name }}/* public/
+          echo "${{ github.event.inputs.host_name }}.github.io" > public/CNAME
+
+      - name: Deploy to GitHub Pages
+        run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
           git add public
-          git commit -m "Deploy $HOST_NAME files to GitHub Pages"
+          git commit -m "Deploy ${{ github.event.inputs.host_name }} files to GitHub Pages"
           git push --force "https://${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.git" main:gh-pages
