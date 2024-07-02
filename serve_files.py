@@ -15,5 +15,5 @@ def serve_files(server_id):
     print(f"Serving file: {file_path}")
 
 if __name__ == "__main__":
-    server_id = identify_user()
+    server_id = identify_server()
     serve_files(server_id)
