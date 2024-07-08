@@ -1,1 +1,1 @@
-{"pushtype": "object","expressions": [{"exp" : "o.171.add(Scorecard, id := '220401', description := ' dfgfdgdfg')","objectid" : "220401","parentclass" : "Organisation","parentid" : "171","objectname" : "Scorecard","parentname" : "hemming2","class" : "Scorecard"}]}
+o.171.add(Scorecard, id := '220401', description := ' dfgfdgdfg')
