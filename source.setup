@@ -1,1 +1,0 @@
-o.171.add(Scorecard, id := '7054', name := 'Scorecarda', description := ' fdgdfgdfg', ownership := list(u.admin, u.get('roaldsoy@corporater.com')))
