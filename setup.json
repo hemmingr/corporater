@@ -1,0 +1,75 @@
+{
+    "setup": {
+        "hosts": [
+            {
+                "id": "host1",
+                "name": "Newfeaturemaster",
+                "url": "https://newfeaturemaster.innovation.corporater.dev",
+                "type": "source",
+                "authentication": {
+                    "method": "basic",
+                    "credentials": {
+                        "username": "user1",
+                        "password": "password1"
+                    }
+                }
+            },
+            {
+                "id": "host2",
+                "name": "Deployment",
+                "url": "https://deployment.innovation.corporater.dev",
+                "type": "target",
+                "authentication": {
+                    "method": "token",
+                    "credentials": {
+                        "token": "abc123token"
+                    }
+                }
+            },
+            {
+                "id": "host3",
+                "name": "Basic",
+                "url": "https://basic.innovation.corporater.dev",
+                "type": "intermediate",
+                "authentication": {
+                    "method": "none"
+                }
+            }
+        ],
+        "default_source": {
+            "id": "host1",
+            "name": "Newfeaturemaster",
+            "url": "https://newfeaturemaster.innovation.corporater.dev"
+        },
+        "default_target": {
+            "id": "host2",
+            "name": "Deployment",
+            "url": "https://deployment.innovation.corporater.dev"
+        },
+        "transfer_settings": {
+            "protocol": "SFTP",
+            "compression": "gzip",
+            "encryption": {
+                "enabled": true,
+                "method": "AES-256"
+            },
+            "retries": 3,
+            "timeout": 120
+        },
+        "logging": {
+            "level": "ERROR",
+            "destination": "",
+            "file_path": ""
+        },
+        "notification": {
+            "enabled": false,
+            "method": "email",
+            "recipients": [
+                "roaldsoy@corporater.com",
+                "test@corporater.com"
+            ],
+            "on_success": true,
+            "on_failure": true
+        }
+    }
+}
