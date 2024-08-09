@@ -50,7 +50,7 @@
       "allowed_transfers": [
         {
           "from": "dev",
-          "to": "test"
+          "to": "qa"
         },
         {
           "from": "qa",
@@ -74,7 +74,25 @@
           "from": "qa",
           "to": "dev"
         }
-      ]
+      ],
+      "rollback_rules": {
+        "allowed_rollbacks": [
+          {
+            "from": "qa",
+            "to": "dev"
+          },
+          {
+            "from": "prod",
+            "to": "qa"
+          }
+        ],
+        "disallowed_rollbacks": [
+          {
+            "from": "prod",
+            "to": "dev"
+          }
+        ]
+      }
     },
     "transfer_settings": {
       "protocol": "SFTP",
