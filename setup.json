@@ -5,7 +5,7 @@
         "id": "host1",
         "name": "Newfeaturemaster",
         "url": "https://newfeaturemaster.innovation.corporater.dev",
-        "stage": "test",
+        "stage": "dev",
         "authentication": {
           "method": "basic",
           "credentials": {
@@ -18,7 +18,7 @@
         "id": "host2",
         "name": "Deployment",
         "url": "https://deployment.innovation.corporater.dev",
-        "stage": "staging",
+        "stage": "qa",
         "authentication": {
           "method": "token",
           "credentials": {
@@ -30,7 +30,7 @@
         "id": "host3",
         "name": "Production",
         "url": "https://basic.innovation.corporater.dev",
-        "stage": "production",
+        "stage": "prod",
         "authentication": {
           "method": "none"
         }
@@ -49,30 +49,30 @@
     "transfer_rules": {
       "allowed_transfers": [
         {
-          "from": "test",
-          "to": "staging"
-        },
-        {
-          "from": "staging",
-          "to": "production"
-        },
-        {
-          "from": "production",
+          "from": "dev",
           "to": "test"
+        },
+        {
+          "from": "qa",
+          "to": "prod"
+        },
+        {
+          "from": "prod",
+          "to": "dev"
         }
       ],
       "disallowed_transfers": [
         {
-          "from": "test",
-          "to": "production"
+          "from": "dev",
+          "to": "prod"
         },
         {
-          "from": "production",
-          "to": "staging"
+          "from": "prod",
+          "to": "qa"
         },
         {
-          "from": "staging",
-          "to": "test"
+          "from": "qa",
+          "to": "dev"
         }
       ]
     },
