@@ -3,6 +3,7 @@
     "hosts": [
       {
         "id": "host1",
+        "uid": "f3a5b76e-1c4d-4f19-8d2b-1a3c33e73f1b",
         "name": "Newfeaturemaster",
         "url": "https://newfeaturemaster.innovation.corporater.dev",
         "stage": "dev",
@@ -16,6 +17,7 @@
       },
       {
         "id": "host2",
+        "uid": "b2c6a7e1-6cd5-4c88-a8f1-89f7cbb8f8c5",
         "name": "Deployment",
         "url": "https://deployment.innovation.corporater.dev",
         "stage": "qa",
@@ -28,6 +30,7 @@
       },
       {
         "id": "host3",
+        "uid": "e4d7c72a-9e7a-4f99-bb91-f5c8d9b8b715",
         "name": "Production",
         "url": "https://basic.innovation.corporater.dev",
         "stage": "prod",
