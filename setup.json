@@ -1,4 +1,26 @@
 {
+    "metadata": {
+        "version": "1.0.0",
+        "last_updated": "2024-08-12",
+        "description": "Configuration for deployment and rollback processes, including customer details and transfer rules."
+    },
+    "customer": {
+        "customer_uid": "c12345-abcde-67890-fghij",
+        "name": "Innovative Solutions Inc.",
+        "contact": {
+            "name": "Jane Doe",
+            "email": "jane.doe@innovativesolutions.com",
+            "phone": "+1234567890"
+        },
+        "address": {
+            "street": "123 Innovation Drive",
+            "city": "Tech City",
+            "state": "CA",
+            "zip": "90001",
+            "country": "USA"
+        },
+        "description": "Innovative Solutions Inc. is a leading provider of cutting-edge technology solutions, specializing in software development and IT consulting."
+    },
     "setup": {
         "version": "1.0.0",
         "hosts": [
@@ -123,7 +145,12 @@
         "logging": {
             "level": "ERROR",
             "destination": "server",
-            "file_path": "/var/logs/transfer.log"
+            "file_path": "/var/logs/transfer.log",
+            "rotation_policy": {
+                "enabled": true,
+                "max_size": "50MB",
+                "max_age": "30d"
+            }
         },
         "notification": {
             "enabled": false,
