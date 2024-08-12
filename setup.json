@@ -6,20 +6,20 @@
     },
     "customer": {
         "customer_uid": "c12345-abcde-67890-fghij",
-        "name": "Innovative Solutions Inc.",
+        "name": "Corporater",
         "contact": {
-            "name": "Jane Doe",
-            "email": "jane.doe@innovativesolutions.com",
-            "phone": "+1234567890"
+            "name": "Test",
+            "email": "test@coporater.com",
+            "phone": "9999999"
         },
         "address": {
-            "street": "123 Innovation Drive",
-            "city": "Tech City",
-            "state": "CA",
-            "zip": "90001",
-            "country": "USA"
+            "street": "gateaderse",
+            "city": "Stavanger",
+            "state": "",
+            "zip": "4444",
+            "country": "NO"
         },
-        "description": "Innovative Solutions Inc. is a leading provider of cutting-edge technology solutions, specializing in software development and IT consulting."
+        "description": "Corporater beskrivelse"
     },
     "setup": {
         "version": "1.0.0",
