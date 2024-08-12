@@ -1,6 +1,6 @@
 {
     "setup": {
-        "version": "1.0.0", 
+        "version": "1.0.0",
         "hosts": [
             {
                 "id": "host1",
@@ -135,10 +135,22 @@
             "on_success": true,
             "on_failure": true
         },
-        "process_descriptions": {
-            "dev_to_qa": "This step involves transferring data from the Development environment to the QA environment. In this stage, features that have been developed and initially tested are moved to QA for more rigorous testing. This includes functional, integration, and system testing to ensure that the features meet the quality standards before moving to production. Successful transfer and testing in QA are crucial before the deployment to production.",
-            "qa_to_prod": "Once features have passed all QA tests, they are ready to be deployed to the Production environment. This step involves transferring validated and approved data from the QA environment to Production. This is the final step in the deployment pipeline, where the features become live and available to end-users. Rigorous validation in QA helps minimize risks associated with deploying to Production.",
-            "prod_to_dev": "In cases where data or features need to be rolled back or revised based on feedback from Production, they are transferred back to the Development environment. This step allows for addressing any issues or making further enhancements before potentially redeploying to QA or Production. It ensures that feedback from Production can be incorporated into future development cycles."
-        }
+        "process_descriptions": [
+            {
+                "id": "process1",
+                "name": "Development to QA",
+                "description": "This step involves transferring data from the Development environment to the QA environment. In this stage, features that have been developed and initially tested are moved to QA for more rigorous testing. This includes functional, integration, and system testing to ensure that the features meet the quality standards before moving to production. Successful transfer and testing in QA are crucial before the deployment to production."
+            },
+            {
+                "id": "process2",
+                "name": "QA to Production",
+                "description": "Once features have passed all QA tests, they are ready to be deployed to the Production environment. This step involves transferring validated and approved data from the QA environment to Production. This is the final step in the deployment pipeline, where the features become live and available to end-users. Rigorous validation in QA helps minimize risks associated with deploying to Production."
+            },
+            {
+                "id": "process3",
+                "name": "Production to Development",
+                "description": "In cases where data or features need to be rolled back or revised based on feedback from Production, they are transferred back to the Development environment. This step allows for addressing any issues or making further enhancements before potentially redeploying to QA or Production. It ensures that feedback from Production can be incorporated into future development cycles."
+            }
+        ]
     }
 }
