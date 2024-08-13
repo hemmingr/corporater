@@ -31,7 +31,7 @@
                 "id": "host1",
                 "uid": "f3a5b76e-1c4d-4f19-8d2b-1a3c33e73f1b",
                 "name": "Newfeaturemaster",
-                "url": "${common.base_url}/newfeaturemaster",
+                "url": "/newfeaturemaster",
                 "stage": "dev",
                 "authentication": {
                     "method": "basic",
@@ -46,7 +46,7 @@
                 "id": "host2",
                 "uid": "b2c6a7e1-6cd5-4c88-a8f1-89f7cbb8f8c5",
                 "name": "Deployment",
-                "url": "${common.base_url}/deployment",
+                "url": "/deployment",
                 "stage": "qa",
                 "authentication": {
                     "method": "token",
@@ -60,7 +60,7 @@
                 "id": "host3",
                 "uid": "e4d7c72a-9e7a-4f99-bb91-f5c8d9b8b715",
                 "name": "Production",
-                "url": "${common.base_url}/basic",
+                "url": "/basic",
                 "stage": "prod",
                 "authentication": {
                     "method": "none"
@@ -71,12 +71,12 @@
         "default_source": {
             "id": "host1",
             "name": "Newfeaturemaster",
-            "url": "${common.base_url}/newfeaturemaster"
+            "url": "/newfeaturemaster"
         },
         "default_target": {
             "id": "host2",
             "name": "Deployment",
-            "url": "${common.base_url}/deployment"
+            "url": "/deployment"
         },
         "transfer_rules": {
             "allowed_transfers": [
@@ -146,28 +146,28 @@
             "timeout": 120,
             "pre_transfer_validation": {
                 "enabled": true,
-                "script": "/scripts/pre_transfer_validation.sh"
+                "script": "pre_transfer_validation"
             },
             "post_transfer_verification": {
                 "enabled": true,
-                "script": "/scripts/post_transfer_verification.sh"
+                "script": "post_transfer_verification"
             }
         },
         "logging": {
             "dev": {
                 "level": "DEBUG",
                 "destination": "server",
-                "file_path": "/var/logs/dev_transfer.log"
+                "file_path": "dev_transfer.log"
             },
             "qa": {
                 "level": "INFO",
                 "destination": "server",
-                "file_path": "/var/logs/qa_transfer.log"
+                "file_path": "qa_transfer.log"
             },
             "prod": {
                 "level": "ERROR",
                 "destination": "server",
-                "file_path": "/var/logs/prod_transfer.log",
+                "file_path": "prod_transfer.log",
                 "rotation_policy": {
                     "enabled": true,
                     "max_size": "50MB",
@@ -184,7 +184,7 @@
             "recipients": {
                 "dev": ["devteam@corporater.com"],
                 "qa": ["qatest@corporater.com"],
-                "prod": ["ops@corporater.com", "admin@corporater.com"]
+                "prod": ["prod@corporater.com", "test@corporater.com"]
             },
             "on_success": true,
             "on_failure": true
