@@ -1,8 +1,7 @@
 {
   "metadata": {
-    "version": "1.0.0",
     "last_updated": "2024-08-12",
-    "description": "ing cuddddddddddddddddddddstomer details and transfer rules."
+    "description": "Configfor deployment, rollback, and release management processes, including customer details and transfer rules."
   },
   "customer": {
     "customer_uid": "c12345-abcde-67890-fghij",
