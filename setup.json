@@ -1,5 +1,6 @@
 {
   "metadata": {
+    "version": "1.0.0",
     "last_updated": "2024-08-12",
     "description": "Configurationssssss for deployment, rollback, and release management processes, including customer details and transfer rules."
   },
