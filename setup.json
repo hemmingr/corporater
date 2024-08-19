@@ -372,12 +372,12 @@
         }
       },
       "dependency_management": {
-        "enabled": true,
+        "enabled": false,
         "dependency_tracking": {
-          "enabled": true,
+          "enabled": false,
           "method": "automatic",
           "notification": {
-            "enabled": true,
+            "enabled": false,
             "method": "email",
             "recipients": [
               "devteam@corporater.com"
