@@ -73,7 +73,7 @@
       "name": "Newfeaturemaster",
       "url": "/newfeaturemaster"
     },
-    "default_target": {
+    "default_destination": {
       "id": "host2",
       "name": "Deployment",
       "url": "/deployment"
@@ -81,55 +81,55 @@
     "transfer_rules": {
       "allowed_transfers": [
         {
-          "from": "dev",
-          "to": "qa",
+          "source": "dev",
+          "destination": "qa",
           "description": "Transfer from Development to QA for further testing."
         },
         {
-          "from": "qa",
-          "to": "prod",
+          "source": "qa",
+          "destination": "prod",
           "description": "Transfer from QA to Production for live deployment."
         },
         {
-          "from": "prod",
-          "to": "dev",
+          "source": "prod",
+          "destination": "dev",
           "description": "Roll back from Production to Development for addressing issues."
         }
       ],
       "disallowed_transfers": [
         {
-          "from": "dev",
-          "to": "prod",
+          "source": "dev",
+          "destination": "prod",
           "description": "Direct transfer from Development to Production is not allowed to maintain stability."
         },
         {
-          "from": "prod",
-          "to": "qa",
+          "source": "prod",
+          "destination": "qa",
           "description": "Direct transfer from Production to QA is not allowed to prevent overwriting QA data."
         },
         {
-          "from": "qa",
-          "to": "dev",
+          "source": "qa",
+          "destination": "dev",
           "description": "Direct transfer from QA to Development is not allowed to maintain data integrity."
         }
       ],
       "rollback_rules": {
         "allowed_rollbacks": [
           {
-            "from": "qa",
-            "to": "dev",
+            "source": "qa",
+            "destination": "dev",
             "description": "Rollback from QA to Development to address testing feedback."
           },
           {
-            "from": "prod",
-            "to": "qa",
+            "source": "prod",
+            "destination": "qa",
             "description": "Rollback from Production to QA to fix issues identified in the live environment."
           }
         ],
         "disallowed_rollbacks": [
           {
-            "from": "prod",
-            "to": "dev",
+            "source": "prod",
+            "destination": "dev",
             "description": "Rollback from Production to Development is not allowed to prevent data inconsistency."
           }
         ]
@@ -270,146 +270,43 @@
         },
         {
           "stage": "pre-production",
-          "description": "Optional stage for final testing in an environment closely mirroring production."
+          "description": "Optional stage for final testing in an environment closely resembling production."
         },
         {
           "stage": "production",
-          "description": "Final stage where features are live and available to end-users."
+          "description": "Live environment where the final, tested product is deployed for end-users."
         }
       ],
-      "approval_process": {
-        "development_to_qa": {
-          "required_approvals": [
-            {
-              "role": "Lead Developer",
-              "name": "devteam@corporater.com"
-            },
-            {
-              "role": "QA Manager",
-              "name": "qatest@corporater.com"
-            }
-          ],
-          "approval_conditions": {
-            "tests_passed": true,
-            "no_critical_bugs": true
-          }
-        },
-        "qa_to_pre_production": {
-          "required_approvals": [
-            {
-              "role": "QA Manager",
-              "name": "qatest@corporater.com"
-            },
-            {
-              "role": "Project Manager",
-              "name": "pm@corporater.com"
-            }
-          ],
-          "approval_conditions": {
-            "all_tests_passed": true,
-            "performance_criteria_met": true
-          }
-        },
-        "pre_production_to_production": {
-          "required_approvals": [
-            {
-              "role": "CTO",
-              "name": "cto@corporater.com"
-            },
-            {
-              "role": "Product Owner",
-              "name": "productowner@corporater.com"
-            }
-          ],
-          "approval_conditions": {
-            "no_open_critical_issues": true,
-            "security_checks_passed": true
-          }
-        }
-      },
       "versioning": {
-        "strategy": "Semantic Versioning",
+        "strategy": "semantic",
         "format": "MAJOR.MINOR.PATCH",
-        "auto_increment": true
+        "example": "1.2.3",
+        "description": "Versioning strategy follows semantic versioning where increments in major, minor, or patch versions correspond to backward-incompatible changes, new features, and bug fixes respectively."
       },
-      "communication": {
-        "release_notes": {
-          "enabled": false,
-          "distribution_method": "email",
-          "recipients": [
-            "stakeholders@corporater.com",
-            "support@corporater.com"
-          ],
-          "template": "release_notes_template.md"
+      "rollback_policies": {
+        "development": {
+          "allowed": true,
+          "description": "Rollbacks allowed from Development to previous versions."
         },
-        "emergency_release": {
-          "protocol": "Hotfix",
-          "approvals": [
-            {
-              "role": "CTO",
-              "name": "cto@corporater.com"
-            },
-            {
-              "role": "Support Lead",
-              "name": "support@corporater.com"
-            }
-          ],
-          "notification_method": "sms"
-        }
-      }
-    },
-    "collaboration_and_concurrency": {
-      "object_locking": {
-        "enabled": false,
-        "method": "optimistic",
-        "conflict_resolution": "last_writer_wins",
-        "notification": {
-          "enabled": false,
-          "method": "email",
-          "recipients": [
-            "devteam@corporater.com"
-          ]
+        "qa": {
+          "allowed": true,
+          "description": "Rollbacks allowed from QA to Development."
+        },
+        "pre-production": {
+          "allowed": false,
+          "description": "Rollbacks are generally not allowed at this stage to ensure consistency with production."
+        },
+        "production": {
+          "allowed": true,
+          "description": "Rollbacks allowed from Production to QA or Development in case of critical issues."
         }
       },
-      "dependency_management": {
-        "enabled": false,
-        "dependency_tracking": {
-          "enabled": false,
-          "method": "automatic",
-          "notification": {
-            "enabled": false,
-            "method": "email",
-            "recipients": [
-              "devteam@corporater.com"
-            ]
-          }
-        },
-        "impact_analysis": {
-          "enabled": false,
-          "method": "automated",
-          "notification": {
-            "enabled": true,
-            "method": "email",
-            "recipients": [
-              "pm@corporater.com"
-            ]
-          }
-        }
+      "changelog": {
+        "enabled": true,
+        "path": "changelog.md",
+        "format": "markdown",
+        "description": "Changelog records all significant changes including new features, enhancements, and bug fixes across all environments. It follows a clear format to track the progression of changes throughout the release stages."
       }
-    },
-    "automated_performance_reviews": {
-      "enabled": false,
-      "review_frequency": "monthly",
-      "report_distribution": [
-        "process_owner@corporater.com",
-        "cto@corporater.com"
-      ],
-      "auto_optimization_suggestions": true
-    },
-    "user_feedback_integration": {
-      "enabled": false,
-      "feedback_form_url": "https://feedback.corporater.dev",
-      "incentives_for_feedback": true
     }
   }
 }
