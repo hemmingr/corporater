@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "version": "1.5.0",
+    "version": "1.8.2",
     "last_updated": "2024-08-19",
-    "description": "Updated config for deployment, with a forward-only development cycle and no rollback requirements."
+    "description": "Configuration with forward-only transfers and logical chunking methods."
   },
   "customer": {
     "customer_uid": "c12345-abcde-67890-fghij",
@@ -22,7 +22,7 @@
     "description": "Corporater description"
   },
   "setup": {
-    "version": "1.5.0",
+    "version": "1.8.2",
     "common": {
       "base_url": "https://innovation.corporater.dev"
     },
@@ -52,6 +52,109 @@
         "description": "Production environment where features are live and available to end-users."
       }
     ],
+    "chunking": {
+      "enabled": true,
+      "description": "Divide large datasets into smaller chunks for manageable processing and transfer.",
+      "methods": [
+        {
+          "method": "logical_split",
+          "description": "Chunk data based on logical separations, such as records, categories, or modules."
+        },
+        {
+          "method": "pagination",
+          "description": "Fetch and transfer data in pages using pagination parameters."
+        },
+        {
+          "method": "batch_processing",
+          "description": "Process and transfer data in predefined batches based on record count or other criteria."
+        },
+        {
+          "method": "temporal_segmentation",
+          "description": "Segment data based on time intervals, such as daily, weekly, or monthly."
+        },
+        {
+          "method": "hierarchical_splitting",
+          "description": "Split data based on hierarchical relationships within the data structure."
+        }
+      ],
+      "handling": {
+        "compression": {
+          "enabled": true,
+          "method": "gzip",
+          "description": "Compress chunks to reduce transfer size and improve efficiency."
+        },
+        "validation": {
+          "enabled": true,
+          "methods": [
+            "checksum_verification",
+            "restore_test"
+          ],
+          "description": "Verify each chunk to ensure data integrity before and after transfer."
+        }
+      }
+    },
+    "message_queue": {
+      "enabled": true,
+      "description": "Distribute data chunks using a message queue to manage processing order and efficiency.",
+      "provider": "ExampleQueueProvider",
+      "settings": {
+        "queue_name": "dataChunksQueue",
+        "message_format": "JSON",
+        "retry_policy": {
+          "enabled": true,
+          "max_retries": 5,
+          "retry_delay_seconds": 60
+        },
+        "error_handling": {
+          "enabled": true,
+          "dead_letter_queue": "errorQueue",
+          "notification_method": "email",
+          "recipients": [
+            "admin@corporater.com"
+          ]
+        }
+      },
+      "integration": {
+        "data_producer": {
+          "description": "Component that publishes data chunks to the message queue.",
+          "methods": [
+            "publish_chunk"
+          ]
+        },
+        "data_consumer": {
+          "description": "Component that consumes data chunks from the message queue.",
+          "methods": [
+            "consume_chunk"
+          ]
+        }
+      }
+    },
+    "backup_procedures": {
+      "enabled": true,
+      "pre_transfer_backup": {
+        "enabled": true,
+        "description": "Backup the current state of the environment before initiating a transfer to ensure data integrity and recovery if needed.",
+        "frequency": "before each transfer",
+        "methods": [
+          {
+            "method": "full_backup",
+            "description": "Perform a full backup of the environment's data."
+          },
+          {
+            "method": "incremental_backup",
+            "description": "Perform incremental backups for efficiency if required."
+          }
+        ],
+        "verification": {
+          "enabled": true,
+          "description": "Verify the backup to ensure it is complete and usable.",
+          "methods": [
+            "checksum_verification",
+            "restore_test"
+          ]
+        }
+      }
+    },
     "transfer_rules": {
       "allowed_transfers": [
         {
@@ -82,32 +185,6 @@
           "description": "Direct transfer from Testing to Development is not allowed to maintain data integrity."
         }
       ]
-    },
-    "backup_procedures": {
-      "enabled": true,
-      "pre_transfer_backup": {
-        "enabled": true,
-        "description": "Backup the current state of the environment before initiating a transfer to ensure data integrity and recovery if needed.",
-        "frequency": "before each transfer",
-        "methods": [
-          {
-            "method": "full_backup",
-            "description": "Perform a full backup of the environment's data."
-          },
-          {
-            "method": "incremental_backup",
-            "description": "Perform incremental backups for efficiency if required."
-          }
-        ],
-        "verification": {
-          "enabled": true,
-          "description": "Verify the backup to ensure it is complete and usable.",
-          "methods": [
-            "checksum_verification",
-            "restore_test"
-          ]
-        }
-      }
     },
     "logging": {
       "development": {
@@ -162,7 +239,13 @@
       {
         "id": "process2",
         "name": "Testing to Production",
-        "description": "Transfer from Testing to Production for live deployment. Features are monitored in Production to ensure they perform as expected.",
+        "description": "Transfer from Testing to Production. Features become live for end-users. Issues detected in Production can be handled as required.",
+        "type": "forward"
+      },
+      {
+        "id": "process3",
+        "name": "Production to Development",
+        "description": "In case features need revision based on Production feedback, they are transferred back to Development. Ensures issues or enhancements are addressed before redeployment.",
         "type": "forward"
       }
     ],
@@ -228,7 +311,21 @@
             "stakeholders@corporater.com",
             "support@corporater.com"
           ],
-          "template": "release_notes_template.html"
+          "template": "release_notes_template.md"
+        },
+        "emergency_release": {
+          "protocol": "Hotfix",
+          "approvals": [
+            {
+              "role": "CTO",
+              "name": "cto@corporater.com"
+            },
+            {
+              "role": "Support Lead",
+              "name": "support@corporater.com"
+            }
+          ],
+          "notification_method": "sms"
         }
       }
     }
