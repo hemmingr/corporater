@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "version": "1.0.0",
-    "last_updated": "2024-08-12",
+    "version": "1.1.0",
+    "last_updated": "2024-08-19",
     "description": "Config for deployment, rollback, and release management processes, including customer details and transfer rules."
   },
   "customer": {
@@ -9,7 +9,7 @@
     "name": "Corporater",
     "contact": {
       "name": "Test",
-      "email": "test@coporater.com",
+      "email": "test@corporater.com",
       "phone": "9999999"
     },
     "address": {
@@ -19,10 +19,10 @@
       "zip": "4444",
       "country": "NO"
     },
-    "description": "Corporater beskrivelse"
+    "description": "Corporater description"
   },
   "setup": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "common": {
       "base_url": "https://innovation.corporater.dev"
     },
@@ -30,144 +30,103 @@
       {
         "id": "host1",
         "uid": "f3a5b76e-1c4d-4f19-8d2b-1a3c33e73f1b",
-        "name": "Newfeaturemaster",
-        "url": "/newfeaturemaster",
-        "stage": "dev",
-        "authentication": {
-          "method": "basic",
-          "credentials": {
-            "username": "user1",
-            "password": "password1"
-          }
-        },
+        "name": "Development Environment",
+        "url": "/development",
+        "stage": "development",
         "description": "Development environment where new features are developed and initially tested."
       },
       {
         "id": "host2",
         "uid": "b2c6a7e1-6cd5-4c88-a8f1-89f7cbb8f8c5",
-        "name": "Deployment",
-        "url": "/deployment",
-        "stage": "qa",
-        "authentication": {
-          "method": "token",
-          "credentials": {
-            "token": "abc123token"
-          }
-        },
+        "name": "QA Environment",
+        "url": "/qa",
+        "stage": "testing",
         "description": "QA environment for thorough testing of features before production deployment."
       },
       {
         "id": "host3",
         "uid": "e4d7c72a-9e7a-4f99-bb91-f5c8d9b8b715",
-        "name": "Production",
-        "url": "/basic",
-        "stage": "prod",
-        "authentication": {
-          "method": "none"
-        },
+        "name": "Production Environment",
+        "url": "/production",
+        "stage": "production",
         "description": "Production environment where features are live and available to end-users."
       }
     ],
-    "default_source": {
-      "id": "host1",
-      "name": "Newfeaturemaster",
-      "url": "/newfeaturemaster"
-    },
-    "default_destination": {
-      "id": "host2",
-      "name": "Deployment",
-      "url": "/deployment"
-    },
     "transfer_rules": {
       "allowed_transfers": [
         {
-          "source": "dev",
-          "destination": "qa",
-          "description": "Transfer from Development to QA for further testing."
+          "source": "development",
+          "destination": "testing",
+          "description": "Transfer from Development to Testing for further validation."
         },
         {
-          "source": "qa",
-          "destination": "prod",
-          "description": "Transfer from QA to Production for live deployment."
-        },
-        {
-          "source": "prod",
-          "destination": "dev",
-          "description": "Roll back from Production to Development for addressing issues."
+          "source": "testing",
+          "destination": "production",
+          "description": "Transfer from Testing to Production for live deployment."
         }
       ],
       "disallowed_transfers": [
         {
-          "source": "dev",
-          "destination": "prod",
+          "source": "development",
+          "destination": "production",
           "description": "Direct transfer from Development to Production is not allowed to maintain stability."
         },
         {
-          "source": "prod",
-          "destination": "qa",
-          "description": "Direct transfer from Production to QA is not allowed to prevent overwriting QA data."
+          "source": "production",
+          "destination": "testing",
+          "description": "Direct transfer from Production to Testing is not allowed to prevent overwriting Testing data."
         },
         {
-          "source": "qa",
-          "destination": "dev",
-          "description": "Direct transfer from QA to Development is not allowed to maintain data integrity."
+          "source": "testing",
+          "destination": "development",
+          "description": "Direct transfer from Testing to Development is not allowed to maintain data integrity."
         }
       ],
       "rollback_rules": {
-        "allowed_rollbacks": [
+        "partial_rollbacks": [
           {
-            "source": "qa",
-            "destination": "dev",
-            "description": "Rollback from QA to Development to address testing feedback."
+            "source": "testing",
+            "destination": "development",
+            "components": [
+              "All"
+            ],
+            "description": "Partial rollback from Testing to Development to address issues identified during Testing."
           },
           {
-            "source": "prod",
-            "destination": "qa",
-            "description": "Rollback from Production to QA to fix issues identified in the live environment."
-          }
-        ],
-        "disallowed_rollbacks": [
+            "source": "production",
+            "destination": "testing",
+            "components": [
+              "UI",
+              "API"
+            ],
+            "description": "Partial rollback of UI and API components from Production to Testing to resolve specific issues without affecting the database."
+          },
           {
-            "source": "prod",
-            "destination": "dev",
-            "description": "Rollback from Production to Development is not allowed to prevent data inconsistency."
+            "source": "production",
+            "destination": "development",
+            "components": [
+              "Database Schema"
+            ],
+            "description": "Partial rollback of the Database Schema from Production to Development for schema corrections while leaving other components unchanged."
           }
         ]
       }
     },
-    "transfer_settings": {
-      "protocol": "undecided",
-      "compression": "gzip",
-      "encryption": {
-        "enabled": true,
-        "method": "AES-256"
-      },
-      "retries": 3,
-      "timeout": 120,
-      "pre_transfer_validation": {
-        "enabled": false,
-        "script": "pre_transfer_validation"
-      },
-      "post_transfer_verification": {
-        "enabled": false,
-        "script": "post_transfer_verification"
-      }
-    },
     "logging": {
-      "dev": {
+      "development": {
         "level": "DEBUG",
         "destination": "server",
-        "file_path": "dev_transfer.log"
+        "file_path": "development_transfer.log"
       },
-      "qa": {
+      "testing": {
         "level": "INFO",
         "destination": "server",
-        "file_path": "qa_transfer.log"
+        "file_path": "testing_transfer.log"
       },
-      "prod": {
+      "production": {
         "level": "ERROR",
         "destination": "server",
-        "file_path": "prod_transfer.log",
+        "file_path": "production_transfer.log",
         "rotation_policy": {
           "enabled": false,
           "max_size": "50MB",
@@ -182,13 +141,13 @@
         "on_failure": "sms"
       },
       "recipients": {
-        "dev": [
+        "development": [
           "devteam@corporater.com"
         ],
-        "qa": [
+        "testing": [
           "qatest@corporater.com"
         ],
-        "prod": [
+        "production": [
           "prod@corporater.com",
           "test@corporater.com"
         ]
@@ -199,28 +158,28 @@
     "process_descriptions": [
       {
         "id": "process1",
-        "name": "Development to QA",
-        "description": "This step involves transferring data from the Development environment to the QA environment. Pre-transfer validation is performed using a script to ensure data integrity before initiating the transfer. In QA, features undergo rigorous testing including functional, integration, and system testing to ensure quality standards before moving to production.",
+        "name": "Development to Testing",
+        "description": "Transfer from Development to Testing. Features are validated in the Testing environment. Post-transfer validation ensures quality before moving to Production.",
         "type": "forward",
         "related_processes": [
           {
             "id": "process4",
-            "name": "QA to Development",
-            "description": "Rollback from QA to Development to address any issues identified during QA testing.",
+            "name": "Testing to Development",
+            "description": "Partial rollback from Testing to Development to address issues identified during Testing.",
             "type": "rollback"
           }
         ]
       },
       {
         "id": "process2",
-        "name": "QA to Production",
-        "description": "Once features have passed all QA tests and post-transfer verification confirms data integrity, they are transferred to the Production environment. This step is critical as the features become live for end-users. Any issues detected in production can be rolled back to QA for resolution.",
+        "name": "Testing to Production",
+        "description": "Transfer from Testing to Production. Features become live for end-users. Any issues detected in Production can be partially rolled back to Testing for resolution.",
         "type": "forward",
         "related_processes": [
           {
             "id": "process5",
-            "name": "Production to QA",
-            "description": "Rollback from Production to QA to resolve any issues detected in the live environment.",
+            "name": "Production to Testing",
+            "description": "Partial rollback from Production to Testing to resolve issues detected in the live environment.",
             "type": "rollback"
           }
         ]
@@ -228,7 +187,7 @@
       {
         "id": "process3",
         "name": "Production to Development",
-        "description": "In case features need revision based on production feedback, they are transferred back to Development. This ensures that any issues or required enhancements are addressed in a controlled environment before potentially redeploying to QA or Production. Post-transfer verification ensures data consistency.",
+        "description": "Transfer from Production to Development for revision based on production feedback. Partial rollback of specific components to Development ensures controlled addressing of issues.",
         "type": "forward",
         "related_processes": [
           {
@@ -238,24 +197,6 @@
             "type": "rollback"
           }
         ]
-      },
-      {
-        "id": "process4",
-        "name": "QA to Development",
-        "description": "Rollback from QA to Development to address any issues identified during QA testing.",
-        "type": "rollback"
-      },
-      {
-        "id": "process5",
-        "name": "Production to QA",
-        "description": "Rollback from Production to QA to resolve any issues detected in the live environment.",
-        "type": "rollback"
-      },
-      {
-        "id": "process6",
-        "name": "Development to Production",
-        "description": "Rollback from Development to Production is not permitted to prevent data inconsistencies.",
-        "type": "rollback"
       }
     ],
     "release_management": {
@@ -265,48 +206,131 @@
           "description": "Initial stage where new features and fixes are developed and unit tested."
         },
         {
-          "stage": "qa",
-          "description": "QA stage for comprehensive testing including functional, integration, and system testing."
-        },
-        {
-          "stage": "pre-production",
-          "description": "Optional stage for final testing in an environment closely resembling production."
+          "stage": "testing",
+          "description": "Testing stage for comprehensive validation including functional, integration, and system testing."
         },
         {
           "stage": "production",
-          "description": "Live environment where the final, tested product is deployed for end-users."
+          "description": "Final stage where features are live and available to end-users."
         }
       ],
-      "versioning": {
-        "strategy": "semantic",
-        "format": "MAJOR.MINOR.PATCH",
-        "example": "1.2.3",
-        "description": "Versioning strategy follows semantic versioning where increments in major, minor, or patch versions correspond to backward-incompatible changes, new features, and bug fixes respectively."
-      },
-      "rollback_policies": {
-        "development": {
-          "allowed": true,
-          "description": "Rollbacks allowed from Development to previous versions."
+      "approval_process": {
+        "development_to_testing": {
+          "required_approvals": [
+            {
+              "role": "Lead Developer",
+              "name": "devteam@corporater.com"
+            },
+            {
+              "role": "QA Manager",
+              "name": "qatest@corporater.com"
+            }
+          ],
+          "approval_conditions": {
+            "tests_passed": true,
+            "no_critical_bugs": true
+          }
         },
-        "qa": {
-          "allowed": true,
-          "description": "Rollbacks allowed from QA to Development."
-        },
-        "pre-production": {
-          "allowed": false,
-          "description": "Rollbacks are generally not allowed at this stage to ensure consistency with production."
-        },
-        "production": {
-          "allowed": true,
-          "description": "Rollbacks allowed from Production to QA or Development in case of critical issues."
+        "testing_to_production": {
+          "required_approvals": [
+            {
+              "role": "CTO",
+              "name": "cto@corporater.com"
+            },
+            {
+              "role": "Product Owner",
+              "name": "productowner@corporater.com"
+            }
+          ],
+          "approval_conditions": {
+            "no_open_critical_issues": true,
+            "security_checks_passed": true
+          }
         }
       },
-      "changelog": {
-        "enabled": true,
-        "path": "changelog.md",
-        "format": "markdown",
-        "description": "Changelog records all significant changes including new features, enhancements, and bug fixes across all environments. It follows a clear format to track the progression of changes throughout the release stages."
+      "versioning": {
+        "strategy": "Semantic Versioning",
+        "format": "MAJOR.MINOR.PATCH",
+        "auto_increment": true
+      },
+      "communication": {
+        "release_notes": {
+          "enabled": false,
+          "distribution_method": "email",
+          "recipients": [
+            "stakeholders@corporater.com",
+            "support@corporater.com"
+          ],
+          "template": "release_notes_template.md"
+        },
+        "emergency_release": {
+          "protocol": "Hotfix",
+          "approvals": [
+            {
+              "role": "CTO",
+              "name": "cto@corporater.com"
+            },
+            {
+              "role": "Support Lead",
+              "name": "support@corporater.com"
+            }
+          ],
+          "notification_method": "sms"
+        }
       }
+    },
+    "collaboration_and_concurrency": {
+      "object_locking": {
+        "enabled": false,
+        "method": "optimistic",
+        "conflict_resolution": "last_writer_wins",
+        "notification": {
+          "enabled": false,
+          "method": "email",
+          "recipients": [
+            "devteam@corporater.com"
+          ]
+        }
+      },
+      "dependency_management": {
+        "enabled": false,
+        "dependency_tracking": {
+          "enabled": false,
+          "method": "automatic",
+          "notification": {
+            "enabled": false,
+            "method": "email",
+            "recipients": [
+              "devteam@corporater.com"
+            ]
+          }
+        },
+        "impact_analysis": {
+          "enabled": false,
+          "method": "automated",
+          "notification": {
+            "enabled": true,
+            "method": "email",
+            "recipients": [
+              "pm@corporater.com"
+            ]
+          }
+        }
+      }
+    },
+    "automated_performance_reviews": {
+      "enabled": false,
+      "review_frequency": "monthly",
+      "report_distribution": [
+        "process_owner@corporater.com",
+        "cto@corporater.com"
+      ],
+      "auto_optimization_suggestions": true
+    },
+    "user_feedback_integration": {
+      "enabled": false,
+      "feedback_form_url": "https://feedback.corporater.dev",
+      "incentives_for_feedback": true
     }
   }
 }
