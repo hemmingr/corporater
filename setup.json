@@ -1,15 +1,15 @@
 {
   "metadata": {
-    "version": "1.1.0",
-    "last_updated": "2024-08-19",
-    "description": "Config for deployment, rollback, release management processes, and object handling, including customer details, transfer rules, and dependency management."
+    "version": "1.0.0",
+    "last_updated": "2024-08-12",
+    "description": "Config for deployment, rollback, and release management processes, including customer details and transfer rules."
   },
   "customer": {
     "customer_uid": "c12345-abcde-67890-fghij",
     "name": "Corporater",
     "contact": {
       "name": "Test",
-      "email": "test@corporater.com",
+      "email": "test@coporater.com",
       "phone": "9999999"
     },
     "address": {
@@ -22,7 +22,7 @@
     "description": "Corporater beskrivelse"
   },
   "setup": {
-    "version": "1.1.0",
+    "version": "1.0.0",
     "common": {
       "base_url": "https://innovation.corporater.dev"
     },
@@ -196,37 +196,6 @@
       "on_success": true,
       "on_failure": true
     },
-    "object_handling": {
-      "version_control": {
-        "strategy": "Semantic Versioning",
-        "format": "MAJOR.MINOR.PATCH",
-        "auto_increment": true
-      },
-      "object_locking": {
-        "enabled": true,
-        "timeout": 24,
-        "auto_unlock": true
-      },
-      "conflict_resolution": {
-        "strategy": "Merge",
-        "auto_merge": false,
-        "manual_merge_reviewers": [
-          "lead_dev@corporater.com",
-          "architect@corporater.com"
-        ]
-      },
-      "dependency_management": {
-        "mapping_enabled": true,
-        "dependency_types": [
-          "hard_dependency",
-          "soft_dependency"
-        ],
-        "cascading_updates": {
-          "enabled": true,
-          "notification_on_update": true
-        }
-      }
-    },
     "process_descriptions": [
       {
         "id": "process1",
@@ -273,9 +242,174 @@
       {
         "id": "process4",
         "name": "QA to Development",
-        "description": "Rollback from QA to Development is essential for making corrections identified during testing. This rollback ensures that the Development environment is updated with any necessary fixes or modifications that QA testing reveals.",
+        "description": "Rollback from QA to Development to address any issues identified during QA testing.",
+        "type": "rollback"
+      },
+      {
+        "id": "process5",
+        "name": "Production to QA",
+        "description": "Rollback from Production to QA to resolve any issues detected in the live environment.",
+        "type": "rollback"
+      },
+      {
+        "id": "process6",
+        "name": "Development to Production",
+        "description": "Rollback from Development to Production is not permitted to prevent data inconsistencies.",
         "type": "rollback"
       }
-    ]
+    ],
+    "release_management": {
+      "release_stages": [
+        {
+          "stage": "development",
+          "description": "Initial stage where new features and fixes are developed and unit tested."
+        },
+        {
+          "stage": "qa",
+          "description": "QA stage for comprehensive testing including functional, integration, and system testing."
+        },
+        {
+          "stage": "pre-production",
+          "description": "Optional stage for final testing in an environment closely mirroring production."
+        },
+        {
+          "stage": "production",
+          "description": "Final stage where features are live and available to end-users."
+        }
+      ],
+      "approval_process": {
+        "development_to_qa": {
+          "required_approvals": [
+            {
+              "role": "Lead Developer",
+              "name": "devteam@corporater.com"
+            },
+            {
+              "role": "QA Manager",
+              "name": "qatest@corporater.com"
+            }
+          ],
+          "approval_conditions": {
+            "tests_passed": true,
+            "no_critical_bugs": true
+          }
+        },
+        "qa_to_pre_production": {
+          "required_approvals": [
+            {
+              "role": "QA Manager",
+              "name": "qatest@corporater.com"
+            },
+            {
+              "role": "Project Manager",
+              "name": "pm@corporater.com"
+            }
+          ],
+          "approval_conditions": {
+            "all_tests_passed": true,
+            "performance_criteria_met": true
+          }
+        },
+        "pre_production_to_production": {
+          "required_approvals": [
+            {
+              "role": "CTO",
+              "name": "cto@corporater.com"
+            },
+            {
+              "role": "Product Owner",
+              "name": "productowner@corporater.com"
+            }
+          ],
+          "approval_conditions": {
+            "no_open_critical_issues": true,
+            "security_checks_passed": true
+          }
+        }
+      },
+      "versioning": {
+        "strategy": "Semantic Versioning",
+        "format": "MAJOR.MINOR.PATCH",
+        "auto_increment": true
+      },
+      "communication": {
+        "release_notes": {
+          "enabled": true,
+          "distribution_method": "email",
+          "recipients": [
+            "stakeholders@corporater.com",
+            "support@corporater.com"
+          ],
+          "template": "release_notes_template.md"
+        },
+        "emergency_release": {
+          "protocol": "Hotfix",
+          "approvals": [
+            {
+              "role": "CTO",
+              "name": "cto@corporater.com"
+            },
+            {
+              "role": "Support Lead",
+              "name": "support@corporater.com"
+            }
+          ],
+          "notification_method": "sms"
+        }
+      }
+    },
+    "collaboration_and_concurrency": {
+      "object_locking": {
+        "enabled": true,
+        "method": "optimistic",
+        "conflict_resolution": "last_writer_wins",
+        "notification": {
+          "enabled": true,
+          "method": "email",
+          "recipients": [
+            "devteam@corporater.com"
+          ]
+        }
+      },
+      "dependency_management": {
+        "enabled": true,
+        "dependency_tracking": {
+          "enabled": true,
+          "method": "automatic",
+          "notification": {
+            "enabled": true,
+            "method": "email",
+            "recipients": [
+              "devteam@corporater.com"
+            ]
+          }
+        },
+        "impact_analysis": {
+          "enabled": true,
+          "method": "automated",
+          "notification": {
+            "enabled": true,
+            "method": "email",
+            "recipients": [
+              "pm@corporater.com"
+            ]
+          }
+        }
+      }
+    },
+    "automated_performance_reviews": {
+      "enabled": true,
+      "review_frequency": "monthly",
+      "report_distribution": [
+        "process_owner@corporater.com",
+        "cto@corporater.com"
+      ],
+      "auto_optimization_suggestions": true
+    },
+    "user_feedback_integration": {
+      "enabled": true,
+      "feedback_form_url": "https://feedback.corporater.dev",
+      "incentives_for_feedback": true
+    }
   }
 }
