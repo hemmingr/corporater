@@ -136,7 +136,7 @@
       }
     },
     "transfer_settings": {
-      "protocol": "SFTP",
+      "protocol": "undecided",
       "compression": "gzip",
       "encryption": {
         "enabled": true,
@@ -145,11 +145,11 @@
       "retries": 3,
       "timeout": 120,
       "pre_transfer_validation": {
-        "enabled": true,
+        "enabled": false,
         "script": "pre_transfer_validation"
       },
       "post_transfer_verification": {
-        "enabled": true,
+        "enabled": false,
         "script": "post_transfer_verification"
       }
     },
@@ -169,14 +169,14 @@
         "destination": "server",
         "file_path": "prod_transfer.log",
         "rotation_policy": {
-          "enabled": true,
+          "enabled": false,
           "max_size": "50MB",
           "max_age": "30d"
         }
       }
     },
     "notification": {
-      "enabled": true,
+      "enabled": false,
       "method": {
         "on_success": "email",
         "on_failure": "sms"
@@ -193,8 +193,8 @@
           "test@corporater.com"
         ]
       },
-      "on_success": true,
-      "on_failure": true
+      "on_success": false,
+      "on_failure": false
     },
     "process_descriptions": [
       {
@@ -334,7 +334,7 @@
       },
       "communication": {
         "release_notes": {
-          "enabled": true,
+          "enabled": false,
           "distribution_method": "email",
           "recipients": [
             "stakeholders@corporater.com",
@@ -360,11 +360,11 @@
     },
     "collaboration_and_concurrency": {
       "object_locking": {
-        "enabled": true,
+        "enabled": false,
         "method": "optimistic",
         "conflict_resolution": "last_writer_wins",
         "notification": {
-          "enabled": true,
+          "enabled": false,
           "method": "email",
           "recipients": [
             "devteam@corporater.com"
@@ -385,7 +385,7 @@
           }
         },
         "impact_analysis": {
-          "enabled": true,
+          "enabled": false,
           "method": "automated",
           "notification": {
             "enabled": true,
@@ -398,7 +398,7 @@
       }
     },
     "automated_performance_reviews": {
-      "enabled": true,
+      "enabled": false,
       "review_frequency": "monthly",
       "report_distribution": [
         "process_owner@corporater.com",
@@ -407,7 +407,7 @@
       "auto_optimization_suggestions": true
     },
     "user_feedback_integration": {
-      "enabled": true,
+      "enabled": false,
       "feedback_form_url": "https://feedback.corporater.dev",
       "incentives_for_feedback": true
     }
