@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "version": "1.1.0",
+    "version": "1.5.0",
     "last_updated": "2024-08-19",
-    "description": "Config for deployment, rollback, and release management processes, including customer details and transfer rules."
+    "description": "Updated config for deployment, with a forward-only development cycle and no rollback requirements."
   },
   "customer": {
     "customer_uid": "c12345-abcde-67890-fghij",
@@ -22,7 +22,7 @@
     "description": "Corporater description"
   },
   "setup": {
-    "version": "1.1.0",
+    "version": "1.5.0",
     "common": {
       "base_url": "https://innovation.corporater.dev"
     },
@@ -38,10 +38,10 @@
       {
         "id": "host2",
         "uid": "b2c6a7e1-6cd5-4c88-a8f1-89f7cbb8f8c5",
-        "name": "QA Environment",
-        "url": "/qa",
+        "name": "Testing Environment",
+        "url": "/testing",
         "stage": "testing",
-        "description": "QA environment for thorough testing of features before production deployment."
+        "description": "Testing environment for thorough validation before production deployment."
       },
       {
         "id": "host3",
@@ -81,35 +81,32 @@
           "destination": "development",
           "description": "Direct transfer from Testing to Development is not allowed to maintain data integrity."
         }
-      ],
-      "rollback_rules": {
-        "partial_rollbacks": [
+      ]
+    },
+    "backup_procedures": {
+      "enabled": true,
+      "pre_transfer_backup": {
+        "enabled": true,
+        "description": "Backup the current state of the environment before initiating a transfer to ensure data integrity and recovery if needed.",
+        "frequency": "before each transfer",
+        "methods": [
           {
-            "source": "testing",
-            "destination": "development",
-            "components": [
-              "All"
-            ],
-            "description": "Partial rollback from Testing to Development to address issues identified during Testing."
+            "method": "full_backup",
+            "description": "Perform a full backup of the environment's data."
           },
           {
-            "source": "production",
-            "destination": "testing",
-            "components": [
-              "UI",
-              "API"
-            ],
-            "description": "Partial rollback of UI and API components from Production to Testing to resolve specific issues without affecting the database."
-          },
-          {
-            "source": "production",
-            "destination": "development",
-            "components": [
-              "Database Schema"
-            ],
-            "description": "Partial rollback of the Database Schema from Production to Development for schema corrections while leaving other components unchanged."
+            "method": "incremental_backup",
+            "description": "Perform incremental backups for efficiency if required."
           }
-        ]
+        ],
+        "verification": {
+          "enabled": true,
+          "description": "Verify the backup to ensure it is complete and usable.",
+          "methods": [
+            "checksum_verification",
+            "restore_test"
+          ]
+        }
       }
     },
     "logging": {
@@ -160,43 +157,13 @@
         "id": "process1",
         "name": "Development to Testing",
         "description": "Transfer from Development to Testing. Features are validated in the Testing environment. Post-transfer validation ensures quality before moving to Production.",
-        "type": "forward",
-        "related_processes": [
-          {
-            "id": "process4",
-            "name": "Testing to Development",
-            "description": "Partial rollback from Testing to Development to address issues identified during Testing.",
-            "type": "rollback"
-          }
-        ]
+        "type": "forward"
       },
       {
         "id": "process2",
         "name": "Testing to Production",
-        "description": "Transfer from Testing to Production. Features become live for end-users. Any issues detected in Production can be partially rolled back to Testing for resolution.",
-        "type": "forward",
-        "related_processes": [
-          {
-            "id": "process5",
-            "name": "Production to Testing",
-            "description": "Partial rollback from Production to Testing to resolve issues detected in the live environment.",
-            "type": "rollback"
-          }
-        ]
-      },
-      {
-        "id": "process3",
-        "name": "Production to Development",
-        "description": "Transfer from Production to Development for revision based on production feedback. Partial rollback of specific components to Development ensures controlled addressing of issues.",
-        "type": "forward",
-        "related_processes": [
-          {
-            "id": "process6",
-            "name": "Development to Production",
-            "description": "Rollback from Development to Production is not permitted to prevent data inconsistencies.",
-            "type": "rollback"
-          }
-        ]
+        "description": "Transfer from Testing to Production for live deployment. Features are monitored in Production to ensure they perform as expected.",
+        "type": "forward"
       }
     ],
     "release_management": {
@@ -261,67 +228,9 @@
             "stakeholders@corporater.com",
             "support@corporater.com"
           ],
-          "template": "release_notes_template.md"
-        },
-        "emergency_release": {
-          "protocol": "Hotfix",
-          "approvals": [
-            {
-              "role": "CTO",
-              "name": "cto@corporater.com"
-            },
-            {
-              "role": "Support Lead",
-              "name": "support@corporater.com"
-            }
-          ],
-          "notification_method": "sms"
+          "template": "release_notes_template.html"
         }
       }
-    },
-    "collaboration_and_concurrency": {
-      "object_locking": {
-        "enabled": false,
-        "method": "optimistic",
-        "conflict_resolution": "last_writer_wins",
-        "notification": {
-          "enabled": false,
-          "method": "email",
-          "recipients": [
-            "devteam@corporater.com"
-          ]
-        }
-      },
-      "dependency_management": {
-        "enabled": false,
-        "dependency_tracking": {
-          "enabled": false,
-          "method": "automatic",
-          "notification": {
-            "enabled": false,
-            "method": "email",
-            "recipients": [
-              "devteam@corporater.com"
-            ]
-          }
-        },
-        "impact_analysis": {
-          "enabled": false,
-          "method": "automated",
-          "notification": {
-            "enabled": true,
-            "method": "email",
-            "recipients": [
-              "pm@corporater.com"
-            ]
-          }
-        }
-      }
-    },
-    "user_feedback_integration": {
-      "enabled": false,
-      "feedback_form_url": "https://feedback.corporater.dev",
-      "incentives_for_feedback": true
     }
   }
 }
