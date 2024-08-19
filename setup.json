@@ -318,15 +318,6 @@
         }
       }
     },
-    "automated_performance_reviews": {
-      "enabled": false,
-      "review_frequency": "monthly",
-      "report_distribution": [
-        "process_owner@corporater.com",
-        "cto@corporater.com"
-      ],
-      "auto_optimization_suggestions": true
-    },
     "user_feedback_integration": {
       "enabled": false,
       "feedback_form_url": "https://feedback.corporater.dev",
