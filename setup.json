@@ -53,7 +53,7 @@
       }
     ],
     "chunking": {
-      "enabled": true,
+      "enabled": false,
       "description": "Divide large datasets into smaller chunks for manageable processing and transfer.",
       "methods": [
         {
@@ -79,12 +79,12 @@
       ],
       "handling": {
         "compression": {
-          "enabled": true,
+          "enabled": false,
           "method": "gzip",
           "description": "Compress chunks to reduce transfer size and improve efficiency."
         },
         "validation": {
-          "enabled": true,
+          "enabled": false,
           "methods": [
             "checksum_verification",
             "restore_test"
@@ -94,19 +94,19 @@
       }
     },
     "message_queue": {
-      "enabled": true,
+      "enabled": false,
       "description": "Distribute data chunks using a message queue to manage processing order and efficiency.",
-      "provider": "ExampleQueueProvider",
+      "provider": "cloudamqp",
       "settings": {
         "queue_name": "dataChunksQueue",
         "message_format": "JSON",
         "retry_policy": {
-          "enabled": true,
+          "enabled": false,
           "max_retries": 5,
           "retry_delay_seconds": 60
         },
         "error_handling": {
-          "enabled": true,
+          "enabled": false,
           "dead_letter_queue": "errorQueue",
           "notification_method": "email",
           "recipients": [
@@ -130,9 +130,9 @@
       }
     },
     "backup_procedures": {
-      "enabled": true,
+      "enabled": false,
       "pre_transfer_backup": {
-        "enabled": true,
+        "enabled": false,
         "description": "Backup the current state of the environment before initiating a transfer to ensure data integrity and recovery if needed.",
         "frequency": "before each transfer",
         "methods": [
@@ -146,7 +146,7 @@
           }
         ],
         "verification": {
-          "enabled": true,
+          "enabled": false,
           "description": "Verify the backup to ensure it is complete and usable.",
           "methods": [
             "checksum_verification",
