@@ -325,7 +325,7 @@
               "name": "support@corporater.com"
             }
           ],
-          "notification_method": "sms"
+          "notification_method": "push"
         }
       }
     }
