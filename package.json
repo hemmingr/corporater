@@ -1,12 +1,23 @@
 {
   "name": "json-diff-api",
   "version": "1.0.0",
+  "description": "A server for computing and managing JSON differences.",
   "main": "index.js",
-  "dependencies": {
-    "express": "^4.17.1",
-    "jsondiffpatch": "^0.3.11"
-  },
   "scripts": {
     "start": "node index.js"
-  }
+  },
+  "dependencies": {
+    "amqplib": "^0.10.4",
+    "express": "^4.19.2",
+    "jsondiffpatch": "^0.6.0",
+    "dotenv": "^16.4.5",
+    "axios": "^1.7.4",
+    "@azure/service-bus": "^7.9.5"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "author": "Hemming Roaldsøy",
+  "license": "MIT",
+  "type": "module"
 }

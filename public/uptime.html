@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Uptime Monitor</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        padding: 20px;
+      }
+      h1 {
+        text-align: center;
+      }
+      .container {
+        width: 80%;
+        margin: 0 auto;
+      }
+      .chart-container {
+        margin-bottom: 40px;
+      }
+      canvas {
+        max-width: 100%;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Uptime Monitor</h1>
+      <div class="chart-container">
+        <h2>DEV Environment (Newfeaturemaster)</h2>
+        <canvas id="devChart"></canvas>
+      </div>
+      <div class="chart-container">
+        <h2>QA Environment (Deployment)</h2>
+        <canvas id="qaChart"></canvas>
+      </div>
+      <div class="chart-container">
+        <h2>PROD Environment (Basic)</h2>
+        <canvas id="prodChart"></canvas>
+      </div>
+    </div>
+    <script>
+      async function fetchUptimeData() {
+        try {
+          const response = await fetch("/api/uptime");
+          const data = await response.json();
+
+          // Extract relevant data for each environment
+          const monitors = data.monitors;
+
+          const devMonitor = monitors.find(
+            (monitor) => monitor.friendly_name === "Newfeaturemaster"
+          );
+          const qaMonitor = monitors.find(
+            (monitor) => monitor.friendly_name === "Deployment"
+          );
+          const prodMonitor = monitors.find(
+            (monitor) => monitor.friendly_name === "Basic"
+          );
+
+          // Create charts
+          createChart("devChart", devMonitor);
+          createChart("qaChart", qaMonitor);
+          createChart("prodChart", prodMonitor);
+        } catch (error) {
+          console.error("Error fetching uptime data:", error);
+        }
+      }
+
+      function createChart(canvasId, monitor) {
+        const ctx = document.getElementById(canvasId).getContext("2d");
+        new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: ["Last Hour", "Last 24 Hours", "Last Week", "Last Month"], // Example labels
+            datasets: [
+              {
+                label: monitor.friendly_name,
+                data: [
+                  monitor.uptime_last_hour,
+                  monitor.uptime_last_24_hours,
+                  monitor.uptime_last_week,
+                  monitor.uptime_last_month,
+                ], // Example data
+                borderColor: getRandomColor(),
+                backgroundColor: getRandomColor(0.2),
+                fill: true,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            scales: {
+              x: {
+                beginAtZero: true,
+              },
+              y: {
+                beginAtZero: true,
+                ticks: {
+                  callback: function (value) {
+                    return value + "%"; // Append percentage sign
+                  },
+                },
+              },
+            },
+            plugins: {
+              legend: {
+                position: "top",
+              },
+              tooltip: {
+                callbacks: {
+                  label: function (context) {
+                    return (
+                      context.dataset.label + ": " + context.parsed.y + "%"
+                    );
+                  },
+                },
+              },
+            },
+          },
+        });
+      }
+
+      function getRandomColor(alpha = 1) {
+        const r = Math.floor(Math.random() * 255);
+        const g = Math.floor(Math.random() * 255);
+        const b = Math.floor(Math.random() * 255);
+        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+      }
+
+      // Fetch and render uptime data
+      fetchUptimeData();
+    </script>
+  </body>
+</html>

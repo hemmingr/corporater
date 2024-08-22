@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Diff Visualization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .summary {
+            margin-top: 20px;
+        }
+        .summary div {
+            margin-bottom: 5px;
+        }
+        .change-log {
+            margin-top: 20px;
+        }
+        .change-log pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <div id="summary" class="summary"></div>
+    <div id="change-log" class="change-log"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const response = await fetch('/latest-diff');
+
+            if (response.ok) {
+                const result = await response.json();
+                const summaryDiv = document.getElementById('summary');
+                const changeLogDiv = document.getElementById('change-log');
+
+                const { changes, changeLogs } = result;
+
+                summaryDiv.innerHTML = `
+                    <h2>Summary</h2>
+                    <div>Total Changes: ${changes.totalChanges}</div>
+                    <div>New Entries: ${changes.newEntries}</div>
+                    <div>Deleted Entries: ${changes.deletedEntries}</div>
+                    <div>Modified Entries: ${changes.modifiedEntries}</div>
+                    <div>Added Keys: ${changes.addedKeys}</div>
+                    <div>Removed Keys: ${changes.removedKeys}</div>
+                    <div>Value Changes: ${changes.valueChanges}</div>
+                    <div>Depth: ${changes.depth}</div>
+                `;
+
+                changeLogDiv.innerHTML = `
+                    <h2>Change Log</h2>
+                    <pre>${JSON.stringify(changeLogs, null, 2)}</pre>
+                `;
+            } else {
+                console.error('Failed to fetch the latest diff data:', response.statusText);
+            }
+        });
+    </script>
+</body>
+</html>

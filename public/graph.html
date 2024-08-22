@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Diff Visualization Graph</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        canvas {
+            max-width: 100%;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="diffChart" width="400" height="200"></canvas>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const response = await fetch('/latest-diff');
+
+            if (response.ok) {
+                const result = await response.json();
+                const { changes } = result;
+
+                const ctx = document.getElementById('diffChart').getContext('2d');
+                const diffChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Total Changes', 'New Entries', 'Deleted Entries', 'Modified Entries', 'Added Keys', 'Removed Keys', 'Value Changes', 'Depth'],
+                        datasets: [{
+                            label: 'Metrics',
+                            data: [
+                                changes.totalChanges,
+                                changes.newEntries,
+                                changes.deletedEntries,
+                                changes.modifiedEntries,
+                                changes.addedKeys,
+                                changes.removedKeys,
+                                changes.valueChanges,
+                                changes.depth
+                            ],
+                            backgroundColor: [
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)',
+                                'rgba(99, 255, 132, 0.2)',
+                                'rgba(206, 86, 255, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(99, 255, 132, 1)',
+                                'rgba(206, 86, 255, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            } else {
+                console.error('Failed to fetch the latest diff data:', response.statusText);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSON Diff Visualization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f0f0; /* Light grey background for the page */
+            color: #333; /* Dark grey text for better readability */
+        }
+        .summary {
+            margin-top: 20px;
+            background: #fff; /* White background for summary */
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        .summary div {
+            margin-bottom: 5px;
+        }
+        .change-log {
+            margin-top: 20px;
+            background: #000; /* Black background for change log */
+            padding: 10px;
+            border-radius: 4px;
+            color: #fff; /* White text for better contrast on black background */
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
+        }
+        .change-log pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            color: #fff; /* Ensure text inside <pre> tag is also white */
+        }
+        .json-diff {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 4px;
+            background: #fff; /* White background for JSON diff */
+            color: #000; /* Black text for JSON diff */
+        }
+        .collapse {
+            cursor: pointer;
+            margin: 5px 0;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: #eee;
+            font-weight: bold;
+        }
+        .collapse-content {
+            display: none;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: #fafafa;
+        }
+        .collapse-content.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="summary" class="summary"></div>
+    <div id="change-log" class="change-log"></div>
+    <div id="json-diff" class="json-diff"></div>
+
+    <!-- Load jsondiffpatch library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsondiffpatch/0.2.2/jsondiffpatch-full.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const response = await fetch("/latest-diff");
+
+            if (response.ok) {
+                const result = await response.json();
+                const summaryDiv = document.getElementById("summary");
+                const changeLogDiv = document.getElementById("change-log");
+                const jsonDiffDiv = document.getElementById("json-diff");
+
+                const { changes, changeLogs, diff } = result;
+
+                summaryDiv.innerHTML = `
+                    <h2>Summary</h2>
+                    <div>Total Changes: ${changes.totalChanges}</div>
+                    <div>New Entries: ${changes.newEntries}</div>
+                    <div>Deleted Entries: ${changes.deletedEntries}</div>
+                    <div>Modified Entries: ${changes.modifiedEntries}</div>
+                    <div>Added Keys: ${changes.addedKeys}</div>
+                    <div>Removed Keys: ${changes.removedKeys}</div>
+                    <div>Value Changes: ${changes.valueChanges}</div>
+                    <div>Depth: ${changes.depth}</div>
+                `;
+
+                changeLogDiv.innerHTML = `
+                    <h2>Change Log</h2>
+                    <pre>${JSON.stringify(changeLogs, null, 2)}</pre>
+                `;
+
+                // Check if jsondiffpatch is defined
+                if (typeof jsondiffpatch !== 'undefined') {
+                    // Format and display the diff
+                    const jsonDiffHtml = jsondiffpatch.formatters.html.format(diff);
+                    jsonDiffDiv.innerHTML = jsonDiffHtml;
+
+                    // Add collapsible functionality
+                    document.querySelectorAll('.collapse').forEach(el => {
+                        el.addEventListener('click', () => {
+                            const content = el.nextElementSibling;
+                            content.classList.toggle('show');
+                        });
+                    });
+
+                    // Ensure collapsible content is applied
+                    document.querySelectorAll('.jsondiffpatch').forEach(el => {
+                        el.classList.add('collapse');
+                        const content = document.createElement('div');
+                        content.classList.add('collapse-content');
+                        content.innerHTML = el.innerHTML;
+                        el.innerHTML = '';
+                        el.appendChild(content);
+                    });
+                } else {
+                    console.error("jsondiffpatch is not defined. Make sure the library is properly included.");
+                }
+
+            } else {
+                console.error("Failed to fetch the latest diff data:", response.statusText);
+            }
+        });
+    </script>
+</body>
+</html>
