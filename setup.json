@@ -52,107 +52,28 @@
         "description": "Production environment where features are live and available to end-users."
       }
     ],
-    "chunking": {
-      "enabled": false,
-      "description": "Divide large datasets into smaller chunks for manageable processing and transfer.",
-      "methods": [
-        {
-          "method": "logical_split",
-          "description": "Chunk data based on logical separations, such as records, categories, or modules."
-        },
-        {
-          "method": "pagination",
-          "description": "Fetch and transfer data in pages using pagination parameters."
-        },
-        {
-          "method": "batch_processing",
-          "description": "Process and transfer data in predefined batches based on record count or other criteria."
-        },
-        {
-          "method": "temporal_segmentation",
-          "description": "Segment data based on time intervals, such as daily, weekly, or monthly."
-        },
-        {
-          "method": "hierarchical_splitting",
-          "description": "Split data based on hierarchical relationships within the data structure."
-        }
-      ],
-      "handling": {
-        "compression": {
-          "enabled": false,
-          "method": "gzip",
-          "description": "Compress chunks to reduce transfer size and improve efficiency."
-        },
-        "validation": {
-          "enabled": false,
-          "methods": [
-            "checksum_verification",
-            "restore_test"
-          ],
-          "description": "Verify each chunk to ensure data integrity before and after transfer."
-        }
-      }
-    },
-    "message_queue": {
-      "enabled": false,
-      "description": "Distribute data chunks using a message queue to manage processing order and efficiency.",
-      "provider": "cloudamqp",
-      "settings": {
-        "queue_name": "dataChunksQueue",
-        "message_format": "JSON",
-        "retry_policy": {
-          "enabled": false,
-          "max_retries": 5,
-          "retry_delay_seconds": 60
-        },
-        "error_handling": {
-          "enabled": false,
-          "dead_letter_queue": "errorQueue",
-          "notification_method": "email",
-          "recipients": [
-            "admin@corporater.com"
-          ]
-        }
-      },
-      "integration": {
-        "data_producer": {
-          "description": "Component that publishes data chunks to the message queue.",
-          "methods": [
-            "publish_chunk"
-          ]
-        },
-        "data_consumer": {
-          "description": "Component that consumes data chunks from the message queue.",
-          "methods": [
-            "consume_chunk"
-          ]
-        }
-      }
-    },
-    "backup_procedures": {
-      "enabled": false,
-      "pre_transfer_backup": {
+    "feature_flags": {
+      "new_ui": {
         "enabled": false,
-        "description": "Backup the current state of the environment before initiating a transfer to ensure data integrity and recovery if needed.",
-        "frequency": "before each transfer",
-        "methods": [
-          {
-            "method": "full_backup",
-            "description": "Perform a full backup of the environment's data."
-          },
-          {
-            "method": "incremental_backup",
-            "description": "Perform incremental backups for efficiency if required."
-          }
-        ],
-        "verification": {
-          "enabled": false,
-          "description": "Verify the backup to ensure it is complete and usable.",
-          "methods": [
-            "checksum_verification",
-            "restore_test"
-          ]
-        }
+        "description": "Toggle for the new user interface."
+      },
+      "beta_features": {
+        "enabled": true,
+        "description": "Enable beta features for testing."
+      }
+    },
+    "health_checks": {
+      "development": {
+        "endpoint": "/health",
+        "interval": "5m"
+      },
+      "testing": {
+        "endpoint": "/health",
+        "interval": "5m"
+      },
+      "production": {
+        "endpoint": "/health",
+        "interval": "1m"
       }
     },
     "transfer_rules": {
@@ -202,14 +123,14 @@
         "destination": "server",
         "file_path": "production_transfer.log",
         "rotation_policy": {
-          "enabled": false,
+          "enabled": true,
           "max_size": "50MB",
           "max_age": "30d"
         }
       }
     },
     "notification": {
-      "enabled": false,
+      "enabled": true,
       "method": {
         "on_success": "email",
         "on_failure": "sms"
@@ -226,8 +147,8 @@
           "test@corporater.com"
         ]
       },
-      "on_success": false,
-      "on_failure": false
+      "on_success": true,
+      "on_failure": true
     },
     "process_descriptions": [
       {
