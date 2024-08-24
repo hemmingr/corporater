@@ -1,740 +1,738 @@
-{
-  "rows": [
-    {
-      "id": 1,
-      "exp": "_boo := root.page.add(Book, id := 'categoryPagesDeploy', name := 'DEPLOY', description := 'Project (INNOVA-2)', iconName := 'PROCESS', ownership := list(u.hemmingr))"
-    },
-    {
-      "id": 2,
-      "exp": "_pag := _boo.add(Page, id := '173830', name := 'Customer')"
-    },
-    {
-      "id": 3,
-      "exp": "_con := _pag.add(Container, id := '177946')"
-    },
-    {
-      "id": 4,
-      "exp": "_con.add(TextElement, id := '177947', name := 'Customer info', text := ' ${t.extendedGetCustomerName.expression}  \\u00A0 ', longText := ' Customer ID : ${t.extendedGetCustomerUID.expression}  \\u00A0 ', showToolMenu := false, disableSearch := true, headerStyle := 'NONE', borderStyle := 'NONE', transparency := 100)"
-    },
-    {
-      "id": 5,
-      "exp": "_con.add(TextElement, id := '177952', name := 'Empty', text := ' . ', headerStyle := 'NONE', borderStyle := 'NONE', transparency := 100)"
-    },
-    {
-      "id": 6,
-      "exp": "_con1 := _pag.add(Container, id := '175817')"
-    },
-    {
-      "id": 7,
-      "exp": "_con1.add(InputView, id := '181179', inputSet := t.181177, showToolMenu := false, disableSearch := true, headerStyle := 'NONE', borderStyle := 'NONE', transparency := 100)"
-    },
-    {
-      "id": 8,
-      "exp": "_pag.add(ExtendedTable, id := '175408', name := 'Uptime status', expression := 'r.resourceUptime.content.monitors.table(friendly_name,url,status)', columnsLargeScreen := 4, columnsMediumScreen := 4, showToolMenu := false, disableSearch := true, headerStyle := 'NONE', borderStyle := 'NONE', transparency := 100)"
-    },
-    {
-      "id": 9,
-      "exp": "_pag.add(URLView, id := '177742', columnsLargeScreen := 4, columnsMediumScreen := 4, height := 600, loadURI := 'https:\\/\\/corporater-get-github-setup.glitch.me\\/view-config', headerStyle := 'NONE', borderStyle := 'NONE', transparency := 100)"
-    },
-    {
-      "id": 10,
-      "exp": "_pag1 := _boo.add(Page, id := '173831', name := 'Transfer')"
-    },
-    {
-      "id": 11,
-      "exp": "_pag1.add(Spacer, id := '177895', name := '------------Details----------------')"
-    },
-    {
-      "id": 12,
-      "exp": "_pag1.add(ImageView, id := '11361', name := 'Visualize development cycle', headerStyle := 'NONE', borderStyle := 'NONE', visibility := 'NOVISIBLE')"
-    },
-    {
-      "id": 13,
-      "exp": "_pag1.add(InputView, id := '7065', name := 'Object selection', inputSet := t.7063, columnsLargeScreen := 3, columnsMediumScreen := 3, headerStyle := 'NONE', borderStyle := 'NONE', transparency := 100, visibility := 'NOVISIBLE')"
-    },
-    {
-      "id": 14,
-      "exp": "_pag1.add(ExtendedTable, id := '7066', name := 'Selected Objects', expression := 'myObjectSelection.table().addColumn(\\'exp\\',output(self.generate(true)))', columnsLargeScreen := 3, columnsMediumScreen := 3, showToolMenu := false, disableSearch := true, headerStyle := 'NONE', borderStyle := 'NONE', transparency := 100, visibility := 'NOVISIBLE', tableSearchingEnabled := false)"
-    },
-    {
-      "id": 15,
-      "exp": "_pag1.add(ActionButton, id := '7067', name := 'Object Deploy', buttonText := 'Deploy', actionObject := t.actionPushObject, headerStyle := 'NONE', borderStyle := 'NONE', visibility := 'NOVISIBLE', ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
-    },
-    {
-      "id": 16,
-      "exp": "_pag1.add(Spacer, id := '177875', name := '------------Scripts----------------')"
-    },
-    {
-      "id": 17,
-      "exp": "_pag1.add(ImageView, id := '173699', name := 'Visualize development cycle', headerStyle := 'NONE', borderStyle := 'NONE', visibility := 'NOVISIBLE', container := t.177866)"
-    },
-    {
-      "id": 18,
-      "exp": "_pag1.add(InputView, id := '173700', name := 'Script selection', inputSet := t.201191, showToolMenu := false, disableSearch := true, headerStyle := 'NONE', borderStyle := 'NONE', transparency := 100, visibility := 'NOVISIBLE', container := t.177866)"
-    },
-    {
-      "id": 19,
-      "exp": "_pag1.add(ExtendedTable, id := '173701', name := 'Selected script', expression := 'mySelection.table().addColumn(\\'expression\\',output(self.expression))', showToolMenu := false, disableSearch := true, headerStyle := 'NONE', borderStyle := 'NONE', transparency := 100, visibility := 'NOVISIBLE', container := t.177866)"
-    },
-    {
-      "id": 20,
-      "exp": "_pag1.add(ActionButton, id := '173702', name := 'Deploy script', buttonText := 'Deploy', actionObject := t.actionPush, headerStyle := 'NONE', borderStyle := 'NONE', visibility := 'NOVISIBLE', container := t.177866, ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
-    },
-    {
-      "id": 21,
-      "exp": "_pag1.add(ActionButton, id := '174775', name := 'Test', buttonText := 'Test', actionObject := t.174834, headerStyle := 'NONE', borderStyle := 'NONE', visibility := 'NOVISIBLE', container := t.177866, ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
-    },
-    {
-      "id": 22,
-      "exp": "_pag1.add(Spacer, id := '177888', name := '-----------Process-----------------')"
-    },
-    {
-      "id": 23,
-      "exp": "_pag1.add(InputView, id := '177859', name := 'Available process options', inputSet := t.177860, columnsLargeScreen := 3, columnsMediumScreen := 3, showToolMenu := false, headerStyle := 'NONE', borderStyle := 'NONE', transparency := 100, container := t.177870)"
-    },
-    {
-      "id": 24,
-      "exp": "_con2 := _pag1.add(Container, id := '177955', columnsLargeScreen := 3, columnsMediumScreen := 3, visibility := 'NOVISIBLE', container := t.177870)"
-    },
-    {
-      "id": 25,
-      "exp": "_con2.add(TextElement, id := '177956', name := 'Empty', text := ' . ', headerStyle := 'NONE', borderStyle := 'NONE', transparency := 100)"
-    },
-    {
-      "id": 26,
-      "exp": "_con2.add(ImageView, id := '177810', name := 'Visualize development cycle', expression := 't.177981.expression', scaleToFit := true, headerStyle := 'NONE', borderStyle := 'NONE', container := t.177870)"
-    },
-    {
-      "id": 27,
-      "exp": "_con2.add(TextElement, id := '177850', name := 'Current Source', text := ' Source: ${t.177852.expression}', columnsLargeScreen := 3, columnsMediumScreen := 3, headerStyle := 'NONE', borderStyle := 'NONE', container := t.177870)"
-    },
-    {
-      "id": 28,
-      "exp": "_con2.add(TextElement, id := '177853', name := 'Current Target', text := ' Target: ${t.177854.expression}', columnsLargeScreen := 3, columnsMediumScreen := 3, headerStyle := 'NONE', borderStyle := 'NONE', container := t.177870)"
-    },
-    {
-      "id": 29,
-      "exp": "_con3 := _pag1.add(Container, id := '177966', container := t.177870)"
-    },
-    {
-      "id": 30,
-      "exp": "_con3.add(ExtendedTable, id := '177972', name := 'Metrics', expression := 'r.resourceGetLatestDiff.content.changes.table()', showToolMenu := false, disableSearch := true, enableTableMode := false, borderStyle := 'NONE', transparency := 100, tableSearchingEnabled := false)"
-    },
-    {
-      "id": 31,
-      "exp": "_con3.add(ExtendedTable, id := '175646', name := 'Differences', expression := 'r.resourceGetLatestDiff.content.patchedObj.table()', tableSearchingEnabled := false)"
-    },
-    {
-      "id": 32,
-      "exp": "_but := _pag1.add(ButtonContainer, id := '177937', container := t.177869)"
-    },
-    {
-      "id": 33,
-      "exp": "_but.add(ActionButton, id := '177939', name := 'Resolve Dependencies', buttonText := 'Resolve Dependencies', actionObject := t.174834, headerStyle := 'NONE', borderStyle := 'NONE', transparency := 100, showExpression := t.extendedDependenciesUnresolved)"
-    },
-    {
-      "id": 34,
-      "exp": "_but.add(ActionButton, id := '177938', name := 'Deploy', buttonText := 'Deploy', actionObject := t.174834, headerStyle := 'NONE', borderStyle := 'NONE', transparency := 100, showExpression := t.extendedDependenciesResolved)"
-    },
-    {
-      "id": 35,
-      "exp": "_pag1.add(InputView, id := '177811', name := 'Select objects for transfer', inputSet := t.177814, showToolMenu := false, headerStyle := 'NONE', borderStyle := 'NONE', transparency := 100, visibility := 'NOVISIBLE', container := t.177870)"
-    },
-    {
-      "id": 36,
-      "exp": "_pag1.add(ExtendedTable, id := '177812', name := 'Visualize selected objects', expression := 'myObjectSelectionTest.table()', showToolMenu := false, disableSearch := true, headerStyle := 'NONE', transparency := 100, visibility := 'NOVISIBLE', tableSearchingEnabled := false, container := t.177870)"
-    },
-    {
-      "id": 37,
-      "exp": "_cat := root.templatecategory.add(Category, id := 'categoryTemplateDeploy', name := 'DEPLOY', ownership := list(u.hemmingr))"
-    },
-    {
-      "id": 38,
-      "exp": "_cat.add(ExtendedTable, id := 'myExpression', name := 'My Expression', expression := 'createTable(\\'exp\\')\\n .addRow(output(t.expressionContent.expression),id)\\n\\/\\/ .addColumn(\\'exp\\',\\'gg\\')', ownership := list(u.epeterson, u.get('roaldsoy@corporater.com')))"
-    },
-    {
-      "id": 39,
-      "exp": "_cat.add(ExtendedTable, id := 'myObjectExpression', name := 'My Object Expression', expression := 't.extendedShowObjectContent.expression', ownership := list(u.epeterson, u.get('roaldsoy@corporater.com')))"
-    },
-    {
-      "id": 40,
-      "exp": "_cat.add(ExtendedTable, id := 'myEr', expression := 'myOutput := \\'\\'\\nmyObjectSelection.foreach(row:\\n myTest := row.generate(true).strip()\\n myOutput := myOutput + \\'\\\\{\\\\\\\"exp\\\\\\\" : \\\\\\\"\\' + \\n myTest + \\n \\'\\\\\\\",\\\\\\\"objectid\\\\\\\" : \\\\\\\"\\' + \\n row.id + \\n \\'\\\\\\\",\\\\\\\"parentclass\\\\\\\" : \\\\\\\"\\' + \\n row.parent.classname + \\n \\'\\\\\\\",\\\\\\\"parentid\\\\\\\" : \\\\\\\"\\' + \\n row.parent.id +\\n \\'\\\\\\\",\\\\\\\"objectname\\\\\\\" : \\\\\\\"\\' + \\n row.name +\\n \\'\\\\\\\",\\\\\\\"parentname\\\\\\\" : \\\\\\\"\\' + \\n row.parent.name +\\n \\'\\\\\\\",\\\\\\\"class\\\\\\\" : \\\\\\\"\\' + \\n row.classname +\\n \\'\\\\\\\"\\\\},\\'\\n)\\n\\'{\\\\\\\"pushtype\\\\\\\": \\\\\\\"object\\\\\\\",\\\\\\\"expressions\\\\\\\": [\\' + myOutput.substring(0,myOutput.size()-1) + \\']}\\'')"
-    },
-    {
-      "id": 41,
-      "exp": "_cat.add(ExtendedTable, id := '174774', expression := 'o.171.descendants.table(id,name,description)')"
-    },
-    {
-      "id": 42,
-      "exp": "_cat.add(ExtendedTable, id := '177755', name := 'Summary Users', expression := 'r.resourceDiffUsers.content.changes.table()', columnsLargeScreen := 4, showToolMenu := false, borderStyle := 'NONE', tableSearchingEnabled := false)"
-    },
-    {
-      "id": 43,
-      "exp": "_cat.add(ExtendedTable, id := '177757', name := 'Summary Properties', expression := 'r.resourceDiffProperties.content.changes.table()', columnsLargeScreen := 4, showToolMenu := false, borderStyle := 'NONE', tableSearchingEnabled := false)"
-    },
-    {
-      "id": 44,
-      "exp": "_cat := root.expression.add(Category, id := 'categoryExpressionsDeploy', name := 'DEPLOY', ownership := list(u.hemmingr))"
-    },
-    {
-      "id": 45,
-      "exp": "_cat1 := _cat.add(Category, id := 'categoryExpressionsIDspaces', name := 'IDspaces')"
-    },
-    {
-      "id": 46,
-      "exp": "_cat2 := _cat1.add(Category, id := '174574', name := 'Properties')"
-    },
-    {
-      "id": 47,
-      "exp": "_cat2.add(ExtendedExpression, id := 'extendedDiffProperties', name := 'Diff Properties', expression := 'r.resourceDiffProperties.content')"
-    },
-    {
-      "id": 48,
-      "exp": "_cat2.add(ExtendedExpression, id := 'extendedRemoteProperties', name := 'Remote Properties', expression := 'r.remoteProperties.content')"
-    },
-    {
-      "id": 49,
-      "exp": "_cat2.add(ExtendedExpression, id := 'extendedLocalProperties', name := 'Local Properties', expression := 'r.localProperties.content')"
-    },
-    {
-      "id": 50,
-      "exp": "_cat2.add(ExtendedExpression, id := 'extendedGeneditProperties', name := 'Genedit Properties', expression := 'myList := root.property.children.filter(className != \\'SystemMethodConfig\\')\\ngeneditScript := \\'\\'\\n \\nmyList.foreach(row: \\n geneditScript := geneditScript + row.genedit()\\n)')"
-    },
-    {
-      "id": 51,
-      "exp": "_cat2.add(ExtendedExpression, id := 'extendedGenerateProperties', name := 'Generate Properties', expression := 'myList := root.property.children.filter(className != \\'SystemMethodConfig\\')\\ngenerateScript := \\'\\'\\n \\nmyList.foreach(row: \\n generateScript := generateScript + row.generate(true)\\n)')"
-    },
-    {
-      "id": 52,
-      "exp": "_cat2.add(ExtendedExpression, id := 'extendedGeneditRemoteProperties', name := 'Genedit remote Properties', expression := 'r.resourceGeneditRemoteProperties.content')"
-    },
-    {
-      "id": 53,
-      "exp": "_cat2.add(ExtendedExpression, id := 'extendedGenerateRemoteProperties', name := 'Generate Remote Properties', expression := 'r.resourceGenerateRemoteProperties.content')"
-    },
-    {
-      "id": 54,
-      "exp": "_cat3 := _cat1.add(Category, id := '174587', name := 'Users')"
-    },
-    {
-      "id": 55,
-      "exp": "_cat3.add(ExtendedExpression, id := 'oldextendedDiffUsers', name := 'DEL Diff Users', expression := 'r.resourceDiffUsers.content')"
-    },
-    {
-      "id": 56,
-      "exp": "_cat3.add(ExtendedExpression, id := 'extendedLocalUsers', name := 'DEL Local Users', expression := 'r.resourceLocalUsers.content')"
-    },
-    {
-      "id": 57,
-      "exp": "_cat3.add(ExtendedExpression, id := 'extendedRemoteUsers', name := 'DEL Remote Users', expression := 'r.resourceRemoteUsers.content')"
-    },
-    {
-      "id": 58,
-      "exp": "_cat4 := _cat1.add(Category, id := '563072', name := 'Organisations')"
-    },
-    {
-      "id": 59,
-      "exp": "_cat4.add(ExtendedExpression, id := '563073', expression := 'r.resourceDiffProperties.content')"
-    },
-    {
-      "id": 60,
-      "exp": "_cat4.add(ExtendedExpression, id := '563074', expression := 'r.remoteProperties.content')"
-    },
-    {
-      "id": 61,
-      "exp": "_cat4.add(ExtendedExpression, id := '563075', expression := 'r.localProperties.content')"
-    },
-    {
-      "id": 62,
-      "exp": "_cat5 := _cat.add(Category, id := 'categoryExpressionsUtility', name := 'Utility')"
-    },
-    {
-      "id": 63,
-      "exp": "_cat5.add(ExtendedExpression, id := 'extendedGetCustomerName', name := 'Get customer name', expression := 'r.resourceGetSetup.content.customer.name')"
-    },
-    {
-      "id": 64,
-      "exp": "_cat5.add(ExtendedExpression, id := 'extendedGetCustomerUID', name := 'Get customer UID', expression := 'r.resourceGetSetup.content.customer.customer_uid')"
-    },
-    {
-      "id": 65,
-      "exp": "_cat5.add(ExtendedExpression, id := 'extendedDependenciesUnresolved', expression := 'myTemplateRowsCount := num(r.resourceGetLatestDiff.content.changes.templateRowsCount)\\nIF myTemplateRowsCount  0 THEN\\n TRUE\\nELSE\\n FALSE\\nENDIF')"
-    },
-    {
-      "id": 66,
-      "exp": "_cat5.add(ExtendedExpression, id := 'extendedDependenciesResolved', expression := 'myTemplateRowsCount := num(r.resourceGetLatestDiff.content.changes.templateRowsCount)\\nIF myTemplateRowsCount  0 THEN\\n FALSE\\nELSE\\n TRUE\\nENDIF')"
-    },
-    {
-      "id": 67,
-      "exp": "_cat5.add(ExtendedExpression, id := 'extendedSourceServer', name := 'Source Server')"
-    },
-    {
-      "id": 68,
-      "exp": "_cat5.add(ExtendedExpression, id := 'extendedTargetServer', name := 'Target Server')"
-    },
-    {
-      "id": 69,
-      "exp": "_cat5.add(ExtendedExpression, id := 'extendedServerUID', expression := '\\'f3a5b76e-1c4d-4f19-8d2b-1a3c33e73f1b\\'')"
-    },
-    {
-      "id": 70,
-      "exp": "_cat6 := _cat.add(Category, id := 'categoryExpressionsPush', name := 'Push')"
-    },
-    {
-      "id": 71,
-      "exp": "_cat6.add(ExtendedExpression, id := 'extendedPush', expression := '\\'{\\\\\\\"pushtype\\\\\\\": \\\\\\\"script\\\\\\\",\\\\\\\"exp\\\\\\\" : \\\\\\\"\\' + output(mySelection.expression.strip()) + \\'\\\\\\\"}\\'')"
-    },
-    {
-      "id": 72,
-      "exp": "_cat6.add(ExtendedExpression, id := 'extendedPushObject', expression := 'myOutput := \\'\\'\\nmyExtended := \\'\\'\\nmyObjectSelection.foreach(row:\\n myTest := row.generate(true).strip()\\n myOutput := myOutput + \\'\\\\{\\\\\\\"exp\\\\\\\" : \\\\\\\"\\' + \\n myTest + \\n \\'\\\\\\\",\\\\\\\"objectid\\\\\\\" : \\\\\\\"\\' + \\n row.id + \\n \\'\\\\\\\",\\\\\\\"parentclass\\\\\\\" : \\\\\\\"\\' + \\n row.parent.classname + \\n \\'\\\\\\\",\\\\\\\"parentid\\\\\\\" : \\\\\\\"\\' + \\n row.parent.id +\\n \\'\\\\\\\",\\\\\\\"objectname\\\\\\\" : \\\\\\\"\\' + \\n row.name +\\n \\'\\\\\\\",\\\\\\\"parentname\\\\\\\" : \\\\\\\"\\' + \\n row.parent.name +\\n \\'\\\\\\\",\\\\\\\"class\\\\\\\" : \\\\\\\"\\' + \\n row.classname +\\n \\'\\\\\\\"\\\\},\\'\\n myExtended := myExtended + myTest\\n)\\nt.extendedDumbo.expression := myExtended\\nt.extendedDummy.expression := \\'{\\\\\\\"pushtype\\\\\\\": \\\\\\\"object\\\\\\\",\\\\\\\"expressions\\\\\\\": [\\' + myOutput.substring(0,myOutput.size()-1) + \\']}\\'')"
-    },
-    {
-      "id": 73,
-      "exp": "_cat6.add(ExtendedExpression, id := '24783', expression := 'myEnvironment := \\'master\\'\\nmyGitHubURL := \\'https:\\/\\/raw.githubusercontent.com\\/hemmingr\\/corporater\\/main\\/dasb_patch\\'\\nmyGithubMetaURL := \\'https:\\/\\/api.github.com\\/repos\\/hemmingr\\/corporater\\/contents\\/\\'+myEnvironment+\\'.setup\\'\\n\\ntable := createTable(\\'id\\')\\ntable.addRow(t.expressionContent,id)\\nmyExpression := output(t.expressionContent.expression)\\nmyFile := t.extendedBase64.expression\\n\\nIF source = \\'github\\' THEN\\n table.addColumn(\\'exp\\',r.resourceGetGithubFile.content)\\nELSE \\n IF source = \\'direct\\' THEN\\n IF objectid != MISSING AND objectid  \\'\\' THEN\\n table.addColumn(\\'exp\\',output(t.get(objectid).parent.generate(true))) \\n\\/\\/ table.addColumn(\\'expression\\',myFile)\\n ELSE\\n table.addColumn(\\'exp\\',myExpression)\\n ENDIF\\n ELSE\\n IF source = \\'local\\' THEN \\'\\'\\n ELSE\\n \\'NOT A VALID PARAMETER\\'\\n ENDIF\\n ENDIF\\n \\nENDIF')"
-    },
-    {
-      "id": 74,
-      "exp": "_cat6.add(ExtendedExpression, id := '177764', expression := '\\'{\\\\\\\"pushtype\\\\\\\": \\\\\\\"test\\\\\\\",\\\\\\\"mytest\\\\\\\": \\\\\\\"hemming\\\\\\\",\\\\\\\"expressions\\\\\\\" : \\' + r.resourceGetLatestDiff.content.patchedObj + \\'}\\'')"
-    },
-    {
-      "id": 75,
-      "exp": "_cat6.add(ExtendedExpression, id := '200515', expression := '\\'{\\\\\\\"pushtype\\\\\\\": \\\\\\\"plugin\\\\\\\",\\\\\\\"expressions\\\\\\\" : \\' + r.resourceGeneratePluginCode.content.rows + \\'}\\'')"
-    },
-    {
-      "id": 76,
-      "exp": "_cat7 := _cat.add(Category, id := 'categoryExpressionsPlugin', name := 'Plugin')"
-    },
-    {
-      "id": 77,
-      "exp": "_cat7.add(ExtendedExpression, id := 'extendedGeneratePlugin', name := 'Generate Plugin Code', expression := 'script := \\'\\'\\nscript := script + t.categoryPagesDeploy.generate(true)\\nscript := script + t.categoryTemplateDeploy.generate(true)\\nscript := script + t.categoryExpressionsDeploy.generate(true)\\nscript := script + t.categoryResourcesDeploy.generate(true)\\nscript := script + t.categoryWorkflowDeploy.generate(true)', ownership := list(u.hemmingr))"
-    },
-    {
-      "id": 78,
-      "exp": "_cat8 := _cat.add(Category, id := '177851', name := 'Test')"
-    },
-    {
-      "id": 79,
-      "exp": "_cat8.add(ExtendedExpression, id := '177852', expression := '\\/\\/IF keyStep.ismissing() = TRUE THEN\\n r.resourceGetSetup.content.setup.hosts.filter(stage = \\'dev\\').first().name\\n\\/\\/ENDIF')"
-    },
-    {
-      "id": 80,
-      "exp": "_cat8.add(ExtendedExpression, id := '177854', expression := 'r.resourceGetSetup.content.setup.hosts.filter(stage = \\'qa\\').first().name')"
-    },
-    {
-      "id": 81,
-      "exp": "_cat8.add(ExtendedExpression, id := 'extendedGenerateHash')"
-    },
-    {
-      "id": 82,
-      "exp": "_cat8.add(ExtendedExpression, id := 'extendedGenerateInitialHash', expression := 'script := \\'{\\\\\\\"text\\\\\\\": \\\\\\\"\\'\\n\\/\\/script := script + \\'hemming\\'\\nscript := script+t.categoryPagesDeploy.generate(true).strip()\\n\\/\\/script := script+t.categoryTemplateDeploy.generate(true).strip()\\n\\/\\/script := script+t.categoryExpressionDeploy.generate(true).strip()\\n\\/\\/script := script+t.categoryResourcesDeploy.generate(true).strip()\\n\\/\\/script := script+t.categoryWorkflowDeploy.generate(true).strip()\\nscript := script + \\'\\\\\\\"}\\'')"
-    },
-    {
-      "id": 83,
-      "exp": "_cat8.add(ExtendedExpression, id := 'myTest')"
-    },
-    {
-      "id": 84,
-      "exp": "_cat8.add(ExtendedExpression, id := '175766', name := 'Generate Client Code', expression := '\\/*script := \\'\\'\\nscript := script+t.categoryPagesDeploy.generate(true).strip()\\nscript := script+t.categoryTemplateDeploy.generate(true).strip()\\nscript := script+t.categoryExpressionDeploy.generate(true).strip()\\nscript := script+t.categoryResourcesDeploy.generate(true).strip()\\nscript := script+t.categoryWorkflowDeploy.generate(true).strip()\\n*\\/\\nt.extendedDiffProperties.generate(true)', ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
-    },
-    {
-      "id": 85,
-      "exp": "_cat8.add(ExtendedExpression, id := '181461', expression := 't.220401.generate(true)')"
-    },
-    {
-      "id": 86,
-      "exp": "_cat9 := _cat8.add(Category, id := '201275', name := 'DEL GitHub')"
-    },
-    {
-      "id": 87,
-      "exp": "_cat9.add(ExtendedExpression, id := 'extendedGenerateURL', name := 'Generate URL', expression := 'myEnvironment := t.extendedEnvironment.expression\\nmyURL := \\'https:\\/\\/raw.githubusercontent.com\\/hemmingr\\/corporater\\/main\\/\\'+myEnvironment+\\'.setup\\'')"
-    },
-    {
-      "id": 88,
-      "exp": "_cat9.add(ExtendedExpression, id := 'extendedGenerateMetaURL', name := 'Generate Meta URL', expression := 'myEnvironment := t.extendedEnvironment.expression\\nmyURL := \\'https:\\/\\/api.github.com\\/repos\\/hemmingr\\/corporater\\/contents\\/\\'+myEnvironment+\\'.setup\\'')"
-    },
-    {
-      "id": 89,
-      "exp": "_cat9.add(ExtendedExpression, id := 'extendedDownloadGithubRawFile', name := 'GithHub File Link', expression := 'myUID := \\'080557ce-49c9-4635-9ea3-ef29606681a1\\'\\nrootURL := \\'https:\\/\\/raw.githubusercontent.com\\/hemmingr\\/corporater\\/main\\/\\'\\nmyURL := rootURL + myUID + \\'_setup\\' + \\'.json\\'')"
-    },
-    {
-      "id": 90,
-      "exp": "_cat9.add(ExtendedExpression, id := 'extendedListGithubFiles', name := 'List Github Files', expression := 'myEnvironment := t.extendedEnvironment.expression\\nmyURL := \\'https:\\/\\/api.github.com\\/repos\\/hemmingr\\/corporater\\/contents\\'')"
-    },
-    {
-      "id": 91,
-      "exp": "_cat9.add(ExtendedExpression, id := 'extendedShowGitHubContent', name := 'Show GitHub Content', expression := 'myGitHubSelection.table().addColumn(\\'expression\\',output(self.expression))')"
-    },
-    {
-      "id": 92,
-      "exp": "_cat9.add(ExtendedExpression, id := 'extendedTmp', name := 'Temporary contentholder', description := 'Temporary contentholder', expression := '[ {\\n \\\"operation\\\" : \\\"update\\\",\\n \\\"organization\\\" : \\\"102\\\",\\n \\\"id\\\" : \\\"expressionContent\\\",\\n \\\"expression\\\" : \\\"o.102.change(name := \\'jsontest\\')\\\"\\n} ]\\n')"
-    },
-    {
-      "id": 93,
-      "exp": "_cat9.add(ExtendedExpression, id := 'extendedGithubInstall', name := 'Github Install', expression := 'myEnvironment := t.extendedEnvironment.expression\\nmyURL := \\'https:\\/\\/api.github.com\\/repos\\/hemmingr\\/corporater\\/contents\\'')"
-    },
-    {
-      "id": 94,
-      "exp": "_cat9.add(ExtendedExpression, id := 'extendedGenerateBase64', name := 'Generate BASE64', expression := '\\/\\/\\'bXkgbmV3IGZpbGUgY29udGVudHM=\\'\\nr.resourceTranslateBase64.content.result')"
-    },
-    {
-      "id": 95,
-      "exp": "_cat9.add(ExtendedExpression, id := 'extendedBASE64helper', name := 'BASE64 Helper', expression := 'output(t.extendedDumbo.expression)')"
-    },
-    {
-      "id": 96,
-      "exp": "_cat10 := _cat8.add(Category, id := 'categoryExpressions', name := 'DEL Scripts')"
-    },
-    {
-      "id": 97,
-      "exp": "_cat10.add(ExtendedExpression, id := '201195', name := 'Script 1', description := 'CHANGE : Test script 1 (WORKING)', expression := 'o.102.change(name := \\'hemming1\\')\\n', ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
-    },
-    {
-      "id": 98,
-      "exp": "_cat10.add(ExtendedExpression, id := '201241', name := 'Script 2', description := 'CHANGE : Test script 2 (WORKING)', expression := 'o.102.change(name := \\'hemming2\\')\\n', ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
-    },
-    {
-      "id": 99,
-      "exp": "_cat10.add(ExtendedExpression, id := '173665', name := 'Script 3', description := 'CHANGE : Test script 3 (WORKING)', expression := 'o.102.change(name := \\'hemming3\\')\\n', ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
-    },
-    {
-      "id": 100,
-      "exp": "_cat10.add(ExtendedExpression, id := '174251', name := 'Script 4', description := 'ADD: Test script 4 (WORKING)', expression := 'o.171.add(Scorecard, name := \\'Scorecarda\\', ownership := list(u.admin, u.get(\\'roaldsoy@corporater.com\\')))', ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
-    },
-    {
-      "id": 101,
-      "exp": "_cat10.add(ExtendedExpression, id := '23938', name := 'Script 5', description := 'ADD: Test script 5 (WORKING)', expression := 'o.171.add(Scorecard, name := \\'Scorecarda\\', id := \\'hemmingtestid\\')', ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
-    },
-    {
-      "id": 102,
-      "exp": "_cat10.add(ExtendedExpression, id := '175677', name := 'Script 6', description := 'CHANGE: Test script 6 (WORKING)', expression := 't.hemmingtestid.change(id := \\'hemmingtestid\\', name := \\'Scorecardx\\', ownership := list(u.apiuser)) \\/\\/Scorecard', ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
-    },
-    {
-      "id": 103,
-      "exp": "_cat10.add(ExtendedExpression, id := '175686', name := 'Script 7', description := 'DELETE: Test script 7 (WORKING IF ID PRESENT)', expression := 't.2289.delete()', ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
-    },
-    {
-      "id": 104,
-      "exp": "_cat8.add(ExtendedExpression, id := 'extendedDumbo')"
-    },
-    {
-      "id": 105,
-      "exp": "_cat8.add(ExtendedExpression, id := 'extendedDummy', expression := '{\\\"pushtype\\\": \\\"object\\\",\\\"expressions\\\": []}')"
-    },
-    {
-      "id": 106,
-      "exp": "_cat8.add(ExtendedExpression, id := 'extendedShowObjectContent', name := 'Show Content', expression := 'myObjectSelection.table().addColumn(\\'expression\\',output(self.generate()))\\n')"
-    },
-    {
-      "id": 107,
-      "exp": "_cat8.add(ExtendedExpression, id := 'extendedTest', expression := 'myOutput := \\'\\'\\nmyObjectSelection.foreach(row:\\n myOutput := myOutput + \\'\\\\{\\\\\\\"exp\\\\\\\" : \\\\\\\"\\' + \\n row.generate(true).strip() + \\n \\'\\\\\\\",\\\\\\\"objectid\\\\\\\" : \\\\\\\"\\' + \\n row.id + \\n \\'\\\\\\\",\\\\\\\"parentclass\\\\\\\" : \\\\\\\"\\' + \\n row.parent.classname + \\n \\'\\\\\\\",\\\\\\\"parentid\\\\\\\" : \\\\\\\"\\' + \\n row.parent.id +\\n \\'\\\\\\\",\\\\\\\"objectname\\\\\\\" : \\\\\\\"\\' + \\n row.name +\\n \\'\\\\\\\",\\\\\\\"parentname\\\\\\\" : \\\\\\\"\\' + \\n row.parent.name +\\n \\'\\\\\\\",\\\\\\\"class\\\\\\\" : \\\\\\\"\\' + \\n row.classname +\\n \\'\\\\\\\"\\\\},\\'\\n)\\n\\'{\\\\\\\"pushtype\\\\\\\": \\\\\\\"object\\\\\\\",\\\\\\\"expressions\\\\\\\": [\\' + myOutput.substring(0,myOutput.size()-1) + \\']}\\'\\n\\n')"
-    },
-    {
-      "id": 108,
-      "exp": "_cat8.add(ExtendedExpression, id := '174506', expression := '\\'{\\\\\\\"pushtype\\\\\\\": \\\\\\\"script\\\\\\\",\\\\\\\"exp\\\\\\\" : \\\\\\\"\\' + \\'\\' + \\'\\\\\\\"}\\'')"
-    },
-    {
-      "id": 109,
-      "exp": "_cat8.add(ExtendedExpression, id := '24782', expression := 'r.fileJSONsetup.content.setup.hosts.table()')"
-    },
-    {
-      "id": 110,
-      "exp": "_cat8.add(ExtendedExpression, id := '24784', expression := 'myEnvironment := \\'master\\'\\n\\nIF mykey = \\'user\\' THEN\\n root.user.children\\nELSE \\n IF mykey = \\'direct\\' THEN\\n IF objectid != MISSING AND objectid  \\'\\' THEN\\n table.addColumn(\\'exp\\',output(t.get(objectid).parent.generate(true))) \\n\\/\\/ table.addColumn(\\'expression\\',myFile)\\n ELSE\\n table.addColumn(\\'exp\\',myExpression)\\n ENDIF\\n ELSE\\n IF mykey = \\'local\\' THEN \\'\\'\\n ELSE\\n \\'NOT A VALID PARAMETER\\'\\n ENDIF\\n ENDIF\\n \\nENDIF')"
-    },
-    {
-      "id": 111,
-      "exp": "_cat := root.externalresource.add(Category, id := 'categoryResourcesDeploy', name := 'DEPLOY', ownership := list(u.epeterson, u.hemmingr))"
-    },
-    {
-      "id": 112,
-      "exp": "_apir := _cat.add(APIResource, id := 'deploy', name := 'DEPLOY', ownership := list(u.hemmingr))"
-    },
-    {
-      "id": 113,
-      "exp": "_apie := _apir.add(APIEndpoint, id := '604', name := 'ID spaces', endpointName := 'roots', advancedMode := true, expression := 'myDebug := TRUE\\nIF keyidspace = \\'user\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.user.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN \\n root.user.children.table(id).addColumn(\\'exp\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n IF keyrelease = \\'1.0.0\\' THEN\\n root.user.children.filter(propRelease  \\'\\').table().addColumn(\\'id\\',id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ELSE\\n root.user.children.table().addColumn(\\'id\\',id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n\\/\\/ IF myDebug = TRUE THEN\\n\\/\\/ \\'method : \\' + keymethod + \\', keyidspace : \\' + keyidspace + \\', release : \\' + keyrelease \\n\\/\\/ ELSE\\n\\/\\/ \\n\\/\\/ ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\nELSE\\n IF keyidspace = \\'property\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.property.children.filter(className != \\'SystemMethodConfig\\').table()\\n ELSE \\n IF keymethod = \\'genedit\\' THEN\\n root.property.children.filter(className != \\'SystemMethodConfig\\').table(id).addColumn(\\'exp\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.property.children.filter(className != \\'SystemMethodConfig\\').table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'organisation\\' THEN \\n \\'\\'\\n ELSE\\n IF keyidspace = \\'accessprofile\\' THEN\\n \\/\\/ Code for accessprofile\\n IF keymethod = \\'standard\\' THEN\\n root.accessprofile.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.accessprofile.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.accessprofile.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n \\/\\/ Additional roots added here\\n IF keyidspace = \\'ceven\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.ceven.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.ceven.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.ceven.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'cetask\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.cetask.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.cetask.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.cetask.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'cecom\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.cecom.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.cecom.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.cecom.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'ceinc\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.ceinc.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.ceinc.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.ceinc.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'cepro\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.cepro.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.cepro.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.cepro.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'cepol\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.cepol.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.cepol.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.cepol.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'cecme\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.cecme.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.cecme.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.cecme.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'ceiss\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.ceiss.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.ceiss.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.ceiss.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'ceass\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.ceass.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.ceass.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.ceass.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'ceser\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.ceser.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.ceser.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.ceser.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'cecot\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.cecot.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.cecot.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.cecot.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'ceprj\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.ceprj.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.ceprj.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.ceprj.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'cereg\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.cereg.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.cereg.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.cereg.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'cecor\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.cecor.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.cecor.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.cecor.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'ceind\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.ceind.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.ceind.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.ceind.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'ceatt\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.ceatt.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.ceatt.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.ceatt.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'ceras\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.ceras.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.ceras.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.ceras.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'acpol\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.acpol.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.acpol.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.acpol.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'role\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.role.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.role.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.role.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'ceprd\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.ceprd.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.ceprd.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.ceprd.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'sa\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.sa.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.sa.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.sa.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'cepsc\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.cepsc.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.cepsc.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.cepsc.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'ceprv\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.ceprv.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.ceprv.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.ceprv.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'cewfl\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.cewfl.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.cewfl.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.cewfl.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'cedis\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.cedis.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.cedis.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.cedis.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'ceinq\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.ceinq.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.ceinq.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.ceinq.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'ceqst\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.ceqst.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.ceqst.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.ceqst.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'cedpi\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.cedpi.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.cedpi.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.cedpi.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'cetia\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.cetia.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.cetia.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.cetia.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n \\'NOT A VALID PARAMETER\\'\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\nENDIF\\n')"
-    },
-    {
-      "id": 114,
-      "exp": "_apie.add(EndpointParameter, id := '606', name := 'Name', key := 'keyidspace', mandatory := true)"
-    },
-    {
-      "id": 115,
-      "exp": "_apie.add(EndpointParameter, id := '650', name := 'Method', key := 'keymethod', mandatory := true)"
-    },
-    {
-      "id": 116,
-      "exp": "_apie.add(EndpointParameter, id := '651', name := 'Release', key := 'keyrelease', mandatory := true)"
-    },
-    {
-      "id": 117,
-      "exp": "_apie.add(EndpointParameter, id := '652', name := 'Filter', key := 'keyfilter')"
-    },
-    {
-      "id": 118,
-      "exp": "_apie.add(EndpointParameter, id := '658', name := 'Page', key := 'keypage')"
-    },
-    {
-      "id": 119,
-      "exp": "_apie.add(EndpointParameter, id := '661', name := 'Limit', key := 'keylimit')"
-    },
-    {
-      "id": 120,
-      "exp": "_apir.add(APIClientAuthentication, id := '654', clientId := '20ea04b4b90b0944ba6a11c3b86a84', user := u.get('roaldsoy@corporater.com'))"
-    },
-    {
-      "id": 121,
-      "exp": "_apir.add(LogFolder, id := '230097')"
-    },
-    {
-      "id": 122,
-      "exp": "_cat1 := _cat.add(Category, id := 'categoryRemoteResources', name := 'Remote Resources')"
-    },
-    {
-      "id": 123,
-      "exp": "_cat2 := _cat1.add(Category, id := 'categoryUtility', name := 'Utility')"
-    },
-    {
-      "id": 124,
-      "exp": "_cat2.add(RemoteResource, id := 'resourceUptime', name := 'Uptime', requestMethod := 'POST', url := 'https:\\/\\/api.uptimerobot.com\\/v2\\/getMonitors', authentication := 'API_KEY', key := 'api_key', param := 'logs:1', bodyType := 'RAW', body := '{\\n\\\"logs\\\":1\\n}')"
-    },
-    {
-      "id": 125,
-      "exp": "_cat2.add(RemoteResource, id := 'resourceGetSetup', name := 'Get Setup', url := 'https:\\/\\/corporater-jsondiffpatch-compare.glitch.me\\/github\\/config', authentication := 'API_KEY', key := 'api_key', bodyType := 'RAW')"
-    },
-    {
-      "id": 126,
-      "exp": "_cat2.add(RemoteResource, id := 'resourcePush', name := 'Push', requestMethod := 'POST', url := 'https:\\/\\/deployment.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deploy\\/push', authentication := 'BASIC', userName := 'apiuser', bodyType := 'RAW', body := '${t.extendedPush.expression}')"
-    },
-    {
-      "id": 127,
-      "exp": "_cat3 := _cat1.add(Category, id := 'categoryIDspaces', name := 'IDspaces')"
-    },
-    {
-      "id": 128,
-      "exp": "_cat3.add(Category, id := '563069', name := 'ORGANISATION')"
-    },
-    {
-      "id": 129,
-      "exp": "_cat5 := _cat3.add(Category, id := '174577', name := 'PROPERTY')"
-    },
-    {
-      "id": 130,
-      "exp": "_cat5.add(RemoteResource, id := 'localProperties', name := 'Local Properties', url := 'https:\\/\\/newfeaturemaster.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deploy\\/roots', authentication := 'BASIC', userName := 'roaldsoy@corporater.com', param := 'keyroot:property\\nkeymethod:generate')"
-    },
-    {
-      "id": 131,
-      "exp": "_cat5.add(RemoteResource, id := 'remoteProperties', name := 'Remote Properties', url := 'https:\\/\\/deployment.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deploy\\/roots', authentication := 'BASIC', userName := 'apiuser', param := 'keyroot:property\\nkeymethod:generate\\n', bodyType := 'RAW')"
-    },
-    {
-      "id": 132,
-      "exp": "_cat5.add(RemoteResource, id := 'resourceDiffProperties', name := 'Diff - Properties', requestMethod := 'POST', url := 'https:\\/\\/corporater-jsondiffpatch-compare.glitch.me\\/diff', bodyType := 'RAW', body := '{\\n \\\"json1\\\": ${t.extendedRemoteProperties.expression},\\n \\\"json2\\\": ${t.extendedLocalProperties.expression}\\n}\\n')"
-    },
-    {
-      "id": 133,
-      "exp": "_cat5.add(RemoteResource, id := '638', name := 'Diff - Properties Limited', description := 'Limited to properties having ID ending with __test', requestMethod := 'POST', url := 'https:\\/\\/corporater-jsondiffpatch-compare.glitch.me\\/diff', bodyType := 'RAW', body := '{\\n \\\"json1\\\": ${t.extendedRemoteProperties.expression},\\n \\\"json2\\\": ${t.extendedLocalProperties.expression}\\n}\\n')"
-    },
-    {
-      "id": 134,
-      "exp": "_rem7 := _cat5.add(RemoteResource, id := 'resourceDiffExtended', name := 'Process Properties Extended', requestMethod := 'POST', url := 'https:\\/\\/corporater-compare-extended.glitch.me\\/compare', bodyType := 'RAW', body := '{\\n \\\"currentContentBase64\\\": \\\"${result2}\\\",\\n \\\"changeContentBase64\\\": \\\"${result1}\\\"\\n}', timeout := 120)"
-    },
-    {
-      "id": 135,
-      "exp": "_cat6 := _cat3.add(Category, id := '174576', name := 'USER')"
-    },
-    {
-      "id": 136,
-      "exp": "_cat6.add(RemoteResource, id := 'resourceLocalUsers', name := 'Local Users', url := 'https:\\/\\/newfeaturemaster.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deploy\\/roots', authentication := 'BASIC', userName := 'roaldsoy@corporater.com', param := 'keyidspace:user\\nkeymethod:generate\\nkeyfilter:testfilter\\nkeypage:1\\nkeylimit:10\\nkeyrelease:1.0.0', tokenExpression := '\\/\\/bearerToken := body.token\\n')"
-    },
-    {
-      "id": 137,
-      "exp": "_cat6.add(RemoteResource, id := 'resourceRemoteUsers', name := 'Remote Users', url := 'https:\\/\\/deployment.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deploy\\/roots', authentication := 'BASIC', userName := 'apiuser', param := 'keyroot:user\\nkeymethod:generate\\nrelease:1.0.0', bodyType := 'RAW')"
-    },
-    {
-      "id": 138,
-      "exp": "_cat6.add(RemoteResource, id := 'resourceDiffUsers', name := 'Diff - Users', requestMethod := 'POST', url := 'https:\\/\\/corporater-jsondiffpatch-compare.glitch.me\\/api\\/diff', authentication := 'API_KEY', key := 'api_key', bodyType := 'RAW', body := '{\\n \\\"json1\\\": ${t.extendedRemoteUsers.expression},\\n \\\"json2\\\": ${t.extendedLocalUsers.expression}\\n}\\n')"
-    },
-    {
-      "id": 139,
-      "exp": "_cat6.add(RemoteResource, id := 'resourceGetLatestDiff', name := 'Get latest diff', url := 'https:\\/\\/corporater-jsondiffpatch-compare.glitch.me\\/api\\/latest-diff', authentication := 'API_KEY', key := 'api_key', bodyType := 'RAW')"
-    },
-    {
-      "id": 140,
-      "exp": "_cat6.add(RemoteResource, id := '659', name := 'Push', requestMethod := 'POST', url := 'https:\\/\\/deployment.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deploy\\/push', authentication := 'BASIC', userName := 'apiuser', bodyType := 'RAW', body := '${t.extendedPush.expression}')"
-    },
-    {
-      "id": 141,
-      "exp": "_cat6.add(RemoteResource, id := '771', name := 'TEST User Push', description := 'https:\\/\\/deployment.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deployold\\/push', requestMethod := 'POST', url := 'https:\\/\\/deployment.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deployold\\/push', authentication := 'BASIC', userName := 'apiuser', bodyType := 'RAW', body := '${t.177764.expression}')"
-    },
-    {
-      "id": 142,
-      "exp": "_cat7 := _cat1.add(Category, id := 'categoryPlugin', name := 'Plugin')"
-    },
-    {
-      "id": 143,
-      "exp": "_cat7.add(RemoteResource, id := 'resourceGeneratePluginCode', name := 'Generate Plugin Code', description := 'https:\\/\\/corporater-jsondiffpatch-compare.glitch.me\\/api\\/base64encode', requestMethod := 'POST', url := 'https:\\/\\/corporater-jsondiffpatch-compare.glitch.me\\/api\\/genextended', authentication := 'API_KEY', key := 'api_key', param := 'initial:true', bodyType := 'RAW', body := '${t.extendedGeneratePlugin.expression}', bodyContentType := 'text\\/plain')"
-    },
-    {
-      "id": 144,
-      "exp": "_cat7.add(RemoteResource, id := '7355', name := 'Create Initial Plugin Hash', requestMethod := 'POST', url := 'https:\\/\\/corporater-get-github-setup.glitch.me\\/api\\/hash', authentication := 'API_KEY', key := 'api_key', bodyType := 'RAW', body := '{\\\"text\\\":\\\"${result2}\\\",\\\"initial\\\":\\\"true\\\"}')"
-    },
-    {
-      "id": 145,
-      "exp": "_rem16 := _cat7.add(RemoteResource, id := '7356', name := 'Check Integrity', requestMethod := 'POST', url := 'https:\\/\\/corporater-jsondiffpatch-compare.glitch.me\\/github\\/hash', authentication := 'API_KEY', key := 'api_key', bodyType := 'RAW', body := '{\\\"text\\\":\\\"${result2}\\\"}')"
-    },
-    {
-      "id": 146,
-      "exp": "_cat7.add(RemoteResource, id := '8391', name := 'TEST Plugin Push', description := 'https:\\/\\/deployment.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deployold\\/plugin', requestMethod := 'POST', url := 'https:\\/\\/deployment.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deployold\\/plugin', authentication := 'BASIC', userName := 'apiuser', bodyType := 'RAW', body := '${t.200515.expression}')"
-    },
-    {
-      "id": 147,
-      "exp": "_cat8 := _cat1.add(Category, id := 'categoryTest', name := 'Test')"
-    },
-    {
-      "id": 148,
-      "exp": "_cat8.add(RemoteResource, id := '621', name := 'Mock - POST - Diff', requestMethod := 'POST', url := 'https:\\/\\/b54f45ca-ba50-4695-bb27-c227516e5c7f.mock.pstmn.io', bodyType := 'RAW', body := '${t.extendedLocalProperties.expression}')"
-    },
-    {
-      "id": 149,
-      "exp": "_cat8.add(RemoteResource, id := '624', name := 'TEST roots', url := 'https:\\/\\/newfeaturemaster.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deploy\\/roots', authentication := 'BASIC', userName := 'roaldsoy@corporater.com', param := 'keyroot:user\\nkeymethod:genedit', bodyType := 'RAW')"
-    },
-    {
-      "id": 150,
-      "exp": "_cat8.add(RemoteResource, id := '635', name := 'TEST Push', description := 'https:\\/\\/deployment.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deployold\\/push', requestMethod := 'POST', url := 'https:\\/\\/deployment.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deployold\\/push', authentication := 'BASIC', userName := 'apiuser', bodyType := 'RAW', body := '${t.extendedDummy.expression}')"
-    },
-    {
-      "id": 151,
-      "exp": "_cat8.add(RemoteResource, id := '656', name := 'TEST - Local Users client auth', url := 'https:\\/\\/newfeaturemaster.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deploy\\/roots', authentication := 'CLIENT_AUTH', userName := 'roaldsoy@corporater.com', param := 'keyroot:user\\nkeymethod:generate\\nrelease:1.0.0', clientId := '20ea04b4b90b0944ba6a11c3b86a84', tokenUrl := 'https:\\/\\/newfeaturemaster.innovation.corporater.dev\\/CorpoWebserver\\/api\\/token\\/default\\/deploy')"
-    },
-    {
-      "id": 152,
-      "exp": "_cat8.add(RemoteResource, id := '6051', name := 'TEST Plugin Push', description := 'https:\\/\\/deployment.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deployold\\/plugin', requestMethod := 'POST', url := 'https:\\/\\/deployment.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deployold\\/plugin', authentication := 'BASIC', userName := 'apiuser', bodyType := 'RAW', body := '${t.200515.expression}')"
-    },
-    {
-      "id": 153,
-      "exp": "_rem23 := _cat8.add(RemoteResource, id := '2202', name := 'TEST Create Initial Plugin Hash (SHA256 Hash)', requestMethod := 'POST', url := 'https:\\/\\/corporater-get-github-setup.glitch.me\\/api\\/hash', authentication := 'API_KEY', key := 'api_key', bodyType := 'RAW', body := '{\\\"text\\\":\\\"${result2}\\\",\\\"initial\\\":\\\"true\\\"}')"
-    },
-    {
-      "id": 154,
-      "exp": "_rem24 := _cat8.add(RemoteResource, id := '2203', name := 'TEST Create Initial Plugin Hash (BASE64 Encode)', requestMethod := 'POST', url := 'https:\\/\\/api.thebase64.com\\/encode', authentication := 'API_KEY', key := 'secret', bodyType := 'RAW', body := '${t.extendedGeneratePlugin.expression}', bodyContentType := 'text\\/plain', tokens := 'result2=result')"
-    },
-    {
-      "id": 155,
-      "exp": "_rem25 := _cat8.add(RemoteResource, id := 'resourceCheckIntegrity', name := 'Check Integrity (SHA256 Hash)', requestMethod := 'POST', url := 'https:\\/\\/corporater-get-github-setup.glitch.me\\/api\\/hash', authentication := 'API_KEY', key := 'api_key', bodyType := 'RAW', body := '{\\\"text\\\":\\\"${result2}\\\"}')"
-    },
-    {
-      "id": 156,
-      "exp": "_rem26 := _cat8.add(RemoteResource, id := '1733', name := 'Check Integrity (BASE64 Encode)', requestMethod := 'POST', url := 'https:\\/\\/api.thebase64.com\\/encode', authentication := 'API_KEY', key := 'secret', bodyType := 'RAW', body := '${t.extendedGeneratePlugin.expression}', bodyContentType := 'text\\/plain', tokens := 'result2=result')"
-    },
-    {
-      "id": 157,
-      "exp": "_cat8.add(RemoteResource, id := '1323', name := 'Create Initial Plugin Hash (SHA256 Hash)', requestMethod := 'POST', url := 'https:\\/\\/corporater-jsondiffpatch-compare.glitch.me\\/github\\/hash', authentication := 'API_KEY', key := 'api_key', bodyType := 'RAW', body := '{\\\"text\\\":\\\"${result2}\\\",\\\"initial\\\":\\\"true\\\"}', dependentResources := list(_rem24))"
-    },
-    {
-      "id": 158,
-      "exp": "_cat8.add(RemoteResource, id := '1492', name := 'Check Integrity (SHA256 Hash)', requestMethod := 'POST', url := 'https:\\/\\/corporater-jsondiffpatch-compare.glitch.me\\/github\\/hash', authentication := 'API_KEY', key := 'api_key', bodyType := 'RAW', body := '{\\\"text\\\":\\\"${result2}\\\"}', dependentResources := list(_rem26))"
-    },
-    {
-      "id": 159,
-      "exp": "_cat8.add(RemoteResource, id := '1729', name := 'Check Integrity (SHA256 Hash) Test', requestMethod := 'POST', url := 'https:\\/\\/corporater-jsondiffpatch-compare.glitch.me\\/github\\/hash', authentication := 'API_KEY', key := 'api_key', bodyType := 'RAW', body := '${t.extendedGeneratePlugin.expression}', bodyContentType := 'text\\/plain', dependentResources := list(_rem26))"
-    },
-    {
-      "id": 160,
-      "exp": "_cat8.add(RemoteResource, id := '2019', name := 'Check Integrity (BASE64) Test', description := 'https:\\/\\/corporater-jsondiffpatch-compare.glitch.me\\/api\\/base64encode', requestMethod := 'POST', url := 'https:\\/\\/corporater-jsondiffpatch-compare.glitch.me\\/api\\/base64encode', authentication := 'API_KEY', key := 'api_key', bodyType := 'RAW', body := '${t.extendedGenerateClient.expression}', bodyContentType := 'text\\/plain')"
-    },
-    {
-      "id": 161,
-      "exp": "_cat8.add(RemoteResource, id := 'resourcePushObject', name := 'PushObject', requestMethod := 'POST', url := 'https:\\/\\/deployment.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deploy\\/push', authentication := 'BASIC', userName := 'apiuser', bodyType := 'RAW', body := '${t.extendedPushObject.expression}')"
-    },
-    {
-      "id": 162,
-      "exp": "_rem32 := _cat8.add(RemoteResource, id := 'resourceGeneditRemoteProperties', name := 'Get Remote Properties', url := 'https:\\/\\/deployment.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deploy\\/property', authentication := 'BASIC', userName := 'apiuser', param := 'method:genedit', bodyType := 'RAW', tokens := 'result=result')"
-    },
-    {
-      "id": 163,
-      "exp": "_cat8.add(RemoteResource, id := '648', name := 'Encode BASE64 Genedit Remote Properties', requestMethod := 'POST', url := 'https:\\/\\/api.thebase64.com\\/encode', authentication := 'API_KEY', key := 'secret', bodyType := 'RAW', body := '${t.extendedGeneditRemoteProperties.expression}', bodyContentType := 'text\\/plain', timeout := 120, dependentResources := list(_rem32), tokens := 'result2=result')"
-    },
-    {
-      "id": 164,
-      "exp": "_cat8.add(RemoteResource, id := '649', name := 'Encode BASE64 Generate Remote Properties', requestMethod := 'POST', url := 'https:\\/\\/api.thebase64.com\\/encode', authentication := 'API_KEY', key := 'secret', bodyType := 'RAW', body := '${t.extendedGenerateRemoteProperties.expression}', bodyContentType := 'text\\/plain', timeout := 120, tokens := 'result1=result')"
-    },
-    {
-      "id": 165,
-      "exp": "_rem35 := _cat8.add(RemoteResource, id := '644', name := 'Encode BASE64 Genedit Local Properties', requestMethod := 'POST', url := 'https:\\/\\/api.thebase64.com\\/encode', authentication := 'API_KEY', key := 'secret', bodyType := 'RAW', body := '${t.extendedGeneditProperties.expression}', bodyContentType := 'text\\/plain', timeout := 120, tokens := 'result2=result')"
-    },
-    {
-      "id": 166,
-      "exp": "_rem36 := _cat8.add(RemoteResource, id := 'resourceTranslateBase64Test', name := 'Encode BASE64 Generate Local Properties', requestMethod := 'POST', url := 'https:\\/\\/api.thebase64.com\\/encode', authentication := 'API_KEY', key := 'secret', bodyType := 'RAW', body := '${t.extendedGenerateProperties.expression}', bodyContentType := 'text\\/plain', timeout := 120, tokens := 'result1=result')"
-    },
-    {
-      "id": 167,
-      "exp": "_cat8.add(RemoteResource, id := 'resourceTranslateBase64', name := 'Encode BASE64', requestMethod := 'POST', url := 'https:\\/\\/api.thebase64.com\\/encode', authentication := 'API_KEY', key := 'secret', bodyType := 'RAW', body := '${t.extendedBASE64helper.expression}', bodyContentType := 'text\\/plain')"
-    },
-    {
-      "id": 168,
-      "exp": "_cat8.add(RemoteResource, id := '662', name := 'Check integrity SHA256 HASH', requestMethod := 'POST', url := 'https:\\/\\/api.thebase64.com\\/encode', authentication := 'API_KEY', key := 'secret', bodyType := 'RAW', body := '${t.extendedGenerateClient.expression}', bodyContentType := 'text\\/plain')"
-    },
-    {
-      "id": 169,
-      "exp": "_rem7.change(dependentResources := list(_rem35, _rem36))"
-    },
-    {
-      "id": 170,
-      "exp": "_rem7.change(dependentResources := list(_rem35, _rem36))"
-    },
-    {
-      "id": 171,
-      "exp": "_rem16.change(dependentResources := list(_rem26))"
-    },
-    {
-      "id": 172,
-      "exp": "_rem23.change(dependentResources := list(_rem24))"
-    },
-    {
-      "id": 173,
-      "exp": "_rem25.change(dependentResources := list(_rem26))"
-    },
-    {
-      "id": 174,
-      "exp": "_rem35.change(dependentResources := list(_rem36))"
-    },
-    {
-      "id": 175,
-      "exp": "_cat := root.notification.add(Category, id := 'categoryWorkflowDeploy', name := 'DEPLOY', ownership := list(u.hemmingr))"
-    },
-    {
-      "id": 176,
-      "exp": "_ntg := _cat.add(NotificationTransportGroup, id := '173748', name := '-> remote server', ownership := list(u.hemmingr))"
-    },
-    {
-      "id": 177,
-      "exp": "_ntg.add(ExtendedTransport, id := 'actionPush', name := 'PUSH', expression := 'r.resourcePush.content', ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
-    },
-    {
-      "id": 178,
-      "exp": "_ntg.add(ExtendedTransport, id := 'actionPushObject', name := 'PUSHOBJECT', expression := 'r.resourcePushObject.content\\nr.resourceGithubUpdate.content', ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
-    },
-    {
-      "id": 179,
-      "exp": "_ntg.add(ExtendedTransport, id := '174365', name := 'GITHUB INSTALL', expression := 't.extendedTmp.expression := r.resourceGetGithubFile.content', ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
-    },
-    {
-      "id": 180,
-      "exp": "_ntg.add(ExtendedTransport, id := '174364', name := 'GITHUB WORKFLOW', expression := 'r.resourceGithubWorkflow.content')"
-    },
-    {
-      "id": 181,
-      "exp": "_ntg.add(ExtendedTransport, id := '1648', name := 'GITHUB DOWNLOAD', expression := 't.extendedTmp.expression := r.resourceGetGithubFile.content', ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
-    },
-    {
-      "id": 182,
-      "exp": "_ntg.add(ExtendedTransport, id := '174375', name := 'GITHUB TEST', expression := 't.extendedTmp.expression := r.resourceGetGithubFile.content', ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
-    },
-    {
-      "id": 183,
-      "exp": "_ntg.add(ExtendedTransport, id := '174834', name := 'TEST', expression := 'r.635.content', ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
-    },
-    {
-      "id": 184,
-      "exp": "_ntg.add(ExtendedTransport, id := '175820', name := 'Check Integrity', description := 'Check Integrity and install if needed')"
-    }
-  ]
-}
+[
+  {
+    "id": 1,
+    "exp": "_boo := root.page.add(Book, id := 'categoryPagesDeploy', name := 'DEPLOY', description := 'Project (INNOVA-2)', iconName := 'PROCESS', ownership := list(u.hemmingr))"
+  },
+  {
+    "id": 2,
+    "exp": "_pag := _boo.add(Page, id := '173830', name := 'Customer')"
+  },
+  {
+    "id": 3,
+    "exp": "_con := _pag.add(Container, id := '177946')"
+  },
+  {
+    "id": 4,
+    "exp": "_con.add(TextElement, id := '177947', name := 'Customer info', text := ' ${t.extendedGetCustomerName.expression}  \\u00A0 ', longText := ' Customer ID : ${t.extendedGetCustomerUID.expression}  \\u00A0 ', showToolMenu := false, disableSearch := true, headerStyle := 'NONE', borderStyle := 'NONE', transparency := 100)"
+  },
+  {
+    "id": 5,
+    "exp": "_con.add(TextElement, id := '177952', name := 'Empty', text := ' . ', headerStyle := 'NONE', borderStyle := 'NONE', transparency := 100)"
+  },
+  {
+    "id": 6,
+    "exp": "_con1 := _pag.add(Container, id := '175817')"
+  },
+  {
+    "id": 7,
+    "exp": "_con1.add(InputView, id := '181179', inputSet := t.181177, showToolMenu := false, disableSearch := true, headerStyle := 'NONE', borderStyle := 'NONE', transparency := 100)"
+  },
+  {
+    "id": 8,
+    "exp": "_pag.add(ExtendedTable, id := '175408', name := 'Uptime status', expression := 'r.resourceUptime.content.monitors.table(friendly_name,url,status)', columnsLargeScreen := 4, columnsMediumScreen := 4, showToolMenu := false, disableSearch := true, headerStyle := 'NONE', borderStyle := 'NONE', transparency := 100)"
+  },
+  {
+    "id": 9,
+    "exp": "_pag.add(URLView, id := '177742', columnsLargeScreen := 4, columnsMediumScreen := 4, height := 600, loadURI := 'https:\\/\\/corporater-get-github-setup.glitch.me\\/view-config', headerStyle := 'NONE', borderStyle := 'NONE', transparency := 100)"
+  },
+  {
+    "id": 10,
+    "exp": "_pag1 := _boo.add(Page, id := '173831', name := 'Transfer')"
+  },
+  {
+    "id": 11,
+    "exp": "_pag1.add(Spacer, id := '177895', name := '------------Details----------------')"
+  },
+  {
+    "id": 12,
+    "exp": "_pag1.add(ImageView, id := '11361', name := 'Visualize development cycle', headerStyle := 'NONE', borderStyle := 'NONE', visibility := 'NOVISIBLE')"
+  },
+  {
+    "id": 13,
+    "exp": "_pag1.add(InputView, id := '7065', name := 'Object selection', inputSet := t.7063, columnsLargeScreen := 3, columnsMediumScreen := 3, headerStyle := 'NONE', borderStyle := 'NONE', transparency := 100, visibility := 'NOVISIBLE')"
+  },
+  {
+    "id": 14,
+    "exp": "_pag1.add(ExtendedTable, id := '7066', name := 'Selected Objects', expression := 'myObjectSelection.table().addColumn(\\'exp\\',output(self.generate(true)))', columnsLargeScreen := 3, columnsMediumScreen := 3, showToolMenu := false, disableSearch := true, headerStyle := 'NONE', borderStyle := 'NONE', transparency := 100, visibility := 'NOVISIBLE', tableSearchingEnabled := false)"
+  },
+  {
+    "id": 15,
+    "exp": "_pag1.add(ActionButton, id := '7067', name := 'Object Deploy', buttonText := 'Deploy', actionObject := t.actionPushObject, headerStyle := 'NONE', borderStyle := 'NONE', visibility := 'NOVISIBLE', ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
+  },
+  {
+    "id": 16,
+    "exp": "_pag1.add(Spacer, id := '177875', name := '------------Scripts----------------')"
+  },
+  {
+    "id": 17,
+    "exp": "_pag1.add(ImageView, id := '173699', name := 'Visualize development cycle', headerStyle := 'NONE', borderStyle := 'NONE', visibility := 'NOVISIBLE', container := t.177866)"
+  },
+  {
+    "id": 18,
+    "exp": "_pag1.add(InputView, id := '173700', name := 'Script selection', inputSet := t.201191, showToolMenu := false, disableSearch := true, headerStyle := 'NONE', borderStyle := 'NONE', transparency := 100, visibility := 'NOVISIBLE', container := t.177866)"
+  },
+  {
+    "id": 19,
+    "exp": "_pag1.add(ExtendedTable, id := '173701', name := 'Selected script', expression := 'mySelection.table().addColumn(\\'expression\\',output(self.expression))', showToolMenu := false, disableSearch := true, headerStyle := 'NONE', borderStyle := 'NONE', transparency := 100, visibility := 'NOVISIBLE', container := t.177866)"
+  },
+  {
+    "id": 20,
+    "exp": "_pag1.add(ActionButton, id := '173702', name := 'Deploy script', buttonText := 'Deploy', actionObject := t.actionPush, headerStyle := 'NONE', borderStyle := 'NONE', visibility := 'NOVISIBLE', container := t.177866, ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
+  },
+  {
+    "id": 21,
+    "exp": "_pag1.add(ActionButton, id := '174775', name := 'Test', buttonText := 'Test', actionObject := t.174834, headerStyle := 'NONE', borderStyle := 'NONE', visibility := 'NOVISIBLE', container := t.177866, ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
+  },
+  {
+    "id": 22,
+    "exp": "_pag1.add(Spacer, id := '177888', name := '-----------Process-----------------')"
+  },
+  {
+    "id": 23,
+    "exp": "_pag1.add(InputView, id := '177859', name := 'Available process options', inputSet := t.177860, columnsLargeScreen := 3, columnsMediumScreen := 3, showToolMenu := false, headerStyle := 'NONE', borderStyle := 'NONE', transparency := 100, container := t.177870)"
+  },
+  {
+    "id": 24,
+    "exp": "_con2 := _pag1.add(Container, id := '177955', columnsLargeScreen := 3, columnsMediumScreen := 3, visibility := 'NOVISIBLE', container := t.177870)"
+  },
+  {
+    "id": 25,
+    "exp": "_con2.add(TextElement, id := '177956', name := 'Empty', text := ' . ', headerStyle := 'NONE', borderStyle := 'NONE', transparency := 100)"
+  },
+  {
+    "id": 26,
+    "exp": "_con2.add(ImageView, id := '177810', name := 'Visualize development cycle', expression := 't.177981.expression', scaleToFit := true, headerStyle := 'NONE', borderStyle := 'NONE', container := t.177870)"
+  },
+  {
+    "id": 27,
+    "exp": "_con2.add(TextElement, id := '177850', name := 'Current Source', text := ' Source: ${t.177852.expression}', columnsLargeScreen := 3, columnsMediumScreen := 3, headerStyle := 'NONE', borderStyle := 'NONE', container := t.177870)"
+  },
+  {
+    "id": 28,
+    "exp": "_con2.add(TextElement, id := '177853', name := 'Current Target', text := ' Target: ${t.177854.expression}', columnsLargeScreen := 3, columnsMediumScreen := 3, headerStyle := 'NONE', borderStyle := 'NONE', container := t.177870)"
+  },
+  {
+    "id": 29,
+    "exp": "_con3 := _pag1.add(Container, id := '177966', container := t.177870)"
+  },
+  {
+    "id": 30,
+    "exp": "_con3.add(ExtendedTable, id := '177972', name := 'Metrics', expression := 'r.resourceGetLatestDiff.content.changes.table()', showToolMenu := false, disableSearch := true, enableTableMode := false, borderStyle := 'NONE', transparency := 100, tableSearchingEnabled := false)"
+  },
+  {
+    "id": 31,
+    "exp": "_con3.add(ExtendedTable, id := '175646', name := 'Differences', expression := 'r.resourceGetLatestDiff.content.patchedObj.table()', tableSearchingEnabled := false)"
+  },
+  {
+    "id": 32,
+    "exp": "_but := _pag1.add(ButtonContainer, id := '177937', container := t.177869)"
+  },
+  {
+    "id": 33,
+    "exp": "_but.add(ActionButton, id := '177939', name := 'Resolve Dependencies', buttonText := 'Resolve Dependencies', actionObject := t.174834, headerStyle := 'NONE', borderStyle := 'NONE', transparency := 100, showExpression := t.extendedDependenciesUnresolved)"
+  },
+  {
+    "id": 34,
+    "exp": "_but.add(ActionButton, id := '177938', name := 'Deploy', buttonText := 'Deploy', actionObject := t.174834, headerStyle := 'NONE', borderStyle := 'NONE', transparency := 100, showExpression := t.extendedDependenciesResolved)"
+  },
+  {
+    "id": 35,
+    "exp": "_pag1.add(InputView, id := '177811', name := 'Select objects for transfer', inputSet := t.177814, showToolMenu := false, headerStyle := 'NONE', borderStyle := 'NONE', transparency := 100, visibility := 'NOVISIBLE', container := t.177870)"
+  },
+  {
+    "id": 36,
+    "exp": "_pag1.add(ExtendedTable, id := '177812', name := 'Visualize selected objects', expression := 'myObjectSelectionTest.table()', showToolMenu := false, disableSearch := true, headerStyle := 'NONE', transparency := 100, visibility := 'NOVISIBLE', tableSearchingEnabled := false, container := t.177870)"
+  },
+  {
+    "id": 37,
+    "exp": "_cat := root.templatecategory.add(Category, id := 'categoryTemplateDeploy', name := 'DEPLOY', ownership := list(u.hemmingr))"
+  },
+  {
+    "id": 38,
+    "exp": "_cat.add(ExtendedTable, id := 'myExpression', name := 'My Expression', expression := 'createTable(\\'exp\\')\\n .addRow(output(t.expressionContent.expression),id)\\n\\/\\/ .addColumn(\\'exp\\',\\'gg\\')', ownership := list(u.epeterson, u.get('roaldsoy@corporater.com')))"
+  },
+  {
+    "id": 39,
+    "exp": "_cat.add(ExtendedTable, id := 'myObjectExpression', name := 'My Object Expression', expression := 't.extendedShowObjectContent.expression', ownership := list(u.epeterson, u.get('roaldsoy@corporater.com')))"
+  },
+  {
+    "id": 40,
+    "exp": "_cat.add(ExtendedTable, id := 'myEr', expression := 'myOutput := \\'\\'\\nmyObjectSelection.foreach(row:\\n myTest := row.generate(true).strip()\\n myOutput := myOutput + \\'\\\\{\\\\\\\"exp\\\\\\\" : \\\\\\\"\\' + \\n myTest + \\n \\'\\\\\\\",\\\\\\\"objectid\\\\\\\" : \\\\\\\"\\' + \\n row.id + \\n \\'\\\\\\\",\\\\\\\"parentclass\\\\\\\" : \\\\\\\"\\' + \\n row.parent.classname + \\n \\'\\\\\\\",\\\\\\\"parentid\\\\\\\" : \\\\\\\"\\' + \\n row.parent.id +\\n \\'\\\\\\\",\\\\\\\"objectname\\\\\\\" : \\\\\\\"\\' + \\n row.name +\\n \\'\\\\\\\",\\\\\\\"parentname\\\\\\\" : \\\\\\\"\\' + \\n row.parent.name +\\n \\'\\\\\\\",\\\\\\\"class\\\\\\\" : \\\\\\\"\\' + \\n row.classname +\\n \\'\\\\\\\"\\\\},\\'\\n)\\n\\'{\\\\\\\"pushtype\\\\\\\": \\\\\\\"object\\\\\\\",\\\\\\\"expressions\\\\\\\": [\\' + myOutput.substring(0,myOutput.size()-1) + \\']}\\'')"
+  },
+  {
+    "id": 41,
+    "exp": "_cat.add(ExtendedTable, id := '174774', expression := 'o.171.descendants.table(id,name,description)')"
+  },
+  {
+    "id": 42,
+    "exp": "_cat.add(ExtendedTable, id := '177755', name := 'Summary Users', expression := 'r.resourceDiffUsers.content.changes.table()', columnsLargeScreen := 4, showToolMenu := false, borderStyle := 'NONE', tableSearchingEnabled := false)"
+  },
+  {
+    "id": 43,
+    "exp": "_cat.add(ExtendedTable, id := '177757', name := 'Summary Properties', expression := 'r.resourceDiffProperties.content.changes.table()', columnsLargeScreen := 4, showToolMenu := false, borderStyle := 'NONE', tableSearchingEnabled := false)"
+  },
+  {
+    "id": 44,
+    "exp": "_cat := root.expression.add(Category, id := 'categoryExpressionsDeploy', name := 'DEPLOY', ownership := list(u.hemmingr))"
+  },
+  {
+    "id": 45,
+    "exp": "_cat1 := _cat.add(Category, id := 'categoryExpressionsIDspaces', name := 'IDspaces')"
+  },
+  {
+    "id": 46,
+    "exp": "_cat2 := _cat1.add(Category, id := '174574', name := 'Properties')"
+  },
+  {
+    "id": 47,
+    "exp": "_cat2.add(ExtendedExpression, id := 'extendedDiffProperties', name := 'Diff Properties', expression := 'r.resourceDiffProperties.content')"
+  },
+  {
+    "id": 48,
+    "exp": "_cat2.add(ExtendedExpression, id := 'extendedRemoteProperties', name := 'Remote Properties', expression := 'r.remoteProperties.content')"
+  },
+  {
+    "id": 49,
+    "exp": "_cat2.add(ExtendedExpression, id := 'extendedLocalProperties', name := 'Local Properties', expression := 'r.localProperties.content')"
+  },
+  {
+    "id": 50,
+    "exp": "_cat2.add(ExtendedExpression, id := 'extendedGeneditProperties', name := 'Genedit Properties', expression := 'myList := root.property.children.filter(className != \\'SystemMethodConfig\\')\\ngeneditScript := \\'\\'\\n \\nmyList.foreach(row: \\n geneditScript := geneditScript + row.genedit()\\n)')"
+  },
+  {
+    "id": 51,
+    "exp": "_cat2.add(ExtendedExpression, id := 'extendedGenerateProperties', name := 'Generate Properties', expression := 'myList := root.property.children.filter(className != \\'SystemMethodConfig\\')\\ngenerateScript := \\'\\'\\n \\nmyList.foreach(row: \\n generateScript := generateScript + row.generate(true)\\n)')"
+  },
+  {
+    "id": 52,
+    "exp": "_cat2.add(ExtendedExpression, id := 'extendedGeneditRemoteProperties', name := 'Genedit remote Properties', expression := 'r.resourceGeneditRemoteProperties.content')"
+  },
+  {
+    "id": 53,
+    "exp": "_cat2.add(ExtendedExpression, id := 'extendedGenerateRemoteProperties', name := 'Generate Remote Properties', expression := 'r.resourceGenerateRemoteProperties.content')"
+  },
+  {
+    "id": 54,
+    "exp": "_cat3 := _cat1.add(Category, id := '174587', name := 'Users')"
+  },
+  {
+    "id": 55,
+    "exp": "_cat3.add(ExtendedExpression, id := 'oldextendedDiffUsers', name := 'DEL Diff Users', expression := 'r.resourceDiffUsers.content')"
+  },
+  {
+    "id": 56,
+    "exp": "_cat3.add(ExtendedExpression, id := 'extendedLocalUsers', name := 'DEL Local Users', expression := 'r.resourceLocalUsers.content')"
+  },
+  {
+    "id": 57,
+    "exp": "_cat3.add(ExtendedExpression, id := 'extendedRemoteUsers', name := 'DEL Remote Users', expression := 'r.resourceRemoteUsers.content')"
+  },
+  {
+    "id": 58,
+    "exp": "_cat4 := _cat1.add(Category, id := '563072', name := 'Organisations')"
+  },
+  {
+    "id": 59,
+    "exp": "_cat4.add(ExtendedExpression, id := '563073', expression := 'r.resourceDiffProperties.content')"
+  },
+  {
+    "id": 60,
+    "exp": "_cat4.add(ExtendedExpression, id := '563074', expression := 'r.remoteProperties.content')"
+  },
+  {
+    "id": 61,
+    "exp": "_cat4.add(ExtendedExpression, id := '563075', expression := 'r.localProperties.content')"
+  },
+  {
+    "id": 62,
+    "exp": "_cat5 := _cat.add(Category, id := 'categoryExpressionsUtility', name := 'Utility')"
+  },
+  {
+    "id": 63,
+    "exp": "_cat5.add(ExtendedExpression, id := 'extendedGetCustomerName', name := 'Get customer name', expression := 'r.resourceGetSetup.content.customer.name')"
+  },
+  {
+    "id": 64,
+    "exp": "_cat5.add(ExtendedExpression, id := 'extendedGetCustomerUID', name := 'Get customer UID', expression := 'r.resourceGetSetup.content.customer.customer_uid')"
+  },
+  {
+    "id": 65,
+    "exp": "_cat5.add(ExtendedExpression, id := 'extendedDependenciesUnresolved', expression := 'myTemplateRowsCount := num(r.resourceGetLatestDiff.content.changes.templateRowsCount)\\nIF myTemplateRowsCount  0 THEN\\n TRUE\\nELSE\\n FALSE\\nENDIF')"
+  },
+  {
+    "id": 66,
+    "exp": "_cat5.add(ExtendedExpression, id := 'extendedDependenciesResolved', expression := 'myTemplateRowsCount := num(r.resourceGetLatestDiff.content.changes.templateRowsCount)\\nIF myTemplateRowsCount  0 THEN\\n FALSE\\nELSE\\n TRUE\\nENDIF')"
+  },
+  {
+    "id": 67,
+    "exp": "_cat5.add(ExtendedExpression, id := 'extendedSourceServer', name := 'Source Server')"
+  },
+  {
+    "id": 68,
+    "exp": "_cat5.add(ExtendedExpression, id := 'extendedTargetServer', name := 'Target Server')"
+  },
+  {
+    "id": 69,
+    "exp": "_cat5.add(ExtendedExpression, id := 'extendedServerUID', expression := '\\'f3a5b76e-1c4d-4f19-8d2b-1a3c33e73f1b\\'')"
+  },
+  {
+    "id": 70,
+    "exp": "_cat6 := _cat.add(Category, id := 'categoryExpressionsPush', name := 'Push')"
+  },
+  {
+    "id": 71,
+    "exp": "_cat6.add(ExtendedExpression, id := 'extendedPush', expression := '\\'{\\\\\\\"pushtype\\\\\\\": \\\\\\\"script\\\\\\\",\\\\\\\"exp\\\\\\\" : \\\\\\\"\\' + output(mySelection.expression.strip()) + \\'\\\\\\\"}\\'')"
+  },
+  {
+    "id": 72,
+    "exp": "_cat6.add(ExtendedExpression, id := 'extendedPushObject', expression := 'myOutput := \\'\\'\\nmyExtended := \\'\\'\\nmyObjectSelection.foreach(row:\\n myTest := row.generate(true).strip()\\n myOutput := myOutput + \\'\\\\{\\\\\\\"exp\\\\\\\" : \\\\\\\"\\' + \\n myTest + \\n \\'\\\\\\\",\\\\\\\"objectid\\\\\\\" : \\\\\\\"\\' + \\n row.id + \\n \\'\\\\\\\",\\\\\\\"parentclass\\\\\\\" : \\\\\\\"\\' + \\n row.parent.classname + \\n \\'\\\\\\\",\\\\\\\"parentid\\\\\\\" : \\\\\\\"\\' + \\n row.parent.id +\\n \\'\\\\\\\",\\\\\\\"objectname\\\\\\\" : \\\\\\\"\\' + \\n row.name +\\n \\'\\\\\\\",\\\\\\\"parentname\\\\\\\" : \\\\\\\"\\' + \\n row.parent.name +\\n \\'\\\\\\\",\\\\\\\"class\\\\\\\" : \\\\\\\"\\' + \\n row.classname +\\n \\'\\\\\\\"\\\\},\\'\\n myExtended := myExtended + myTest\\n)\\nt.extendedDumbo.expression := myExtended\\nt.extendedDummy.expression := \\'{\\\\\\\"pushtype\\\\\\\": \\\\\\\"object\\\\\\\",\\\\\\\"expressions\\\\\\\": [\\' + myOutput.substring(0,myOutput.size()-1) + \\']}\\'')"
+  },
+  {
+    "id": 73,
+    "exp": "_cat6.add(ExtendedExpression, id := '24783', expression := 'myEnvironment := \\'master\\'\\nmyGitHubURL := \\'https:\\/\\/raw.githubusercontent.com\\/hemmingr\\/corporater\\/main\\/dasb_patch\\'\\nmyGithubMetaURL := \\'https:\\/\\/api.github.com\\/repos\\/hemmingr\\/corporater\\/contents\\/\\'+myEnvironment+\\'.setup\\'\\n\\ntable := createTable(\\'id\\')\\ntable.addRow(t.expressionContent,id)\\nmyExpression := output(t.expressionContent.expression)\\nmyFile := t.extendedBase64.expression\\n\\nIF source = \\'github\\' THEN\\n table.addColumn(\\'exp\\',r.resourceGetGithubFile.content)\\nELSE \\n IF source = \\'direct\\' THEN\\n IF objectid != MISSING AND objectid  \\'\\' THEN\\n table.addColumn(\\'exp\\',output(t.get(objectid).parent.generate(true))) \\n\\/\\/ table.addColumn(\\'expression\\',myFile)\\n ELSE\\n table.addColumn(\\'exp\\',myExpression)\\n ENDIF\\n ELSE\\n IF source = \\'local\\' THEN \\'\\'\\n ELSE\\n \\'NOT A VALID PARAMETER\\'\\n ENDIF\\n ENDIF\\n \\nENDIF')"
+  },
+  {
+    "id": 74,
+    "exp": "_cat6.add(ExtendedExpression, id := '177764', expression := '\\'{\\\\\\\"pushtype\\\\\\\": \\\\\\\"test\\\\\\\",\\\\\\\"mytest\\\\\\\": \\\\\\\"hemming\\\\\\\",\\\\\\\"expressions\\\\\\\" : \\' + r.resourceGetLatestDiff.content.patchedObj + \\'}\\'')"
+  },
+  {
+    "id": 75,
+    "exp": "_cat6.add(ExtendedExpression, id := '200515', expression := '\\'{\\\\\\\"pushtype\\\\\\\": \\\\\\\"plugin\\\\\\\",\\\\\\\"expressions\\\\\\\" : \\' + r.resourceGeneratePluginCode.content.rows + \\'}\\'')"
+  },
+  {
+    "id": 76,
+    "exp": "_cat7 := _cat.add(Category, id := 'categoryExpressionsPlugin', name := 'Plugin')"
+  },
+  {
+    "id": 77,
+    "exp": "_cat7.add(ExtendedExpression, id := 'extendedGeneratePlugin', name := 'Generate Plugin Code', expression := 'script := \\'\\'\\nscript := script + t.categoryPagesDeploy.generate(true)\\nscript := script + t.categoryTemplateDeploy.generate(true)\\nscript := script + t.categoryExpressionsDeploy.generate(true)\\nscript := script + t.categoryResourcesDeploy.generate(true)\\nscript := script + t.categoryWorkflowDeploy.generate(true)', ownership := list(u.hemmingr))"
+  },
+  {
+    "id": 78,
+    "exp": "_cat8 := _cat.add(Category, id := '177851', name := 'Test')"
+  },
+  {
+    "id": 79,
+    "exp": "_cat8.add(ExtendedExpression, id := '177852', expression := '\\/\\/IF keyStep.ismissing() = TRUE THEN\\n r.resourceGetSetup.content.setup.hosts.filter(stage = \\'dev\\').first().name\\n\\/\\/ENDIF')"
+  },
+  {
+    "id": 80,
+    "exp": "_cat8.add(ExtendedExpression, id := '177854', expression := 'r.resourceGetSetup.content.setup.hosts.filter(stage = \\'qa\\').first().name')"
+  },
+  {
+    "id": 81,
+    "exp": "_cat8.add(ExtendedExpression, id := 'extendedGenerateHash')"
+  },
+  {
+    "id": 82,
+    "exp": "_cat8.add(ExtendedExpression, id := 'extendedGenerateInitialHash', expression := 'script := \\'{\\\\\\\"text\\\\\\\": \\\\\\\"\\'\\n\\/\\/script := script + \\'hemming\\'\\nscript := script+t.categoryPagesDeploy.generate(true).strip()\\n\\/\\/script := script+t.categoryTemplateDeploy.generate(true).strip()\\n\\/\\/script := script+t.categoryExpressionDeploy.generate(true).strip()\\n\\/\\/script := script+t.categoryResourcesDeploy.generate(true).strip()\\n\\/\\/script := script+t.categoryWorkflowDeploy.generate(true).strip()\\nscript := script + \\'\\\\\\\"}\\'')"
+  },
+  {
+    "id": 83,
+    "exp": "_cat8.add(ExtendedExpression, id := 'myTest')"
+  },
+  {
+    "id": 84,
+    "exp": "_cat8.add(ExtendedExpression, id := '175766', name := 'Generate Client Code', expression := '\\/*script := \\'\\'\\nscript := script+t.categoryPagesDeploy.generate(true).strip()\\nscript := script+t.categoryTemplateDeploy.generate(true).strip()\\nscript := script+t.categoryExpressionDeploy.generate(true).strip()\\nscript := script+t.categoryResourcesDeploy.generate(true).strip()\\nscript := script+t.categoryWorkflowDeploy.generate(true).strip()\\n*\\/\\nt.extendedDiffProperties.generate(true)', ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
+  },
+  {
+    "id": 85,
+    "exp": "_cat8.add(ExtendedExpression, id := '181461', expression := 't.220401.generate(true)')"
+  },
+  {
+    "id": 86,
+    "exp": "_cat9 := _cat8.add(Category, id := '201275', name := 'DEL GitHub')"
+  },
+  {
+    "id": 87,
+    "exp": "_cat9.add(ExtendedExpression, id := 'extendedGenerateURL', name := 'Generate URL', expression := 'myEnvironment := t.extendedEnvironment.expression\\nmyURL := \\'https:\\/\\/raw.githubusercontent.com\\/hemmingr\\/corporater\\/main\\/\\'+myEnvironment+\\'.setup\\'')"
+  },
+  {
+    "id": 88,
+    "exp": "_cat9.add(ExtendedExpression, id := 'extendedGenerateMetaURL', name := 'Generate Meta URL', expression := 'myEnvironment := t.extendedEnvironment.expression\\nmyURL := \\'https:\\/\\/api.github.com\\/repos\\/hemmingr\\/corporater\\/contents\\/\\'+myEnvironment+\\'.setup\\'')"
+  },
+  {
+    "id": 89,
+    "exp": "_cat9.add(ExtendedExpression, id := 'extendedDownloadGithubRawFile', name := 'GithHub File Link', expression := 'myUID := \\'080557ce-49c9-4635-9ea3-ef29606681a1\\'\\nrootURL := \\'https:\\/\\/raw.githubusercontent.com\\/hemmingr\\/corporater\\/main\\/\\'\\nmyURL := rootURL + myUID + \\'_setup\\' + \\'.json\\'')"
+  },
+  {
+    "id": 90,
+    "exp": "_cat9.add(ExtendedExpression, id := 'extendedListGithubFiles', name := 'List Github Files', expression := 'myEnvironment := t.extendedEnvironment.expression\\nmyURL := \\'https:\\/\\/api.github.com\\/repos\\/hemmingr\\/corporater\\/contents\\'')"
+  },
+  {
+    "id": 91,
+    "exp": "_cat9.add(ExtendedExpression, id := 'extendedShowGitHubContent', name := 'Show GitHub Content', expression := 'myGitHubSelection.table().addColumn(\\'expression\\',output(self.expression))')"
+  },
+  {
+    "id": 92,
+    "exp": "_cat9.add(ExtendedExpression, id := 'extendedTmp', name := 'Temporary contentholder', description := 'Temporary contentholder', expression := '[ {\\n \\\"operation\\\" : \\\"update\\\",\\n \\\"organization\\\" : \\\"102\\\",\\n \\\"id\\\" : \\\"expressionContent\\\",\\n \\\"expression\\\" : \\\"o.102.change(name := \\'jsontest\\')\\\"\\n} ]\\n')"
+  },
+  {
+    "id": 93,
+    "exp": "_cat9.add(ExtendedExpression, id := 'extendedGithubInstall', name := 'Github Install', expression := 'myEnvironment := t.extendedEnvironment.expression\\nmyURL := \\'https:\\/\\/api.github.com\\/repos\\/hemmingr\\/corporater\\/contents\\'')"
+  },
+  {
+    "id": 94,
+    "exp": "_cat9.add(ExtendedExpression, id := 'extendedGenerateBase64', name := 'Generate BASE64', expression := '\\/\\/\\'bXkgbmV3IGZpbGUgY29udGVudHM=\\'\\nr.resourceTranslateBase64.content.result')"
+  },
+  {
+    "id": 95,
+    "exp": "_cat9.add(ExtendedExpression, id := 'extendedBASE64helper', name := 'BASE64 Helper', expression := 'output(t.extendedDumbo.expression)')"
+  },
+  {
+    "id": 96,
+    "exp": "_cat10 := _cat8.add(Category, id := 'categoryExpressions', name := 'DEL Scripts')"
+  },
+  {
+    "id": 97,
+    "exp": "_cat10.add(ExtendedExpression, id := '201195', name := 'Script 1', description := 'CHANGE : Test script 1 (WORKING)', expression := 'o.102.change(name := \\'hemming1\\')\\n', ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
+  },
+  {
+    "id": 98,
+    "exp": "_cat10.add(ExtendedExpression, id := '201241', name := 'Script 2', description := 'CHANGE : Test script 2 (WORKING)', expression := 'o.102.change(name := \\'hemming2\\')\\n', ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
+  },
+  {
+    "id": 99,
+    "exp": "_cat10.add(ExtendedExpression, id := '173665', name := 'Script 3', description := 'CHANGE : Test script 3 (WORKING)', expression := 'o.102.change(name := \\'hemming3\\')\\n', ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
+  },
+  {
+    "id": 100,
+    "exp": "_cat10.add(ExtendedExpression, id := '174251', name := 'Script 4', description := 'ADD: Test script 4 (WORKING)', expression := 'o.171.add(Scorecard, name := \\'Scorecarda\\', ownership := list(u.admin, u.get(\\'roaldsoy@corporater.com\\')))', ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
+  },
+  {
+    "id": 101,
+    "exp": "_cat10.add(ExtendedExpression, id := '23938', name := 'Script 5', description := 'ADD: Test script 5 (WORKING)', expression := 'o.171.add(Scorecard, name := \\'Scorecarda\\', id := \\'hemmingtestid\\')', ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
+  },
+  {
+    "id": 102,
+    "exp": "_cat10.add(ExtendedExpression, id := '175677', name := 'Script 6', description := 'CHANGE: Test script 6 (WORKING)', expression := 't.hemmingtestid.change(id := \\'hemmingtestid\\', name := \\'Scorecardx\\', ownership := list(u.apiuser)) \\/\\/Scorecard', ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
+  },
+  {
+    "id": 103,
+    "exp": "_cat10.add(ExtendedExpression, id := '175686', name := 'Script 7', description := 'DELETE: Test script 7 (WORKING IF ID PRESENT)', expression := 't.2289.delete()', ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
+  },
+  {
+    "id": 104,
+    "exp": "_cat8.add(ExtendedExpression, id := 'extendedDumbo')"
+  },
+  {
+    "id": 105,
+    "exp": "_cat8.add(ExtendedExpression, id := 'extendedDummy', expression := '{\\\"pushtype\\\": \\\"object\\\",\\\"expressions\\\": []}')"
+  },
+  {
+    "id": 106,
+    "exp": "_cat8.add(ExtendedExpression, id := 'extendedShowObjectContent', name := 'Show Content', expression := 'myObjectSelection.table().addColumn(\\'expression\\',output(self.generate()))\\n')"
+  },
+  {
+    "id": 107,
+    "exp": "_cat8.add(ExtendedExpression, id := 'extendedTest', expression := 'myOutput := \\'\\'\\nmyObjectSelection.foreach(row:\\n myOutput := myOutput + \\'\\\\{\\\\\\\"exp\\\\\\\" : \\\\\\\"\\' + \\n row.generate(true).strip() + \\n \\'\\\\\\\",\\\\\\\"objectid\\\\\\\" : \\\\\\\"\\' + \\n row.id + \\n \\'\\\\\\\",\\\\\\\"parentclass\\\\\\\" : \\\\\\\"\\' + \\n row.parent.classname + \\n \\'\\\\\\\",\\\\\\\"parentid\\\\\\\" : \\\\\\\"\\' + \\n row.parent.id +\\n \\'\\\\\\\",\\\\\\\"objectname\\\\\\\" : \\\\\\\"\\' + \\n row.name +\\n \\'\\\\\\\",\\\\\\\"parentname\\\\\\\" : \\\\\\\"\\' + \\n row.parent.name +\\n \\'\\\\\\\",\\\\\\\"class\\\\\\\" : \\\\\\\"\\' + \\n row.classname +\\n \\'\\\\\\\"\\\\},\\'\\n)\\n\\'{\\\\\\\"pushtype\\\\\\\": \\\\\\\"object\\\\\\\",\\\\\\\"expressions\\\\\\\": [\\' + myOutput.substring(0,myOutput.size()-1) + \\']}\\'\\n\\n')"
+  },
+  {
+    "id": 108,
+    "exp": "_cat8.add(ExtendedExpression, id := '174506', expression := '\\'{\\\\\\\"pushtype\\\\\\\": \\\\\\\"script\\\\\\\",\\\\\\\"exp\\\\\\\" : \\\\\\\"\\' + \\'\\' + \\'\\\\\\\"}\\'')"
+  },
+  {
+    "id": 109,
+    "exp": "_cat8.add(ExtendedExpression, id := '24782', expression := 'r.fileJSONsetup.content.setup.hosts.table()')"
+  },
+  {
+    "id": 110,
+    "exp": "_cat8.add(ExtendedExpression, id := '24784', expression := 'myEnvironment := \\'master\\'\\n\\nIF mykey = \\'user\\' THEN\\n root.user.children\\nELSE \\n IF mykey = \\'direct\\' THEN\\n IF objectid != MISSING AND objectid  \\'\\' THEN\\n table.addColumn(\\'exp\\',output(t.get(objectid).parent.generate(true))) \\n\\/\\/ table.addColumn(\\'expression\\',myFile)\\n ELSE\\n table.addColumn(\\'exp\\',myExpression)\\n ENDIF\\n ELSE\\n IF mykey = \\'local\\' THEN \\'\\'\\n ELSE\\n \\'NOT A VALID PARAMETER\\'\\n ENDIF\\n ENDIF\\n \\nENDIF')"
+  },
+  {
+    "id": 111,
+    "exp": "_cat := root.externalresource.add(Category, id := 'categoryResourcesDeploy', name := 'DEPLOY', ownership := list(u.epeterson, u.hemmingr))"
+  },
+  {
+    "id": 112,
+    "exp": "_apir := _cat.add(APIResource, id := 'deploy', name := 'DEPLOY', ownership := list(u.hemmingr))"
+  },
+  {
+    "id": 113,
+    "exp": "_apie := _apir.add(APIEndpoint, id := '604', name := 'ID spaces', endpointName := 'roots', advancedMode := true, expression := 'myDebug := TRUE\\nIF keyidspace = \\'user\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.user.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN \\n root.user.children.table(id).addColumn(\\'exp\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n IF keyrelease = \\'1.0.0\\' THEN\\n root.user.children.filter(propRelease  \\'\\').table().addColumn(\\'id\\',id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ELSE\\n root.user.children.table().addColumn(\\'id\\',id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n\\/\\/ IF myDebug = TRUE THEN\\n\\/\\/ \\'method : \\' + keymethod + \\', keyidspace : \\' + keyidspace + \\', release : \\' + keyrelease \\n\\/\\/ ELSE\\n\\/\\/ \\n\\/\\/ ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\nELSE\\n IF keyidspace = \\'property\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.property.children.filter(className != \\'SystemMethodConfig\\').table()\\n ELSE \\n IF keymethod = \\'genedit\\' THEN\\n root.property.children.filter(className != \\'SystemMethodConfig\\').table(id).addColumn(\\'exp\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.property.children.filter(className != \\'SystemMethodConfig\\').table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'organisation\\' THEN \\n \\'\\'\\n ELSE\\n IF keyidspace = \\'accessprofile\\' THEN\\n \\/\\/ Code for accessprofile\\n IF keymethod = \\'standard\\' THEN\\n root.accessprofile.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.accessprofile.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.accessprofile.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n \\/\\/ Additional roots added here\\n IF keyidspace = \\'ceven\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.ceven.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.ceven.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.ceven.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'cetask\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.cetask.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.cetask.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.cetask.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'cecom\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.cecom.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.cecom.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.cecom.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'ceinc\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.ceinc.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.ceinc.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.ceinc.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'cepro\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.cepro.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.cepro.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.cepro.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'cepol\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.cepol.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.cepol.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.cepol.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'cecme\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.cecme.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.cecme.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.cecme.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'ceiss\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.ceiss.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.ceiss.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.ceiss.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'ceass\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.ceass.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.ceass.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.ceass.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'ceser\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.ceser.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.ceser.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.ceser.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'cecot\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.cecot.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.cecot.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.cecot.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'ceprj\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.ceprj.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.ceprj.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.ceprj.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'cereg\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.cereg.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.cereg.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.cereg.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'cecor\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.cecor.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.cecor.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.cecor.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'ceind\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.ceind.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.ceind.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.ceind.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'ceatt\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.ceatt.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.ceatt.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.ceatt.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'ceras\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.ceras.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.ceras.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.ceras.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'acpol\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.acpol.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.acpol.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.acpol.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'role\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.role.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.role.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.role.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'ceprd\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.ceprd.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.ceprd.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.ceprd.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'sa\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.sa.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.sa.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.sa.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'cepsc\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.cepsc.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.cepsc.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.cepsc.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'ceprv\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.ceprv.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.ceprv.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.ceprv.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'cewfl\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.cewfl.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.cewfl.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.cewfl.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'cedis\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.cedis.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.cedis.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.cedis.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'ceinq\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.ceinq.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.ceinq.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.ceinq.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'ceqst\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.ceqst.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.ceqst.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.ceqst.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'cedpi\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.cedpi.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.cedpi.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.cedpi.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n IF keyidspace = \\'cetia\\' THEN\\n IF keymethod = \\'standard\\' THEN\\n root.cetia.children\\n ELSE\\n IF keymethod = \\'genedit\\' THEN\\n root.cetia.children.table().addColumn(\\'genedit\\', output(self.genedit().strip))\\n ELSE\\n IF keymethod = \\'generate\\' THEN\\n root.cetia.children.table(id).addColumn(\\'exp\\', output(self.generate(true).strip))\\n ENDIF\\n ENDIF\\n ENDIF\\n ELSE\\n \\'NOT A VALID PARAMETER\\'\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\n ENDIF\\nENDIF\\n')"
+  },
+  {
+    "id": 114,
+    "exp": "_apie.add(EndpointParameter, id := '606', name := 'Name', key := 'keyidspace', mandatory := true)"
+  },
+  {
+    "id": 115,
+    "exp": "_apie.add(EndpointParameter, id := '650', name := 'Method', key := 'keymethod', mandatory := true)"
+  },
+  {
+    "id": 116,
+    "exp": "_apie.add(EndpointParameter, id := '651', name := 'Release', key := 'keyrelease', mandatory := true)"
+  },
+  {
+    "id": 117,
+    "exp": "_apie.add(EndpointParameter, id := '652', name := 'Filter', key := 'keyfilter')"
+  },
+  {
+    "id": 118,
+    "exp": "_apie.add(EndpointParameter, id := '658', name := 'Page', key := 'keypage')"
+  },
+  {
+    "id": 119,
+    "exp": "_apie.add(EndpointParameter, id := '661', name := 'Limit', key := 'keylimit')"
+  },
+  {
+    "id": 120,
+    "exp": "_apir.add(APIClientAuthentication, id := '654', clientId := '20ea04b4b90b0944ba6a11c3b86a84', user := u.get('roaldsoy@corporater.com'))"
+  },
+  {
+    "id": 121,
+    "exp": "_apir.add(LogFolder, id := '230097')"
+  },
+  {
+    "id": 122,
+    "exp": "_cat1 := _cat.add(Category, id := 'categoryRemoteResources', name := 'Remote Resources')"
+  },
+  {
+    "id": 123,
+    "exp": "_cat2 := _cat1.add(Category, id := 'categoryUtility', name := 'Utility')"
+  },
+  {
+    "id": 124,
+    "exp": "_cat2.add(RemoteResource, id := 'resourceUptime', name := 'Uptime', requestMethod := 'POST', url := 'https:\\/\\/api.uptimerobot.com\\/v2\\/getMonitors', authentication := 'API_KEY', key := 'api_key', param := 'logs:1', bodyType := 'RAW', body := '{\\n\\\"logs\\\":1\\n}')"
+  },
+  {
+    "id": 125,
+    "exp": "_cat2.add(RemoteResource, id := 'resourceGetSetup', name := 'Get Setup', url := 'https:\\/\\/corporater-jsondiffpatch-compare.glitch.me\\/github\\/config', authentication := 'API_KEY', key := 'api_key', bodyType := 'RAW')"
+  },
+  {
+    "id": 126,
+    "exp": "_cat2.add(RemoteResource, id := 'resourcePush', name := 'Push', requestMethod := 'POST', url := 'https:\\/\\/deployment.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deploy\\/push', authentication := 'BASIC', userName := 'apiuser', bodyType := 'RAW', body := '${t.extendedPush.expression}')"
+  },
+  {
+    "id": 127,
+    "exp": "_cat3 := _cat1.add(Category, id := 'categoryIDspaces', name := 'IDspaces')"
+  },
+  {
+    "id": 128,
+    "exp": "_cat3.add(Category, id := '563069', name := 'ORGANISATION')"
+  },
+  {
+    "id": 129,
+    "exp": "_cat5 := _cat3.add(Category, id := '174577', name := 'PROPERTY')"
+  },
+  {
+    "id": 130,
+    "exp": "_cat5.add(RemoteResource, id := 'localProperties', name := 'Local Properties', url := 'https:\\/\\/newfeaturemaster.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deploy\\/roots', authentication := 'BASIC', userName := 'roaldsoy@corporater.com', param := 'keyroot:property\\nkeymethod:generate')"
+  },
+  {
+    "id": 131,
+    "exp": "_cat5.add(RemoteResource, id := 'remoteProperties', name := 'Remote Properties', url := 'https:\\/\\/deployment.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deploy\\/roots', authentication := 'BASIC', userName := 'apiuser', param := 'keyroot:property\\nkeymethod:generate\\n', bodyType := 'RAW')"
+  },
+  {
+    "id": 132,
+    "exp": "_cat5.add(RemoteResource, id := 'resourceDiffProperties', name := 'Diff - Properties', requestMethod := 'POST', url := 'https:\\/\\/corporater-jsondiffpatch-compare.glitch.me\\/diff', bodyType := 'RAW', body := '{\\n \\\"json1\\\": ${t.extendedRemoteProperties.expression},\\n \\\"json2\\\": ${t.extendedLocalProperties.expression}\\n}\\n')"
+  },
+  {
+    "id": 133,
+    "exp": "_cat5.add(RemoteResource, id := '638', name := 'Diff - Properties Limited', description := 'Limited to properties having ID ending with __test', requestMethod := 'POST', url := 'https:\\/\\/corporater-jsondiffpatch-compare.glitch.me\\/diff', bodyType := 'RAW', body := '{\\n \\\"json1\\\": ${t.extendedRemoteProperties.expression},\\n \\\"json2\\\": ${t.extendedLocalProperties.expression}\\n}\\n')"
+  },
+  {
+    "id": 134,
+    "exp": "_rem7 := _cat5.add(RemoteResource, id := 'resourceDiffExtended', name := 'Process Properties Extended', requestMethod := 'POST', url := 'https:\\/\\/corporater-compare-extended.glitch.me\\/compare', bodyType := 'RAW', body := '{\\n \\\"currentContentBase64\\\": \\\"${result2}\\\",\\n \\\"changeContentBase64\\\": \\\"${result1}\\\"\\n}', timeout := 120)"
+  },
+  {
+    "id": 135,
+    "exp": "_cat6 := _cat3.add(Category, id := '174576', name := 'USER')"
+  },
+  {
+    "id": 136,
+    "exp": "_cat6.add(RemoteResource, id := 'resourceLocalUsers', name := 'Local Users', url := 'https:\\/\\/newfeaturemaster.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deploy\\/roots', authentication := 'BASIC', userName := 'roaldsoy@corporater.com', param := 'keyidspace:user\\nkeymethod:generate\\nkeyfilter:testfilter\\nkeypage:1\\nkeylimit:10\\nkeyrelease:1.0.0', tokenExpression := '\\/\\/bearerToken := body.token\\n')"
+  },
+  {
+    "id": 137,
+    "exp": "_cat6.add(RemoteResource, id := 'resourceRemoteUsers', name := 'Remote Users', url := 'https:\\/\\/deployment.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deploy\\/roots', authentication := 'BASIC', userName := 'apiuser', param := 'keyroot:user\\nkeymethod:generate\\nrelease:1.0.0', bodyType := 'RAW')"
+  },
+  {
+    "id": 138,
+    "exp": "_cat6.add(RemoteResource, id := 'resourceDiffUsers', name := 'Diff - Users', requestMethod := 'POST', url := 'https:\\/\\/corporater-jsondiffpatch-compare.glitch.me\\/api\\/diff', authentication := 'API_KEY', key := 'api_key', bodyType := 'RAW', body := '{\\n \\\"json1\\\": ${t.extendedRemoteUsers.expression},\\n \\\"json2\\\": ${t.extendedLocalUsers.expression}\\n}\\n')"
+  },
+  {
+    "id": 139,
+    "exp": "_cat6.add(RemoteResource, id := 'resourceGetLatestDiff', name := 'Get latest diff', url := 'https:\\/\\/corporater-jsondiffpatch-compare.glitch.me\\/api\\/latest-diff', authentication := 'API_KEY', key := 'api_key', bodyType := 'RAW')"
+  },
+  {
+    "id": 140,
+    "exp": "_cat6.add(RemoteResource, id := '659', name := 'Push', requestMethod := 'POST', url := 'https:\\/\\/deployment.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deploy\\/push', authentication := 'BASIC', userName := 'apiuser', bodyType := 'RAW', body := '${t.extendedPush.expression}')"
+  },
+  {
+    "id": 141,
+    "exp": "_cat6.add(RemoteResource, id := '771', name := 'TEST User Push', description := 'https:\\/\\/deployment.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deployold\\/push', requestMethod := 'POST', url := 'https:\\/\\/deployment.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deployold\\/push', authentication := 'BASIC', userName := 'apiuser', bodyType := 'RAW', body := '${t.177764.expression}')"
+  },
+  {
+    "id": 142,
+    "exp": "_cat7 := _cat1.add(Category, id := 'categoryPlugin', name := 'Plugin')"
+  },
+  {
+    "id": 143,
+    "exp": "_cat7.add(RemoteResource, id := 'resourceGeneratePluginCode', name := 'Generate Plugin Code', description := 'https:\\/\\/corporater-jsondiffpatch-compare.glitch.me\\/api\\/base64encode', requestMethod := 'POST', url := 'https:\\/\\/corporater-jsondiffpatch-compare.glitch.me\\/api\\/genextended', authentication := 'API_KEY', key := 'api_key', param := 'initial:true', bodyType := 'RAW', body := '${t.extendedGeneratePlugin.expression}', bodyContentType := 'text\\/plain')"
+  },
+  {
+    "id": 144,
+    "exp": "_cat7.add(RemoteResource, id := '7355', name := 'Create Initial Plugin Hash', requestMethod := 'POST', url := 'https:\\/\\/corporater-get-github-setup.glitch.me\\/api\\/hash', authentication := 'API_KEY', key := 'api_key', bodyType := 'RAW', body := '{\\\"text\\\":\\\"${result2}\\\",\\\"initial\\\":\\\"true\\\"}')"
+  },
+  {
+    "id": 145,
+    "exp": "_rem16 := _cat7.add(RemoteResource, id := '7356', name := 'Check Integrity', requestMethod := 'POST', url := 'https:\\/\\/corporater-jsondiffpatch-compare.glitch.me\\/github\\/hash', authentication := 'API_KEY', key := 'api_key', bodyType := 'RAW', body := '{\\\"text\\\":\\\"${result2}\\\"}')"
+  },
+  {
+    "id": 146,
+    "exp": "_cat7.add(RemoteResource, id := '8391', name := 'TEST Plugin Push', description := 'https:\\/\\/deployment.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deployold\\/plugin', requestMethod := 'POST', url := 'https:\\/\\/deployment.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deployold\\/plugin', authentication := 'BASIC', userName := 'apiuser', bodyType := 'RAW', body := '${t.200515.expression}')"
+  },
+  {
+    "id": 147,
+    "exp": "_cat8 := _cat1.add(Category, id := 'categoryTest', name := 'Test')"
+  },
+  {
+    "id": 148,
+    "exp": "_cat8.add(RemoteResource, id := '621', name := 'Mock - POST - Diff', requestMethod := 'POST', url := 'https:\\/\\/b54f45ca-ba50-4695-bb27-c227516e5c7f.mock.pstmn.io', bodyType := 'RAW', body := '${t.extendedLocalProperties.expression}')"
+  },
+  {
+    "id": 149,
+    "exp": "_cat8.add(RemoteResource, id := '624', name := 'TEST roots', url := 'https:\\/\\/newfeaturemaster.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deploy\\/roots', authentication := 'BASIC', userName := 'roaldsoy@corporater.com', param := 'keyroot:user\\nkeymethod:genedit', bodyType := 'RAW')"
+  },
+  {
+    "id": 150,
+    "exp": "_cat8.add(RemoteResource, id := '635', name := 'TEST Push', description := 'https:\\/\\/deployment.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deployold\\/push', requestMethod := 'POST', url := 'https:\\/\\/deployment.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deployold\\/push', authentication := 'BASIC', userName := 'apiuser', bodyType := 'RAW', body := '${t.extendedDummy.expression}')"
+  },
+  {
+    "id": 151,
+    "exp": "_cat8.add(RemoteResource, id := '656', name := 'TEST - Local Users client auth', url := 'https:\\/\\/newfeaturemaster.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deploy\\/roots', authentication := 'CLIENT_AUTH', userName := 'roaldsoy@corporater.com', param := 'keyroot:user\\nkeymethod:generate\\nrelease:1.0.0', clientId := '20ea04b4b90b0944ba6a11c3b86a84', tokenUrl := 'https:\\/\\/newfeaturemaster.innovation.corporater.dev\\/CorpoWebserver\\/api\\/token\\/default\\/deploy')"
+  },
+  {
+    "id": 152,
+    "exp": "_cat8.add(RemoteResource, id := '6051', name := 'TEST Plugin Push', description := 'https:\\/\\/deployment.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deployold\\/plugin', requestMethod := 'POST', url := 'https:\\/\\/deployment.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deployold\\/plugin', authentication := 'BASIC', userName := 'apiuser', bodyType := 'RAW', body := '${t.200515.expression}')"
+  },
+  {
+    "id": 153,
+    "exp": "_rem23 := _cat8.add(RemoteResource, id := '2202', name := 'TEST Create Initial Plugin Hash (SHA256 Hash)', requestMethod := 'POST', url := 'https:\\/\\/corporater-get-github-setup.glitch.me\\/api\\/hash', authentication := 'API_KEY', key := 'api_key', bodyType := 'RAW', body := '{\\\"text\\\":\\\"${result2}\\\",\\\"initial\\\":\\\"true\\\"}')"
+  },
+  {
+    "id": 154,
+    "exp": "_rem24 := _cat8.add(RemoteResource, id := '2203', name := 'TEST Create Initial Plugin Hash (BASE64 Encode)', requestMethod := 'POST', url := 'https:\\/\\/api.thebase64.com\\/encode', authentication := 'API_KEY', key := 'secret', bodyType := 'RAW', body := '${t.extendedGeneratePlugin.expression}', bodyContentType := 'text\\/plain', tokens := 'result2=result')"
+  },
+  {
+    "id": 155,
+    "exp": "_rem25 := _cat8.add(RemoteResource, id := 'resourceCheckIntegrity', name := 'Check Integrity (SHA256 Hash)', requestMethod := 'POST', url := 'https:\\/\\/corporater-get-github-setup.glitch.me\\/api\\/hash', authentication := 'API_KEY', key := 'api_key', bodyType := 'RAW', body := '{\\\"text\\\":\\\"${result2}\\\"}')"
+  },
+  {
+    "id": 156,
+    "exp": "_rem26 := _cat8.add(RemoteResource, id := '1733', name := 'Check Integrity (BASE64 Encode)', requestMethod := 'POST', url := 'https:\\/\\/api.thebase64.com\\/encode', authentication := 'API_KEY', key := 'secret', bodyType := 'RAW', body := '${t.extendedGeneratePlugin.expression}', bodyContentType := 'text\\/plain', tokens := 'result2=result')"
+  },
+  {
+    "id": 157,
+    "exp": "_cat8.add(RemoteResource, id := '1323', name := 'Create Initial Plugin Hash (SHA256 Hash)', requestMethod := 'POST', url := 'https:\\/\\/corporater-jsondiffpatch-compare.glitch.me\\/github\\/hash', authentication := 'API_KEY', key := 'api_key', bodyType := 'RAW', body := '{\\\"text\\\":\\\"${result2}\\\",\\\"initial\\\":\\\"true\\\"}', dependentResources := list(_rem24))"
+  },
+  {
+    "id": 158,
+    "exp": "_cat8.add(RemoteResource, id := '1492', name := 'Check Integrity (SHA256 Hash)', requestMethod := 'POST', url := 'https:\\/\\/corporater-jsondiffpatch-compare.glitch.me\\/github\\/hash', authentication := 'API_KEY', key := 'api_key', bodyType := 'RAW', body := '{\\\"text\\\":\\\"${result2}\\\"}', dependentResources := list(_rem26))"
+  },
+  {
+    "id": 159,
+    "exp": "_cat8.add(RemoteResource, id := '1729', name := 'Check Integrity (SHA256 Hash) Test', requestMethod := 'POST', url := 'https:\\/\\/corporater-jsondiffpatch-compare.glitch.me\\/github\\/hash', authentication := 'API_KEY', key := 'api_key', bodyType := 'RAW', body := '${t.extendedGeneratePlugin.expression}', bodyContentType := 'text\\/plain', dependentResources := list(_rem26))"
+  },
+  {
+    "id": 160,
+    "exp": "_cat8.add(RemoteResource, id := '2019', name := 'Check Integrity (BASE64) Test', description := 'https:\\/\\/corporater-jsondiffpatch-compare.glitch.me\\/api\\/base64encode', requestMethod := 'POST', url := 'https:\\/\\/corporater-jsondiffpatch-compare.glitch.me\\/api\\/base64encode', authentication := 'API_KEY', key := 'api_key', bodyType := 'RAW', body := '${t.extendedGenerateClient.expression}', bodyContentType := 'text\\/plain')"
+  },
+  {
+    "id": 161,
+    "exp": "_cat8.add(RemoteResource, id := 'resourcePushObject', name := 'PushObject', requestMethod := 'POST', url := 'https:\\/\\/deployment.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deploy\\/push', authentication := 'BASIC', userName := 'apiuser', bodyType := 'RAW', body := '${t.extendedPushObject.expression}')"
+  },
+  {
+    "id": 162,
+    "exp": "_rem32 := _cat8.add(RemoteResource, id := 'resourceGeneditRemoteProperties', name := 'Get Remote Properties', url := 'https:\\/\\/deployment.innovation.corporater.dev\\/CorpoWebserver\\/api\\/deploy\\/property', authentication := 'BASIC', userName := 'apiuser', param := 'method:genedit', bodyType := 'RAW', tokens := 'result=result')"
+  },
+  {
+    "id": 163,
+    "exp": "_cat8.add(RemoteResource, id := '648', name := 'Encode BASE64 Genedit Remote Properties', requestMethod := 'POST', url := 'https:\\/\\/api.thebase64.com\\/encode', authentication := 'API_KEY', key := 'secret', bodyType := 'RAW', body := '${t.extendedGeneditRemoteProperties.expression}', bodyContentType := 'text\\/plain', timeout := 120, dependentResources := list(_rem32), tokens := 'result2=result')"
+  },
+  {
+    "id": 164,
+    "exp": "_cat8.add(RemoteResource, id := '649', name := 'Encode BASE64 Generate Remote Properties', requestMethod := 'POST', url := 'https:\\/\\/api.thebase64.com\\/encode', authentication := 'API_KEY', key := 'secret', bodyType := 'RAW', body := '${t.extendedGenerateRemoteProperties.expression}', bodyContentType := 'text\\/plain', timeout := 120, tokens := 'result1=result')"
+  },
+  {
+    "id": 165,
+    "exp": "_rem35 := _cat8.add(RemoteResource, id := '644', name := 'Encode BASE64 Genedit Local Properties', requestMethod := 'POST', url := 'https:\\/\\/api.thebase64.com\\/encode', authentication := 'API_KEY', key := 'secret', bodyType := 'RAW', body := '${t.extendedGeneditProperties.expression}', bodyContentType := 'text\\/plain', timeout := 120, tokens := 'result2=result')"
+  },
+  {
+    "id": 166,
+    "exp": "_rem36 := _cat8.add(RemoteResource, id := 'resourceTranslateBase64Test', name := 'Encode BASE64 Generate Local Properties', requestMethod := 'POST', url := 'https:\\/\\/api.thebase64.com\\/encode', authentication := 'API_KEY', key := 'secret', bodyType := 'RAW', body := '${t.extendedGenerateProperties.expression}', bodyContentType := 'text\\/plain', timeout := 120, tokens := 'result1=result')"
+  },
+  {
+    "id": 167,
+    "exp": "_cat8.add(RemoteResource, id := 'resourceTranslateBase64', name := 'Encode BASE64', requestMethod := 'POST', url := 'https:\\/\\/api.thebase64.com\\/encode', authentication := 'API_KEY', key := 'secret', bodyType := 'RAW', body := '${t.extendedBASE64helper.expression}', bodyContentType := 'text\\/plain')"
+  },
+  {
+    "id": 168,
+    "exp": "_cat8.add(RemoteResource, id := '662', name := 'Check integrity SHA256 HASH', requestMethod := 'POST', url := 'https:\\/\\/api.thebase64.com\\/encode', authentication := 'API_KEY', key := 'secret', bodyType := 'RAW', body := '${t.extendedGenerateClient.expression}', bodyContentType := 'text\\/plain')"
+  },
+  {
+    "id": 169,
+    "exp": "_rem7.change(dependentResources := list(_rem35, _rem36))"
+  },
+  {
+    "id": 170,
+    "exp": "_rem7.change(dependentResources := list(_rem35, _rem36))"
+  },
+  {
+    "id": 171,
+    "exp": "_rem16.change(dependentResources := list(_rem26))"
+  },
+  {
+    "id": 172,
+    "exp": "_rem23.change(dependentResources := list(_rem24))"
+  },
+  {
+    "id": 173,
+    "exp": "_rem25.change(dependentResources := list(_rem26))"
+  },
+  {
+    "id": 174,
+    "exp": "_rem35.change(dependentResources := list(_rem36))"
+  },
+  {
+    "id": 175,
+    "exp": "_cat := root.notification.add(Category, id := 'categoryWorkflowDeploy', name := 'DEPLOY', ownership := list(u.hemmingr))"
+  },
+  {
+    "id": 176,
+    "exp": "_ntg := _cat.add(NotificationTransportGroup, id := '173748', name := '-> remote server', ownership := list(u.hemmingr))"
+  },
+  {
+    "id": 177,
+    "exp": "_ntg.add(ExtendedTransport, id := 'actionPush', name := 'PUSH', expression := 'r.resourcePush.content', ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
+  },
+  {
+    "id": 178,
+    "exp": "_ntg.add(ExtendedTransport, id := 'actionPushObject', name := 'PUSHOBJECT', expression := 'r.resourcePushObject.content\\nr.resourceGithubUpdate.content', ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
+  },
+  {
+    "id": 179,
+    "exp": "_ntg.add(ExtendedTransport, id := '174365', name := 'GITHUB INSTALL', expression := 't.extendedTmp.expression := r.resourceGetGithubFile.content', ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
+  },
+  {
+    "id": 180,
+    "exp": "_ntg.add(ExtendedTransport, id := '174364', name := 'GITHUB WORKFLOW', expression := 'r.resourceGithubWorkflow.content')"
+  },
+  {
+    "id": 181,
+    "exp": "_ntg.add(ExtendedTransport, id := '1648', name := 'GITHUB DOWNLOAD', expression := 't.extendedTmp.expression := r.resourceGetGithubFile.content', ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
+  },
+  {
+    "id": 182,
+    "exp": "_ntg.add(ExtendedTransport, id := '174375', name := 'GITHUB TEST', expression := 't.extendedTmp.expression := r.resourceGetGithubFile.content', ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
+  },
+  {
+    "id": 183,
+    "exp": "_ntg.add(ExtendedTransport, id := '174834', name := 'TEST', expression := 'r.635.content', ownership := list(u.hemmingr, u.get('roaldsoy@corporater.com')))"
+  },
+  {
+    "id": 184,
+    "exp": "_ntg.add(ExtendedTransport, id := '175820', name := 'Check Integrity', description := 'Check Integrity and install if needed')"
+  }
+]
