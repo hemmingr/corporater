@@ -52,7 +52,6 @@ _cat2.add(ExtendedExpression, id := 'extendedGenerateProperties', name := 'Gener
 _cat2.add(ExtendedExpression, id := 'extendedGeneditRemoteProperties', name := 'Genedit remote Properties', expression := 'r.resourceGeneditRemoteProperties.content')
 _cat2.add(ExtendedExpression, id := 'extendedGenerateRemoteProperties', name := 'Generate Remote Properties', expression := 'r.resourceGenerateRemoteProperties.content')
 _cat3 := _cat1.add(Category, id := '174587', name := 'Users')
-_cat3.add(ExtendedExpression, id := 'oldextendedDiffUsers', name := 'DEL Diff Users', expression := 'r.resourceDiffUsers.content')
 _cat3.add(ExtendedExpression, id := 'extendedLocalUsers', name := 'DEL Local Users', expression := 'r.resourceLocalUsers.content')
 _cat3.add(ExtendedExpression, id := 'extendedRemoteUsers', name := 'DEL Remote Users', expression := 'r.resourceRemoteUsers.content')
 _cat4 := _cat1.add(Category, id := '563072', name := 'Organisations')
