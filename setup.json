@@ -163,6 +163,74 @@
         "description": "Transfer from Testing to Production. Features become live for end-users. Issues detected in Production can be handled as required.",
         "type": "forward"
       }
-    ]
+    ],
+    "plugins": [
+      {
+        "id": "plugin1",
+        "name": "Deploy",
+        "version": "1.0.0",
+        "enabled": true,
+        "config": {
+          "setting1": "value1",
+          "setting2": "value2"
+        }
+      },
+      {
+        "id": "plugin2",
+        "name": "ServiceNow",
+        "version": "1.0.0",
+        "enabled": true,
+        "requires": "deploy",
+        "config": {
+          "setting1": "value1",
+          "setting2": "value2"
+        }
+      },
+      {
+        "id": "plugin3",
+        "name": "Jira JSM",
+        "version": "1.0.0",
+        "enabled": true,
+        "requires": "deploy",
+        "config": {
+          "setting1": "value1",
+          "setting2": "value2"
+        }
+      }
+    ],
+    "hybrid_configuration": {
+      "on_prem": {
+        "enabled": true,
+        "base_url": "https://onprem.corporater.local",
+        "failover": {
+          "enabled": true,
+          "strategy": "automatic",
+          "fallback_url": "https://backup.corporater.local",
+          "notification": {
+            "enabled": true,
+            "method": "email",
+            "recipients": [
+              "admin@corporater.com"
+            ]
+          }
+        }
+      },
+      "cloud": {
+        "enabled": true,
+        "base_url": "https://cloud.corporater.dev",
+        "failover": {
+          "enabled": true,
+          "strategy": "manual",
+          "fallback_url": "https://onprem.corporater.local",
+          "notification": {
+            "enabled": true,
+            "method": "sms",
+            "recipients": [
+              "admin@corporater.com"
+            ]
+          }
+        }
+      }
+    }
   }
 }
