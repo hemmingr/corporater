@@ -31,7 +31,7 @@
         "id": "host1",
         "uid": "f3a5b76e-1c4d-4f19-8d2b-1a3c33e73f1b",
         "name": "Development Environment",
-        "url": "/development",
+        "url": "/newfeaturemaster",
         "stage": "development",
         "description": "Development environment where new features are developed and initially tested."
       },
@@ -39,7 +39,7 @@
         "id": "host2",
         "uid": "b2c6a7e1-6cd5-4c88-a8f1-89f7cbb8f8c5",
         "name": "Testing Environment",
-        "url": "/testing",
+        "url": "/deploy",
         "stage": "testing",
         "description": "Testing environment for thorough validation before production deployment."
       },
@@ -47,7 +47,7 @@
         "id": "host3",
         "uid": "e4d7c72a-9e7a-4f99-bb91-f5c8d9b8b715",
         "name": "Production Environment",
-        "url": "/production",
+        "url": "/basic",
         "stage": "production",
         "description": "Production environment where features are live and available to end-users."
       }
