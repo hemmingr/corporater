@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logs</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    #logs {
+      white-space: pre-wrap;
+      background-color: #f4f4f4;
+      padding: 10px;
+      border: 1px solid #ccc;
+      height: 90vh;
+      overflow-y: scroll;
+    }
+  </style>
+</head>
+<body>
+  <h1>Real-Time Logs</h1>
+  <div id="logs"></div>
+
+  <script>
+    const ws = new WebSocket(`ws://${window.location.host}`);
+    const logsDiv = document.getElementById('logs');
+
+    ws.onmessage = (event) => {
+      const logEntry = document.createElement('div');
+      logEntry.textContent = event.data;
+      logsDiv.appendChild(logEntry);
+      logsDiv.scrollTop = logsDiv.scrollHeight; // Auto-scroll to the bottom
+    };
+  </script>
+</body>
+</html>

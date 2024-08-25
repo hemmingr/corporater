@@ -1,118 +1,212 @@
-import express from "express";
-import path from "path";
-import { fileURLToPath } from "url";
-import http from "http";
-import crypto from "crypto";
-import { sendChunks } from "./messageQueue.js";
-import { config } from "./config.js";
-import { processJsonData } from "./jsonProcessor.js";
-import githubRoutes from "./github.js"; // Import the GitHub-related routes
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import http from 'http';
+import bodyParser from 'body-parser';
+import axios from 'axios';
+import { config } from './config/config.js';
+import githubRoutes from './routes/githubRoutes.js';
+import apiRoutes from './routes/apiRoutes.js';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
+import cache from 'memory-cache';
+import winston from 'winston';
+import expressWinston from 'express-winston';
+import { WebSocketServer } from 'ws';
+import swaggerJsdoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
+import dns from 'dns';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+const server = http.createServer(app);
+const wss = new WebSocketServer({ server });
 
-// Increase payload size limit
-app.use(express.json({ limit: '50mb' })); // Increase limit as needed
-app.use(express.urlencoded({ limit: '50mb', extended: true })); // Increase limit as needed
-app.use(express.static(path.join(__dirname, "public")));
+let latestDiffResult = null; // Define latestDiffResult
+let serverIpInfo = null; // Define serverIpInfo
 
-// Initialize variables
-let latestDiffResult = null;
-let configData = {};
-
-// Use the routes from github.js with the /github prefix
-app.use("/github", githubRoutes); // Prefix all GitHub-related routes with /github
-
-// Endpoint to calculate the difference between two JSON arrays
-app.post("/api/diff", async (req, res) => {
+// Fetch IP information
+const fetchIpInfo = async () => {
   try {
-    const { json1, json2 } = req.body;
-
-    if (!Array.isArray(json1) || !Array.isArray(json2)) {
-      return res
-        .status(400)
-        .json({ error: "Both json1 and json2 should be arrays." });
-    }
-
-    // Use the jsonProcessor to handle the diff and related calculations
-    const result = await processJsonData(json1, json2);
-
-    latestDiffResult = result;
-
-    const chunks = [latestDiffResult];
-    await sendChunks(chunks);
-
-    res.json(latestDiffResult);
+    const response = await axios.get('https://ipinfo.io/json');
+    serverIpInfo = response.data;
+    console.log('Server IP information:', serverIpInfo);
   } catch (error) {
-    res
-      .status(500)
-      .json({ error: "Error processing. Ensure both JSON objects are valid." });
+    console.error('Error fetching IP information:', error);
+  }
+};
+
+// Fetch IP information on server start
+fetchIpInfo();
+
+// Set trust proxy
+app.set('trust proxy', 1); // Trust the first proxy
+
+// Security middleware
+app.use(helmet());
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100 // limit each IP to 100 requests per windowMs
+});
+app.use(limiter);
+
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Swagger setup
+const swaggerOptions = {
+  swaggerDefinition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'My API',
+      version: '1.0.0',
+      description: 'API documentation for my project',
+    },
+    servers: [
+      {
+        url: `http://localhost:${config.port}`,
+      },
+    ],
+  },
+  apis: ['./routes/*.js'], // Path to the API docs
+};
+
+const swaggerDocs = swaggerJsdoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
+// Log all requests
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.combine(
+    winston.format.colorize(),
+    winston.format.json(),
+    winston.format.timestamp(),
+    winston.format.printf(({ timestamp, level, message }) => {
+      const logMessage = `${timestamp} ${level}: ${message}`;
+      console.log('Emitting log message:', logMessage); // Debug log
+      wss.clients.forEach(client => {
+        if (client.readyState === client.OPEN) {
+          client.send(logMessage);
+        }
+      });
+      return logMessage;
+    })
+  ),
+  transports: [
+    new winston.transports.Console(),
+    new winston.transports.File({ filename: 'requests.log' })
+  ]
+});
+
+app.use(expressWinston.logger({
+  winstonInstance: logger,
+  meta: true,
+  msg: "HTTP {{req.method}} {{req.url}}",
+  expressFormat: true,
+  colorize: false,
+}));
+
+app.use('/github', githubRoutes);
+app.use('/api', apiRoutes);
+
+app.get('/view-config', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'view-config.html'));
+});
+
+app.get('/uptime', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'uptime.html'));
+});
+
+app.get('/', (req, res) => {
+  res.send('Welcome to the JSON API service');
+});
+
+// New endpoint to display server IP information
+app.get('/server-info', (req, res) => {
+  if (serverIpInfo) {
+    res.json(serverIpInfo);
+  } else {
+    res.status(500).json({ error: 'Unable to fetch server IP information' });
   }
 });
 
-// Endpoint to get the latest diff result
-app.get("/api/latest-diff", (req, res) => {
+// Endpoint to get client hostname
+app.get('/client-info', (req, res) => {
+  const clientIp = req.ip;
+  dns.reverse(clientIp, (err, hostnames) => {
+    if (err) {
+      res.status(500).json({ error: 'Unable to perform reverse DNS lookup' });
+    } else {
+      res.json({ ip: clientIp, hostnames });
+    }
+  });
+});
+
+// Caching middleware
+const cacheMiddleware = (duration) => {
+  return (req, res, next) => {
+    let key = '__express__' + req.originalUrl || req.url;
+    let cachedBody = cache.get(key);
+    if (cachedBody) {
+      res.send(cachedBody);
+      return;
+    } else {
+      res.sendResponse = res.send;
+      res.send = (body) => {
+        cache.put(key, body, duration * 1000);
+        res.sendResponse(body);
+      };
+      next();
+    }
+  };
+};
+
+app.get('/api/latest-diff', cacheMiddleware(30), (req, res) => {
   if (latestDiffResult) {
     res.json(latestDiffResult);
   } else {
     res.status(404).json({
-      error:
-        "No diff data available. Please provide JSON data through the /api/diff endpoint first.",
+      error: 'No diff data available. Please provide JSON data through the /api/diff endpoint first.',
     });
   }
 });
 
-// Endpoint to get the current configuration JSON
-app.get("/api/config", (req, res) => {
-  res.json(configData);
+app.get('/logs', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'logs.html'));
 });
 
-// Endpoint to update the configuration JSON
-app.post("/api/update-config", (req, res) => {
-  try {
-    configData = req.body;
-    res.status(200).json({ message: "Configuration updated successfully." });
-  } catch (error) {
-    res.status(400).json({ error: "Invalid JSON data." });
-  }
-});
-
-// SHA256 hash endpoint
-app.get("/api/integrity", (req, res) => {
-  const hash = crypto.createHash('sha256')
-    .update(JSON.stringify(latestDiffResult || {})) // Ensure latestDiffResult is defined
-    .digest('hex');
-  res.json({ result: hash });
-});
-
-// Base64 encode endpoint
-app.get("/api/base64encode", (req, res) => {
-  const base64 = Buffer.from(JSON.stringify(latestDiffResult || {})).toString('base64'); // Ensure latestDiffResult is defined
-  res.json({ result: base64 });
-});
-
-// Create and start the server
-const server = http.createServer(app);
-
-server.listen(config.port, () => {
+const serverInstance = server.listen(config.port, () => {
   console.log(`Server is running on port ${config.port}`);
 });
 
-// Graceful shutdown handling
-process.on("SIGINT", () => {
-  console.log("SIGINT signal received: closing HTTP server");
-  server.close(() => {
-    console.log("HTTP server closed");
+process.on('SIGINT', () => {
+  console.log('SIGINT signal received: closing HTTP server');
+  serverInstance.close(() => {
+    console.log('HTTP server closed');
     process.exit(0);
   });
 });
 
-process.on("SIGTERM", () => {
-  console.log("SIGTERM signal received: closing HTTP server");
-  server.close(() => {
-    console.log("HTTP server closed");
+process.on('SIGTERM', () => {
+  console.log('SIGTERM signal received: closing HTTP server');
+  serverInstance.close(() => {
+    console.log('HTTP server closed');
     process.exit(0);
+  });
+});
+
+wss.on('connection', (ws) => {
+  console.log('WebSocket client connected');
+  ws.send('WebSocket connection established'); // Debug log
+
+  ws.on('message', (message) => {
+    console.log('Received message from client:', message); // Debug log
+  });
+
+  ws.on('close', () => {
+    console.log('WebSocket client disconnected'); // Debug log
   });
 });
