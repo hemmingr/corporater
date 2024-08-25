@@ -166,17 +166,18 @@
     ],
     "plugins": [
       {
-        "id": "plugin1",
+        "plugin_uid": "b2c6a7e1-6cd5-4c88-a8f1-89f7cbb8f8c5",
         "name": "Deploy",
         "version": "1.0.0",
         "enabled": true,
         "config": {
           "setting1": "value1",
           "setting2": "value2"
-        }
+        },
+        "owner": "b2c6a7e1-6cd5-4c88-a8f1-89f7cbb8f8c9"
       },
       {
-        "id": "plugin2",
+        "plugin_uid": "e4d7c72a-9e7a-4f99-bb91-f5c8d9b8b715",
         "name": "ServiceNow",
         "version": "1.0.0",
         "enabled": false,
@@ -184,10 +185,11 @@
         "config": {
           "setting1": "value1",
           "setting2": "value2"
-        }
+        },
+        "owner": "e4d7c72a-9e7a-4f99-bb91-f5c8d9b8b719"
       },
       {
-        "id": "plugin3",
+        "plugin_uid": "f3a5b76e-1c4d-4f19-8d2b-1a3c33e73f1b",
         "name": "Jira JSM",
         "version": "1.0.0",
         "enabled": false,
@@ -195,7 +197,8 @@
         "config": {
           "setting1": "value1",
           "setting2": "value2"
-        }
+        },
+        "owner": "f3a5b76e-1c4d-4f19-8d2b-1a3c33e73f19"
       }
     ],
     "hybrid_configuration": {
