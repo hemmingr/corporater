@@ -1,27 +1,32 @@
 import dotenv from "dotenv";
+import Joi from "joi";
 
 dotenv.config(); // Load environment variables from .env
 
-const getConfig = () => {
-  if (!process.env.PORT) {
-    throw new Error("Missing environment variable: PORT");
-  }
-  if (!process.env.SOURCE_SERVER_BASE_URL) {
-    throw new Error("Missing environment variable: SOURCE_SERVER_BASE_URL");
-  }
+const schema = Joi.object({
+  PORT: Joi.number().default(3000),
+  RABBITMQ_ENABLED: Joi.boolean().default(false),
+  RABBITMQ_URL: Joi.string().uri().required(),
+  RABBITMQ_QUEUE_NAME: Joi.string().default("patch_queue"),
+  SOURCE_SERVER_BASE_URL: Joi.string()
+    .uri()
+    .default("https://innovation.corporater.dev"),
+});
 
-  return {
-    port: process.env.PORT || 3000,
-    rabbitmqEnabled: process.env.RABBITMQ_ENABLED === "true",
-    rabbitmqUrl: process.env.RABBITMQ_URL,
-    rabbitQueueName: process.env.RABBITMQ_QUEUE_NAME || "patch_queue",
-    azureServiceBusEnabled: process.env.AZURE_SERVICE_BUS_ENABLED === "true",
-    serviceBusConnectionString: process.env.AZURE_SERVICE_BUS_CONNECTION_STRING,
-    queueName: process.env.AZURE_SERVICE_BUS_QUEUE_NAME || "defaultQueue",
-    sourceServerBaseUrl: process.env.SOURCE_SERVER_BASE_URL,
-  };
+const { error, value: envVars } = schema.validate(process.env, {
+  allowUnknown: true,
+});
+
+if (error) {
+  throw new Error(`Config validation error: ${error.message}`);
+}
+
+const config = {
+  port: envVars.PORT,
+  rabbitmqEnabled: envVars.RABBITMQ_ENABLED,
+  rabbitmqUrl: envVars.RABBITMQ_URL,
+  rabbitQueueName: envVars.RABBITMQ_QUEUE_NAME,
+  sourceServerBaseUrl: envVars.SOURCE_SERVER_BASE_URL,
 };
-
-const config = getConfig();
 
 export { config };

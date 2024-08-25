@@ -1,21 +1,20 @@
-import express from 'express';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import http from 'http';
-import bodyParser from 'body-parser';
-import axios from 'axios';
-import { config } from './config/config.js';
-import githubRoutes from './routes/githubRoutes.js';
-import apiRoutes from './routes/apiRoutes.js';
-import helmet from 'helmet';
-import rateLimit from 'express-rate-limit';
-import cache from 'memory-cache';
-import winston from 'winston';
-import expressWinston from 'express-winston';
-import { WebSocketServer } from 'ws';
-import swaggerJsdoc from 'swagger-jsdoc';
-import swaggerUi from 'swagger-ui-express';
-import dns from 'dns';
+import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
+import http from "http";
+import bodyParser from "body-parser";
+import axios from "axios";
+import { config } from "./config/config.js";
+import githubRoutes from "./routes/githubRoutes.js";
+import apiRoutes from "./routes/apiRoutes.js";
+import helmet from "helmet";
+import rateLimit from "express-rate-limit";
+import winston from "winston";
+import expressWinston from "express-winston";
+import { WebSocketServer } from "ws";
+import swaggerJsdoc from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express";
+import dns from "dns";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,17 +23,16 @@ const app = express();
 const server = http.createServer(app);
 const wss = new WebSocketServer({ server });
 
-let latestDiffResult = null; // Define latestDiffResult
 let serverIpInfo = null; // Define serverIpInfo
 
 // Fetch IP information
 const fetchIpInfo = async () => {
   try {
-    const response = await axios.get('https://ipinfo.io/json');
+    const response = await axios.get("https://ipinfo.io/json");
     serverIpInfo = response.data;
-    console.log('Server IP information:', serverIpInfo);
+    //console.log("Server IP information:", serverIpInfo);
   } catch (error) {
-    console.error('Error fetching IP information:', error);
+    console.error("Error fetching IP information:", error);
   }
 };
 
@@ -42,52 +40,52 @@ const fetchIpInfo = async () => {
 fetchIpInfo();
 
 // Set trust proxy
-app.set('trust proxy', 1); // Trust the first proxy
+app.set("trust proxy", 1); // Trust the first proxy
 
 // Security middleware
 app.use(helmet());
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100 // limit each IP to 100 requests per windowMs
+  max: 100, // limit each IP to 100 requests per windowMs
 });
 app.use(limiter);
 
-app.use(bodyParser.json({ limit: '10mb' }));
-app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json({ limit: "10mb" }));
+app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
+app.use(express.static(path.join(__dirname, "public")));
 
 // Swagger setup
 const swaggerOptions = {
   swaggerDefinition: {
-    openapi: '3.0.0',
+    openapi: "3.0.0",
     info: {
-      title: 'My API',
-      version: '1.0.0',
-      description: 'API documentation for my project',
+      title: "Corporater API",
+      version: "1.0.0",
+      description: "Corporater API documentation",
     },
     servers: [
       {
-        url: `http://localhost:${config.port}`,
+        url: `https://newfeaturemaster.innovation.corporater.dev/CorpoWebserver:${config.port}`,
       },
     ],
   },
-  apis: ['./routes/*.js'], // Path to the API docs
+  apis: ["./routes/*.js"], // Path to the API docs
 };
 
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Log all requests
 const logger = winston.createLogger({
-  level: 'info',
+  level: "info",
   format: winston.format.combine(
     winston.format.colorize(),
     winston.format.json(),
     winston.format.timestamp(),
     winston.format.printf(({ timestamp, level, message }) => {
       const logMessage = `${timestamp} ${level}: ${message}`;
-      console.log('Emitting log message:', logMessage); // Debug log
-      wss.clients.forEach(client => {
+      console.log("Emitting log message:", logMessage); // Debug log
+      wss.clients.forEach((client) => {
         if (client.readyState === client.OPEN) {
           client.send(logMessage);
         }
@@ -97,116 +95,93 @@ const logger = winston.createLogger({
   ),
   transports: [
     new winston.transports.Console(),
-    new winston.transports.File({ filename: 'requests.log' })
-  ]
+    new winston.transports.File({ filename: "requests.log" }),
+  ],
 });
 
-app.use(expressWinston.logger({
-  winstonInstance: logger,
-  meta: true,
-  msg: "HTTP {{req.method}} {{req.url}}",
-  expressFormat: true,
-  colorize: false,
-}));
+app.use(
+  expressWinston.logger({
+    winstonInstance: logger,
+    meta: true,
+    msg: "HTTP {{req.method}} {{req.url}}",
+    expressFormat: true,
+    colorize: false,
+  })
+);
 
-app.use('/github', githubRoutes);
-app.use('/api', apiRoutes);
+app.use("/github", githubRoutes);
+app.use("/api", apiRoutes);
 
-app.get('/view-config', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'view-config.html'));
+app.get("/view-config", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "view-config.html"));
 });
 
-app.get('/uptime', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'uptime.html'));
+app.get("/file-structure", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "file-structure.html"));
 });
 
-app.get('/', (req, res) => {
-  res.send('Welcome to the JSON API service');
+app.get("/uptime", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "uptime.html"));
+});
+
+app.get("/", (req, res) => {
+  res.send("Welcome to the JSON API service");
 });
 
 // New endpoint to display server IP information
-app.get('/server-info', (req, res) => {
+app.get("/server-info", (req, res) => {
   if (serverIpInfo) {
     res.json(serverIpInfo);
   } else {
-    res.status(500).json({ error: 'Unable to fetch server IP information' });
+    res.status(500).json({ error: "Unable to fetch server IP information" });
   }
 });
 
 // Endpoint to get client hostname
-app.get('/client-info', (req, res) => {
+app.get("/client-info", (req, res) => {
   const clientIp = req.ip;
   dns.reverse(clientIp, (err, hostnames) => {
     if (err) {
-      res.status(500).json({ error: 'Unable to perform reverse DNS lookup' });
+      res.status(500).json({ error: "Unable to perform reverse DNS lookup" });
     } else {
       res.json({ ip: clientIp, hostnames });
     }
   });
 });
 
-// Caching middleware
-const cacheMiddleware = (duration) => {
-  return (req, res, next) => {
-    let key = '__express__' + req.originalUrl || req.url;
-    let cachedBody = cache.get(key);
-    if (cachedBody) {
-      res.send(cachedBody);
-      return;
-    } else {
-      res.sendResponse = res.send;
-      res.send = (body) => {
-        cache.put(key, body, duration * 1000);
-        res.sendResponse(body);
-      };
-      next();
-    }
-  };
-};
-
-app.get('/api/latest-diff', cacheMiddleware(30), (req, res) => {
-  if (latestDiffResult) {
-    res.json(latestDiffResult);
-  } else {
-    res.status(404).json({
-      error: 'No diff data available. Please provide JSON data through the /api/diff endpoint first.',
-    });
-  }
-});
-
-app.get('/logs', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'logs.html'));
+app.get("/logs", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "logs.html"));
 });
 
 const serverInstance = server.listen(config.port, () => {
   console.log(`Server is running on port ${config.port}`);
 });
 
-process.on('SIGINT', () => {
-  console.log('SIGINT signal received: closing HTTP server');
+process.on("SIGINT", () => {
+  console.log("SIGINT signal received: closing HTTP server");
   serverInstance.close(() => {
-    console.log('HTTP server closed');
+    console.log("HTTP server closed");
     process.exit(0);
   });
 });
 
-process.on('SIGTERM', () => {
-  console.log('SIGTERM signal received: closing HTTP server');
+process.on("SIGTERM", () => {
+  console.log("SIGTERM signal received: closing HTTP server");
   serverInstance.close(() => {
-    console.log('HTTP server closed');
+    console.log("HTTP server closed");
     process.exit(0);
   });
 });
 
-wss.on('connection', (ws) => {
-  console.log('WebSocket client connected');
-  ws.send('WebSocket connection established'); // Debug log
+wss.on("connection", (ws) => {
+  console.log("WebSocket client connected");
+  ws.send("WebSocket connection established"); // Debug log
 
-  ws.on('message', (message) => {
-    console.log('Received message from client:', message); // Debug log
+  ws.on("message", (message) => {
+    console.log("Received message from client:", message); // Debug log
   });
 
-  ws.on('close', () => {
-    console.log('WebSocket client disconnected'); // Debug log
+  ws.on("close", () => {
+    console.log("WebSocket client disconnected"); // Debug log
   });
 });

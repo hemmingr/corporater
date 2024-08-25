@@ -3,8 +3,14 @@ import crypto from "crypto";
 import { processJsonData } from "../services/jsonProcessor.js";
 import { sendChunks } from "../services/messageQueue.js";
 import { updatePluginExtendedFile } from "../services/githubService.js";
-import logger from '../services/logger.js'; // Import the logger
+import logger from "../services/logger.js"; // Import the logger
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+import ignore from "ignore";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const router = express.Router();
 
 let latestDiffResult = null;
@@ -84,12 +90,10 @@ router.get("/latest-diff", (req, res) => {
   if (latestDiffResult) {
     res.json(latestDiffResult);
   } else {
-    res
-      .status(404)
-      .json({
-        error:
-          "No diff data available. Please provide JSON data through the /api/diff endpoint first.",
-      });
+    res.status(404).json({
+      error:
+        "No diff data available. Please provide JSON data through the /api/diff endpoint first.",
+    });
   }
 });
 
@@ -282,12 +286,10 @@ router.post("/genextended", express.text(), async (req, res) => {
       "Error processing text or updating GitHub file:",
       error.message
     ); // Improved error logging
-    res
-      .status(500)
-      .json({
-        error:
-          "Error processing text. Please check the input format and try again.",
-      });
+    res.status(500).json({
+      error:
+        "Error processing text. Please check the input format and try again.",
+    });
   }
 });
 
@@ -309,6 +311,41 @@ router.post("/genextended", express.text(), async (req, res) => {
  */
 router.get("/get-api-key", (req, res) => {
   res.json({ apiKey: process.env.API_KEY });
+});
+
+router.get('/file-structure', (req, res) => {
+    const directoryPath = process.cwd(); // Use the current working directory
+    const ig = ignore();
+
+    // Read .gitignore file
+    const gitignorePath = path.join(directoryPath, '.gitignore');
+    if (fs.existsSync(gitignorePath)) {
+        const gitignoreContent = fs.readFileSync(gitignorePath, 'utf8');
+        ig.add(gitignoreContent);
+    }
+
+    const getFileStructure = (dirPath) => {
+        const files = fs.readdirSync(dirPath);
+        return files
+            .filter(file => {
+                const filePath = path.join(dirPath, file);
+                const isIgnored = ig.ignores(path.relative(directoryPath, filePath));
+                const isHidden = file.startsWith('.');
+                const isLogOrYaml = file.endsWith('.log') || file.endsWith('.yaml');
+                return !isIgnored && !isHidden && !isLogOrYaml;
+            })
+            .map(file => {
+                const filePath = path.join(dirPath, file);
+                const isDirectory = fs.statSync(filePath).isDirectory();
+                return {
+                    name: file,
+                    isDirectory,
+                    children: isDirectory ? getFileStructure(filePath) : []
+                };
+            });
+    };
+
+    res.json(getFileStructure(directoryPath));
 });
 
 export default router;
