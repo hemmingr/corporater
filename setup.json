@@ -179,7 +179,7 @@
         "id": "plugin2",
         "name": "ServiceNow",
         "version": "1.0.0",
-        "enabled": true,
+        "enabled": false,
         "requires": "deploy",
         "config": {
           "setting1": "value1",
@@ -190,7 +190,7 @@
         "id": "plugin3",
         "name": "Jira JSM",
         "version": "1.0.0",
-        "enabled": true,
+        "enabled": false,
         "requires": "deploy",
         "config": {
           "setting1": "value1",
