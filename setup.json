@@ -181,10 +181,22 @@
         "name": "ServiceNow",
         "version": "1.0.0",
         "enabled": false,
-        "requires": "deploy",
+        "requires": "Deploy",
         "config": {
           "setting1": "value1",
           "setting2": "value2"
+        },
+        "owner": "e4d7c72a-9e7a-4f99-bb91-f5c8d9b8b719"
+      },
+      {
+        "plugin_uid": "e4d7c72a-9e7a-4f99-bb91-f5c8d9b8b716",
+        "name": "ID checker",
+        "version": "1.0.0",
+        "enabled": false,
+        "requires": "Deploy",
+        "config": {
+          "check_type": "inform",
+          "template": "default"
         },
         "owner": "e4d7c72a-9e7a-4f99-bb91-f5c8d9b8b719"
       },
