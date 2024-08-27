@@ -1,3 +1,5 @@
+let currentStyle = "visual";
+
 async function fetchFileStructure() {
   try {
     const response = await fetch("/api/file-structure");
@@ -26,12 +28,49 @@ function createTree(data) {
   return ul;
 }
 
-fetchFileStructure().then((data) => {
-  if (data) {
-    console.log("Creating tree with data:", data); // Log the data before creating the tree
+function createAnalogTree(data, prefix = "") {
+  let result = "";
+  data.forEach((item, index) => {
+    const isLast = index === data.length - 1;
+    const newPrefix = prefix + (isLast ? "└── " : "├── ");
+    result += newPrefix + item.name + "\n";
+    if (item.isDirectory) {
+      result += createAnalogTree(
+        item.children,
+        prefix + (isLast ? "    " : "│   ")
+      );
+    }
+  });
+  return result;
+}
+
+function toggleStyle() {
+  console.log("Toggle button clicked"); // Log button click
+  fetchFileStructure().then((data) => {
     const fileStructureElement = document.getElementById("file-structure");
-    fileStructureElement.appendChild(createTree(data));
-  } else {
-    console.error("No data received");
-  }
+    fileStructureElement.innerHTML = ""; // Clear current content
+    if (currentStyle === "visual") {
+      console.log("Switching to analog style"); // Log style switch
+      const pre = document.createElement("pre");
+      pre.classList.add("analog");
+      pre.textContent = createAnalogTree(data);
+      fileStructureElement.appendChild(pre);
+      currentStyle = "analog";
+    } else {
+      console.log("Switching to visual style"); // Log style switch
+      fileStructureElement.appendChild(createTree(data));
+      currentStyle = "visual";
+    }
+  });
+}
+
+// Initialize with visual style
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("Document loaded, initializing with visual style"); // Log initialization
+  toggleStyle();
+
+  // Add event listener for the toggle button
+  document
+    .getElementById("toggle-button")
+    .addEventListener("click", toggleStyle);
 });

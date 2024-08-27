@@ -1,124 +1,111 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: rgba(255, 255, 255, 0.8); /* Transparent white background */
-  padding: 20px;
-  margin: 0;
+/* Light Theme */
+body.light-theme {
+  background-color: #f0f0f0;
+  color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+button.light-theme {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button.light-theme:hover {
+  background-color: #555;
+}
+
+button.light-theme:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Dark Theme */
+body.dark-theme {
+  background-color: #121212;
+  color: #e0e0e0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+button.dark-theme {
+  background-color: #444;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button.dark-theme:hover {
+  background-color: #666;
+}
+
+button.dark-theme:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
+
+/* Ensure CodeMirror themes are also applied */
 .CodeMirror {
   border: 1px solid #ddd;
   height: 500px;
 }
 
-/* Custom styles */
-#contextMenu {
-  display: none;
-  position: absolute;
-  background: #333;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  z-index: 1000;
-  color: #fff;
+.CodeMirror.cm-s-dracula {
+  background-color: #282a36;
+  color: #f8f8f2;
 }
 
-#contextMenu button {
-  background: none;
-  border: none;
-  color: #fff;
-  padding: 10px;
-  cursor: pointer;
-  width: 100%;
-  text-align: left;
+/* Button Container */
+.button-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
-#contextMenu button:hover {
-  background: #444;
-}
-
-#contextMenu button:disabled {
-  cursor: not-allowed;
-  background: #555;
-}
-
-#errorDisplay {
-  color: red;
-  font-size: 0.9em;
-  margin-top: 10px;
-}
-
-.modal {
-  display: none;
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  padding: 20px;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  z-index: 1001;
-}
-
-.modal.show {
-  display: block;
-}
-
-.modal button {
-  margin-top: 10px;
-  background: #333;
-  color: #fff;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-}
-
-.modal button:hover {
-  background: #444;
-}
-
-/* Loading spinner */
-#loading {
-  display: none;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 1.5em;
+/* Summary Container */
+.summary-container {
+  margin-bottom: 20px;
+  font-size: 1.2em;
   color: #333;
 }
 
-/* Overlay Guide */
-#overlayGuide {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  display: none; /* Hidden by default */
-  align-items: center;
-  justify-content: center;
-  z-index: 1002;
+body.dark-theme .summary-container {
+  color: #e0e0e0;
 }
 
-#guideText {
-  background: #fff;
-  padding: 20px;
+/* Input and Output Text Areas */
+textarea {
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  border: 1px solid #ccc;
   border-radius: 5px;
-  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: border-color 0.3s ease;
+}
+
+body.light-theme textarea:focus {
+  border-color: #333;
+}
+
+body.dark-theme textarea:focus {
+  border-color: #444;
+}
+
+/* Loading Indicator */
+.loading {
+  display: none;
+  margin-top: 10px;
+  font-size: 1.2em;
   color: #333;
 }
 
-#closeGuide {
-  margin-top: 10px;
-  padding: 10px 20px;
-  background-color: #333;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-}
-
-#closeGuide:hover {
-  background-color: #444;
+body.dark-theme .loading {
+  color: #e0e0e0;
 }

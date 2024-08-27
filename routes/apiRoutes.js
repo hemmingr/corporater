@@ -3,6 +3,7 @@ import crypto from "crypto";
 import { processJsonData } from "../services/jsonProcessor.js";
 import { sendChunks } from "../services/messageQueue.js";
 import { updatePluginExtendedFile } from "../services/githubService.js";
+import { processIds } from '../services/idProcessor.js';
 import logger from "../services/logger.js"; // Import the logger
 import fs from "fs";
 import path from "path";
@@ -16,38 +17,6 @@ const router = express.Router();
 let latestDiffResult = null;
 let configData = {};
 
-/**
- * @swagger
- * /api/diff:
- *   post:
- *     summary: Process JSON data and return the diff result
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               json1:
- *                 type: array
- *                 items:
- *                   type: object
- *               json2:
- *                 type: array
- *                 items:
- *                   type: object
- *     responses:
- *       200:
- *         description: The diff result
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *       400:
- *         description: Both json1 and json2 should be arrays
- *       500:
- *         description: Error processing. Ensure both JSON objects are valid
- */
 router.post("/diff", async (req, res) => {
   try {
     const { json1, json2 } = req.body;
@@ -71,21 +40,7 @@ router.post("/diff", async (req, res) => {
   }
 });
 
-/**
- * @swagger
- * /api/latest-diff:
- *   get:
- *     summary: Get the latest diff result
- *     responses:
- *       200:
- *         description: The latest diff result
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *       404:
- *         description: No diff data available
- */
+
 router.get("/latest-diff", (req, res) => {
   if (latestDiffResult) {
     res.json(latestDiffResult);
@@ -97,40 +52,12 @@ router.get("/latest-diff", (req, res) => {
   }
 });
 
-/**
- * @swagger
- * /api/config:
- *   get:
- *     summary: Get the current configuration
- *     responses:
- *       200:
- *         description: The current configuration
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- */
+
 router.get("/config", (req, res) => {
   res.json(configData);
 });
 
-/**
- * @swagger
- * /api/update-config:
- *   post:
- *     summary: Update the configuration
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *     responses:
- *       200:
- *         description: Configuration updated successfully
- *       400:
- *         description: Invalid JSON data
- */
+
 router.post("/update-config", (req, res) => {
   try {
     configData = req.body;
@@ -140,31 +67,7 @@ router.post("/update-config", (req, res) => {
   }
 });
 
-/**
- * @swagger
- * /api/integrity:
- *   post:
- *     summary: Calculate the SHA-256 hash of the provided data
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               data:
- *                 type: object
- *     responses:
- *       200:
- *         description: The SHA-256 hash of the provided data
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 result:
- *                   type: string
- */
+
 router.post("/integrity", (req, res) => {
   const { data } = req.body;
   const hash = crypto
@@ -174,30 +77,7 @@ router.post("/integrity", (req, res) => {
   res.json({ result: hash });
 });
 
-/**
- * @swagger
- * /api/base64encode:
- *   post:
- *     summary: Encode the provided text to Base64
- *     requestBody:
- *       required: true
- *       content:
- *         text/plain:
- *           schema:
- *             type: string
- *     responses:
- *       200:
- *         description: The Base64 encoded result
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 result:
- *                   type: string
- *       400:
- *         description: Text is required and must be a non-empty string
- */
+
 router.post("/base64encode", express.text(), (req, res) => {
   const text = req.body;
 
@@ -245,29 +125,7 @@ const processText = (text) => {
   return { rows };
 };
 
-/**
- * @swagger
- * /api/genextended:
- *   post:
- *     summary: Process text and update GitHub file
- *     requestBody:
- *       required: true
- *       content:
- *         text/plain:
- *           schema:
- *             type: string
- *     responses:
- *       200:
- *         description: The processed result
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *       400:
- *         description: Text is required and must be a non-empty string
- *       500:
- *         description: Error processing text. Please check the input format and try again
- */
+
 router.post("/genextended", express.text(), async (req, res) => {
   const text = req.body;
 
@@ -293,25 +151,28 @@ router.post("/genextended", express.text(), async (req, res) => {
   }
 });
 
-/**
- * @swagger
- * /api/get-api-key:
- *   get:
- *     summary: Get the API key
- *     responses:
- *       200:
- *         description: The API key
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 apiKey:
- *                   type: string
- */
+
 router.get("/get-api-key", (req, res) => {
   res.json({ apiKey: process.env.API_KEY });
 });
+
+
+
+router.post("/process-ids", express.json(), (req, res) => {
+  const { inputText, typeMappingsPrefix } = req.body;
+  const cleanedText = inputText.replace(/<BR\/>/g, "\n");
+
+  if (typeof cleanedText !== "string" || cleanedText.trim() === "") {
+    return res
+      .status(400)
+      .json({ error: "Input is required and must be a non-empty string" });
+  }
+
+  const processedNames = processIds(cleanedText, typeMappingsPrefix);
+  res.json(processedNames);
+});
+
+
 
 router.get('/file-structure', (req, res) => {
     const directoryPath = process.cwd(); // Use the current working directory

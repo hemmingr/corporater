@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ID Processor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/dracula.min.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="light-theme">
+    <h1>ID Processor for Extended scripts</h1>
+    <div class="button-container">
+      <button id="themeToggle" class="light-theme">Toggle Theme</button>
+      <button id="processButton" class="light-theme">Process</button>
+    </div>
+    <div id="summaryContainer" class="summary-container"></div>
+    <div>
+      <label for="typeMappingsPrefix">Prefix</label>
+      <input type="text" id="typeMappingsPrefix" placeholder="e.g., DeployPlugin" />
+    </div>
+    <div>
+      <h2>Input</h2>
+      <label for="inputText">Input Text</label>
+      <textarea id="inputText" placeholder="Paste your text here..." title="Input Text"></textarea>
+    </div>
+    <div class="loading" id="loading">Processing...</div>
+    <div>
+      <h2>Output</h2>
+      <label for="output">Output Text</label>
+      <textarea id="output" placeholder="Processed output will appear here..." title="Output Text"></textarea>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/javascript/javascript.min.js"></script>
+    <script src="idprocessor.js"></script>
+  </body>
+</html>

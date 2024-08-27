@@ -43,7 +43,19 @@ fetchIpInfo();
 app.set("trust proxy", 1); // Trust the first proxy
 
 // Security middleware
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "https://cdnjs.cloudflare.com"],
+        styleSrc: ["'self'", "https://cdnjs.cloudflare.com"],
+      },
+    },
+    xContentTypeOptions: true, // Add this line to include the X-Content-Type-Options header
+  })
+);
+
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // limit each IP to 100 requests per windowMs
@@ -65,11 +77,11 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: `https://newfeaturemaster.innovation.corporater.dev/CorpoWebserver:${config.port}`,
+        url: `https://localhost:${config.port}`,
       },
     ],
   },
-  apis: ["./routes/*.js"], // Path to the API docs
+  apis: ["./doc/*.js"], // Path to the API docs
 };
 
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
@@ -111,6 +123,10 @@ app.use(
 
 app.use("/github", githubRoutes);
 app.use("/api", apiRoutes);
+
+app.get("/idprocessor", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "idprocessor.html"));
+});
 
 app.get("/view-config", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "view-config.html"));
