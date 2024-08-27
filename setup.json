@@ -23,6 +23,7 @@
   },
   "setup": {
     "version": "1.8.2",
+    "check_environment_status_before_transfer": true,
     "common": {
       "base_url": "https://innovation.corporater.dev"
     },
