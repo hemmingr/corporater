@@ -2,8 +2,11 @@ import express from "express";
 import crypto from "crypto";
 import { processJsonData } from "../services/jsonProcessor.js";
 import { sendChunks } from "../services/messageQueue.js";
-import { updatePluginExtendedFile } from "../services/githubService.js";
-import { processIds } from '../services/idProcessor.js';
+import {
+  updatePluginExtendedFile,
+  calculateMetrics,
+} from "../services/githubService.js";
+import { processIds } from "../services/idProcessor.js";
 import logger from "../services/logger.js"; // Import the logger
 import fs from "fs";
 import path from "path";
@@ -40,7 +43,6 @@ router.post("/diff", async (req, res) => {
   }
 });
 
-
 router.get("/latest-diff", (req, res) => {
   if (latestDiffResult) {
     res.json(latestDiffResult);
@@ -52,11 +54,9 @@ router.get("/latest-diff", (req, res) => {
   }
 });
 
-
 router.get("/config", (req, res) => {
   res.json(configData);
 });
-
 
 router.post("/update-config", (req, res) => {
   try {
@@ -67,7 +67,6 @@ router.post("/update-config", (req, res) => {
   }
 });
 
-
 router.post("/integrity", (req, res) => {
   const { data } = req.body;
   const hash = crypto
@@ -76,7 +75,6 @@ router.post("/integrity", (req, res) => {
     .digest("hex");
   res.json({ result: hash });
 });
-
 
 router.post("/base64encode", express.text(), (req, res) => {
   const text = req.body;
@@ -125,7 +123,6 @@ const processText = (text) => {
   return { rows };
 };
 
-
 router.post("/genextended", express.text(), async (req, res) => {
   const text = req.body;
 
@@ -151,12 +148,9 @@ router.post("/genextended", express.text(), async (req, res) => {
   }
 });
 
-
 router.get("/get-api-key", (req, res) => {
   res.json({ apiKey: process.env.API_KEY });
 });
-
-
 
 router.post("/process-ids", express.json(), (req, res) => {
   const { inputText, typeMappingsPrefix } = req.body;
@@ -172,41 +166,49 @@ router.post("/process-ids", express.json(), (req, res) => {
   res.json(processedNames);
 });
 
+router.get("/file-structure", (req, res) => {
+  const directoryPath = process.cwd(); // Use the current working directory
+  const ig = ignore();
 
+  // Read .gitignore file
+  const gitignorePath = path.join(directoryPath, ".gitignore");
+  if (fs.existsSync(gitignorePath)) {
+    const gitignoreContent = fs.readFileSync(gitignorePath, "utf8");
+    ig.add(gitignoreContent);
+  }
 
-router.get('/file-structure', (req, res) => {
-    const directoryPath = process.cwd(); // Use the current working directory
-    const ig = ignore();
+  const getFileStructure = (dirPath) => {
+    const files = fs.readdirSync(dirPath);
+    return files
+      .filter((file) => {
+        const filePath = path.join(dirPath, file);
+        const isIgnored = ig.ignores(path.relative(directoryPath, filePath));
+        const isHidden = file.startsWith(".");
+        const isLogOrYaml = file.endsWith(".log") || file.endsWith(".yaml");
+        const containsLock = file.includes("lock");
+        return !isIgnored && !isHidden && !isLogOrYaml && !containsLock;
+      })
+      .map((file) => {
+        const filePath = path.join(dirPath, file);
+        const isDirectory = fs.statSync(filePath).isDirectory();
+        return {
+          name: file,
+          isDirectory,
+          children: isDirectory ? getFileStructure(filePath) : [],
+        };
+      });
+  };
 
-    // Read .gitignore file
-    const gitignorePath = path.join(directoryPath, '.gitignore');
-    if (fs.existsSync(gitignorePath)) {
-        const gitignoreContent = fs.readFileSync(gitignorePath, 'utf8');
-        ig.add(gitignoreContent);
-    }
+  res.json(getFileStructure(directoryPath));
+});
 
-    const getFileStructure = (dirPath) => {
-        const files = fs.readdirSync(dirPath);
-        return files
-            .filter(file => {
-                const filePath = path.join(dirPath, file);
-                const isIgnored = ig.ignores(path.relative(directoryPath, filePath));
-                const isHidden = file.startsWith('.');
-                const isLogOrYaml = file.endsWith('.log') || file.endsWith('.yaml');
-                return !isIgnored && !isHidden && !isLogOrYaml;
-            })
-            .map(file => {
-                const filePath = path.join(dirPath, file);
-                const isDirectory = fs.statSync(filePath).isDirectory();
-                return {
-                    name: file,
-                    isDirectory,
-                    children: isDirectory ? getFileStructure(filePath) : []
-                };
-            });
-    };
-
-    res.json(getFileStructure(directoryPath));
+router.get("/metrics", async (req, res) => {
+  try {
+    const metrics = await calculateMetrics();
+    res.json(metrics);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch metrics" });
+  }
 });
 
 export default router;

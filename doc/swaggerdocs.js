@@ -211,3 +211,86 @@
  *       400:
  *         description: Input is required and must be a non-empty string
  */
+
+/**
+ * @swagger
+ * /github/config:
+ *   get:
+ *     summary: Fetch the configuration file from GitHub
+ *     responses:
+ *       200:
+ *         description: The configuration file content
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *       500:
+ *         description: Failed to fetch JSON from GitHub
+ */
+
+/**
+ * @swagger
+ * /github/save-config:
+ *   post:
+ *     summary: Save the configuration file to GitHub
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *     responses:
+ *       200:
+ *         description: Configuration saved successfully
+ *       400:
+ *         description: Invalid JSON data
+ *       500:
+ *         description: Failed to save configuration
+ */
+
+/**
+ * @swagger
+ * /github/commits:
+ *   get:
+ *     summary: Fetch the commits from GitHub
+ *     responses:
+ *       200:
+ *         description: The list of commits
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       500:
+ *         description: Failed to fetch commits
+ */
+
+/**
+ * @swagger
+ * /api/metrics:
+ *   get:
+ *     summary: Retrieve deployment frequency, lead time, MTTR, and change failure rate metrics.
+ *     responses:
+ *       200:
+ *         description: Metrics including deployment frequency, average lead time, MTTR, and change failure rate.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 deploymentFrequency:
+ *                   type: number
+ *                   description: The frequency of deployments per day.
+ *                 averageLeadTime:
+ *                   type: number
+ *                   description: The average lead time for changes in seconds.
+ *                 averageMTTR:
+ *                   type: number
+ *                   description: The average Mean Time to Recovery (MTTR) in seconds.
+ *                 changeFailureRate:
+ *                   type: number
+ *                   description: The percentage of deployments that result in a failure.
+ *       500:
+ *         description: Failed to fetch metrics.
+ */

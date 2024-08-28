@@ -24,7 +24,12 @@
     "swagger-jsdoc": "^6.2.8",
     "fs": "^0.0.2",
     "path": "^0.12.7",
-    "ignore": "^5.3.2"
+    "ignore": "^5.3.2",
+    "ip-range-check": "^0.2.0",
+    "cors": "^2.8.5",
+    "passport": "^0.7.0",
+    "passport-azure-ad": "^4.3.5",
+    "express-session": "^1.18.0"
   },
   "engines": {
     "node": ">=14.0.0"

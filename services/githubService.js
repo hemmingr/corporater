@@ -1,6 +1,6 @@
 import axios from "axios";
 import { config } from "../config/config.js";
-import logger from './logger.js'; // Import the logger
+import logger from './logger.js'; 
 
 const githubToken = process.env.GITHUB_TOKEN;
 const repoOwner = "hemmingr";
@@ -93,6 +93,79 @@ const getCommits = async () => {
   }
 };
 
+const getWorkflowRuns = async () => {
+  try {
+    const response = await axios.get(
+      `https://api.github.com/repos/${repoOwner}/${repoName}/actions/runs`,
+      {
+        headers: { Authorization: `token ${githubToken}` },
+      }
+    );
+    return response.data.workflow_runs;
+  } catch (error) {
+    console.error("Error fetching workflow runs:", error.message);
+    throw error;
+  }
+};
+
+const calculateMTTR = async () => {
+  const workflowRuns = await getWorkflowRuns();
+  const failedRuns = workflowRuns.filter(run => run.conclusion === 'failure');
+  const recoveryTimes = [];
+
+  for (const failedRun of failedRuns) {
+    const recoveryRun = workflowRuns.find(run => 
+      new Date(run.created_at) > new Date(failedRun.created_at) && run.conclusion === 'success'
+    );
+    if (recoveryRun) {
+      const recoveryTime = new Date(recoveryRun.created_at) - new Date(failedRun.created_at);
+      recoveryTimes.push(recoveryTime);
+    }
+  }
+
+  const averageMTTR = recoveryTimes.reduce((a, b) => a + b, 0) / recoveryTimes.length;
+
+  return averageMTTR / 1000; // Seconds
+};
+
+const calculateChangeFailureRate = async () => {
+  const workflowRuns = await getWorkflowRuns();
+  const totalDeployments = workflowRuns.length;
+  const failedDeployments = workflowRuns.filter(run => run.conclusion === 'failure').length;
+  const changeFailureRate = (failedDeployments / totalDeployments) * 100; // Percentage
+
+  return changeFailureRate;
+};
+
+const calculateMetrics = async () => {
+  const workflowRuns = await getWorkflowRuns();
+  const deployments = workflowRuns.filter(run => run.conclusion === 'success');
+  const deploymentFrequency = deployments.length / 30; // Assuming a 30-day period
+
+  const leadTimes = [];
+  for (const deployment of deployments) {
+    const commitUrl = deployment.head_commit.url;
+    const commitResponse = await axios.get(commitUrl, {
+      headers: { Authorization: `token ${githubToken}` },
+    });
+    const commitTimestamp = commitResponse.data.commit.committer.date;
+    const deploymentTimestamp = deployment.created_at;
+    const leadTime = new Date(deploymentTimestamp) - new Date(commitTimestamp);
+    leadTimes.push(leadTime);
+  }
+
+  const averageLeadTime = leadTimes.reduce((a, b) => a + b, 0) / leadTimes.length;
+  const averageMTTR = await calculateMTTR();
+  const changeFailureRate = await calculateChangeFailureRate();
+
+  return {
+    deploymentFrequency,
+    averageLeadTime: averageLeadTime / 1000, // Seconds
+    averageMTTR, // Seconds
+    changeFailureRate // Percentage
+  };
+};
+
 const updatePluginExtendedFile = async (rows) => {
   const filePath = "plugin.extended";
   const content = rows.map((row) => row.exp).join("\n");
@@ -107,5 +180,7 @@ export {
   getConfigFile,
   saveConfigFile,
   getCommits,
-  updatePluginExtendedFile,
+  getWorkflowRuns,
+  calculateMetrics,
+  updatePluginExtendedFile, 
 };
