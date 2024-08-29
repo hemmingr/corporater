@@ -26,7 +26,7 @@
     "check_environment_status_before_transfer": true,
     "transfer_userpasswords": false,
     "common": {
-      "domain": "https://innovation.corporater.dev"
+      "domain": "corporater.dev"
     },
     "hosts": [
       {
