@@ -26,7 +26,7 @@
     "check_environment_status_before_transfer": true,
     "transfer_userpasswords": false,
     "common": {
-      "base_url": "https://innovation.corporater.dev"
+      "base_url": "https://innovation.corporater.dev/"
     },
     "hosts": [
       {
