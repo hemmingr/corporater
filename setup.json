@@ -88,7 +88,7 @@
             },
             {
               "type": "Users",
-              "enabled": false
+              "enabled": true
             },
             {
               "type": "Enterprise Templates",
