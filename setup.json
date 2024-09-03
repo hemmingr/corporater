@@ -80,12 +80,48 @@
         {
           "source": "development",
           "destination": "testing",
-          "description": "Transfer from Development to Testing for further validation."
+          "description": "Transfer from Development to Testing for further validation.",
+          "options": [
+            {
+              "type": "Plugin",
+              "enabled": true
+            },
+            {
+              "type": "Users",
+              "enabled": false
+            },
+            {
+              "type": "Enterprise Templates",
+              "enabled": true
+            },
+            {
+              "type": "Enterprise Tasks",
+              "enabled": false
+            }
+          ]
         },
         {
           "source": "testing",
           "destination": "production",
-          "description": "Transfer from Testing to Production for live deployment."
+          "description": "Transfer from Testing to Production for live deployment.",
+          "options": [
+            {
+              "type": "Plugin",
+              "enabled": true
+            },
+            {
+              "type": "Users",
+              "enabled": true
+            },
+            {
+              "type": "Enterprise Templates",
+              "enabled": false
+            },
+            {
+              "type": "Enterprise Tasks",
+              "enabled": true
+            }
+          ]
         }
       ],
       "disallowed_transfers": [
