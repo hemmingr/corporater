@@ -1,4 +1,6 @@
 import express from "express";
+import authOrApiKey from '../middleware/authOrApiKey.js'; // Import the combined auth middleware
+import checkApiKey from '../middleware/checkApiKey.js';
 import crypto from "crypto";
 import { processJsonData } from "../services/jsonProcessor.js";
 import { sendChunks } from "../services/messageQueue.js";
@@ -12,10 +14,14 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import ignore from "ignore";
+import { getTrafficMetrics } from "../services/trafficMetricsService.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const router = express.Router();
+
+// Apply the authOrApiKey middleware to all routes starting with /api/
+router.use(authOrApiKey); // Ensure this is applied to all routes
 
 let latestDiffResult = null;
 let configData = {};
@@ -53,7 +59,7 @@ router.get("/latest-diff", (req, res) => {
     });
   }
 });
-
+/*
 router.get("/config", (req, res) => {
   res.json(configData);
 });
@@ -66,6 +72,48 @@ router.post("/update-config", (req, res) => {
     res.status(400).json({ error: "Invalid JSON data." });
   }
 });
+*/
+router.post("/openai", (req, res) => {
+  try {
+    const inputData = req.body;
+
+    if (typeof inputData !== "object" || Array.isArray(inputData)) {
+      return res.status(400).json({ error: "Invalid JSON data" });
+    }
+
+    // Extract and validate the 'content' field
+    const { content } = inputData;
+
+    if (typeof content !== "string") {
+      return res.status(400).json({ error: "Content field must be a string" });
+    }
+
+    // Log the raw content for debugging
+    console.log("Raw content:", content);
+
+    // Clean up content by removing 'json' followed by newline
+    const cleanedContent = content.replace(/json\s*$/m, '').trim();
+
+    let parsedContent;
+    try {
+      // Remove backticks and other unwanted characters
+      const sanitizedContent = cleanedContent.replace(/`/g, '');
+      // Parse the JSON content
+      parsedContent = JSON.parse(sanitizedContent);
+    } catch (parseError) {
+      console.error("Error parsing JSON content:", parseError.message);
+      return res.status(400).json({ error: "Failed to parse JSON content", details: parseError.message });
+    }
+
+    // Send the parsed JSON content as the response
+    res.json(parsedContent);
+  } catch (error) {
+    console.error("Error processing JSON data:", error.message);
+    res.status(500).json({ error: "Failed to process JSON data" });
+  }
+});
+
+
 
 router.post("/integrity", (req, res) => {
   const { data } = req.body;
@@ -204,11 +252,16 @@ router.get("/file-structure", (req, res) => {
 
 router.get("/metrics", async (req, res) => {
   try {
-    const metrics = await calculateMetrics();
-    res.json(metrics);
+    const businessmetrics = await calculateMetrics();
+    res.json(businessmetrics);
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch metrics" });
   }
+});
+
+router.get("/traffic-metrics", (req, res) => {
+  const metrics = getTrafficMetrics();
+  res.json(metrics);
 });
 
 export default router;

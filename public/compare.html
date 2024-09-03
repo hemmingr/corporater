@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DEPLOY</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/dracula.min.css"
+    />
+  </head>
+  <body>
+    <h1>Deployment Test</h1>
+    <select id="transferSelect">
+      <option value="">Select a transfer</option>
+    </select>
+    <button id="compareButton">Compare Objects</button>
+    <button id="deployButton">Deploy Differences</button>
+    <button id="toggleThemeButton">Toggle Theme</button>
+    <textarea id="resultArea" rows="20" cols="100"></textarea>
+    <h2>Transformed JSON</h2>
+    <textarea id="transformedArea" rows="20" cols="100"></textarea>
+    <h2>Logs</h2>
+    <textarea id="logsArea" rows="10" cols="100" readonly></textarea>
+    <h2>Remote Logs</h2>
+    <textarea id="remoteLogsArea" rows="10" cols="100" readonly></textarea>
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/javascript/javascript.min.js"></script>
+    <script src="js/compare.js"></script>
+  </body>
+</html>

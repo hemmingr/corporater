@@ -1,5 +1,4 @@
 import axios from "axios";
-import { config } from "../config/config.js";
 import logger from './logger.js'; 
 
 const githubToken = process.env.GITHUB_TOKEN;

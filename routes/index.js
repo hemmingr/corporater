@@ -6,6 +6,7 @@ import githubRoutes from './githubRoutes.js';
 import apiRoutes from './apiRoutes.js';
 import { passport } from '../config/auth.js';
 import checkDomain from '../middleware/checkDomain.js'; // Import the middleware
+import { ensureAuthenticated } from '../middleware/index.js'; // Import ensureAuthenticated
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -29,7 +30,7 @@ router.get('/logout', (req, res) => {
 });
 
 // Add the profile route
-router.get('/profile', (req, res) => {
+router.get('/profile', ensureAuthenticated, (req, res) => {
   if (req.isAuthenticated()) {
     res.json(req.user);
   } else {
@@ -37,20 +38,24 @@ router.get('/profile', (req, res) => {
   }
 });
 
-router.get('/idprocessor', (req, res) => {
+router.get('/idprocessor', ensureAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, '../public', 'idprocessor.html'));
 });
 
-router.get('/view-config', (req, res) => {
+router.get('/view-config', ensureAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, '../public', 'view-config.html'));
 });
 
-router.get('/file-structure', (req, res) => {
+router.get('/file-structure', ensureAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, '../public', 'file-structure.html'));
 });
 
-router.get('/uptime', (req, res) => {
+router.get('/uptime', ensureAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, '../public', 'uptime.html'));
+});
+
+router.get('/compare', ensureAuthenticated, (req, res) => {
+    res.sendFile(path.join(__dirname, '../public', 'compare.html'));
 });
 
 router.get('/', (req, res) => {
@@ -76,7 +81,14 @@ router.get('/client-info', (req, res) => {
   });
 });
 
-router.get('/logs', (req, res) => {
+router.get('/credentials', ensureAuthenticated, (req, res) => {
+    res.json({
+        username: process.env.SOURCE_SERVER_USERNAME,
+        password: process.env.SOURCE_SERVER_PASSWORD
+    });
+});
+
+router.get('/logs', ensureAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, '../public', 'logs.html'));
 });
 

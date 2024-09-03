@@ -1,10 +1,33 @@
 let currentStyle = "visual";
+let apiKey = "";
+
+// Fetch API key from /get-api-key endpoint
+async function fetchApiKey() {
+  try {
+    const response = await fetch("/api/get-api-key");
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    apiKey = data.apiKey;
+    console.log("Fetched API key:", apiKey); // Log the fetched API key
+  } catch (error) {
+    console.error("Error fetching API key:", error);
+  }
+}
 
 async function fetchFileStructure() {
   try {
-    const response = await fetch("/api/file-structure");
+    // Ensure API key is fetched before making the request
+    await fetchApiKey();
+
+    const response = await fetch("/api/file-structure", {
+      headers: {
+        'Authorization': `Bearer ${apiKey}` // Include the API key in the Authorization header
+      }
+    });
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data = await response.json();
     console.log("Fetched data:", data); // Log the fetched data
@@ -45,19 +68,19 @@ function createAnalogTree(data, prefix = "") {
 }
 
 function toggleStyle() {
-  console.log("Toggle button clicked"); // Log button click
+  console.log("Toggle button clicked");
   fetchFileStructure().then((data) => {
     const fileStructureElement = document.getElementById("file-structure");
     fileStructureElement.innerHTML = ""; // Clear current content
     if (currentStyle === "visual") {
-      console.log("Switching to analog style"); // Log style switch
+      console.log("Switching to analog style"); // style switch
       const pre = document.createElement("pre");
       pre.classList.add("analog");
       pre.textContent = createAnalogTree(data);
       fileStructureElement.appendChild(pre);
       currentStyle = "analog";
     } else {
-      console.log("Switching to visual style"); // Log style switch
+      console.log("Switching to visual style"); // style switch
       fileStructureElement.appendChild(createTree(data));
       currentStyle = "visual";
     }
@@ -66,7 +89,7 @@ function toggleStyle() {
 
 // Initialize with visual style
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("Document loaded, initializing with visual style"); // Log initialization
+  console.log("Document loaded, initializing with visual style");
   toggleStyle();
 
   // Add event listener for the toggle button

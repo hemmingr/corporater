@@ -1,9 +1,10 @@
 import winston from "winston";
 import expressWinston from "express-winston";
 import { WebSocketServer } from "ws";
-import { config } from "../config/config.js";
+import { initializeConfig } from "../config/config.js";
 
-const setupLogging = (app, server) => {
+const setupLogging = async (app, server) => {
+  const config = await initializeConfig();
   const wss = new WebSocketServer({ server });
 
   const logger = winston.createLogger({

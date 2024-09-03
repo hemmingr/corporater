@@ -1,8 +1,7 @@
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
-import { config } from "../config/config.js";
 
-const setupSwagger = (app) => {
+const setupSwagger = (app, config) => {
   const swaggerOptions = {
     swaggerDefinition: {
       openapi: "3.0.0",
@@ -25,3 +24,4 @@ const setupSwagger = (app) => {
 };
 
 export default setupSwagger;
+

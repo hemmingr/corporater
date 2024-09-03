@@ -1,5 +1,5 @@
 import amqplib from "amqplib";
-import { config } from "../config/config.js";
+import { initializeConfig } from "../config/config.js";
 
 const MAX_RETRIES = 5;
 const RETRY_DELAY = 5000; // 5 seconds delay between retries
@@ -7,7 +7,7 @@ const RETRY_DELAY = 5000; // 5 seconds delay between retries
 let rabbitConnection;
 let rabbitChannel;
 
-async function initializeRabbitMQ() {
+async function initializeRabbitMQ(config) {
   if (config.rabbitmqEnabled) {
     try {
       console.log("Initializing RabbitMQ...");
@@ -23,15 +23,13 @@ async function initializeRabbitMQ() {
   }
 }
 
-initializeRabbitMQ();
-
-async function sendChunks(chunks) {
+async function sendChunks(chunks, config) {
   if (config.rabbitmqEnabled && rabbitChannel) {
     try {
       console.log("Sending messages to RabbitMQ...");
       for (const chunk of chunks) {
         console.log("Sending chunk to RabbitMQ:", chunk);
-        await sendToRabbitQueueWithRetry(chunk);
+        await sendToRabbitQueueWithRetry(chunk, config);
       }
     } catch (error) {
       console.error("Error sending messages to RabbitMQ:", error);
@@ -41,7 +39,7 @@ async function sendChunks(chunks) {
   }
 }
 
-async function sendToRabbitQueueWithRetry(chunk, attempt = 1) {
+async function sendToRabbitQueueWithRetry(chunk, config, attempt = 1) {
   try {
     await rabbitChannel.sendToQueue(
       config.rabbitQueueName,
@@ -58,7 +56,7 @@ async function sendToRabbitQueueWithRetry(chunk, attempt = 1) {
         } seconds...`
       );
       await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
-      await sendToRabbitQueueWithRetry(chunk, attempt + 1);
+      await sendToRabbitQueueWithRetry(chunk, config, attempt + 1);
     } else {
       console.error(
         "Max retries reached. Could not send message to RabbitMQ:",
@@ -68,4 +66,4 @@ async function sendToRabbitQueueWithRetry(chunk, attempt = 1) {
   }
 }
 
-export { sendChunks };
+export { initializeRabbitMQ, sendChunks };

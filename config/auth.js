@@ -13,7 +13,6 @@ passport.use(new OIDCStrategy({
   passReqToCallback: false,
   scope: ['profile', 'offline_access', 'https://graph.microsoft.com/mail.read']
 }, (iss, sub, profile, accessToken, refreshToken, done) => {
-  // Handle user profile and tokens here
   done(null, profile);
 }));
 
@@ -26,3 +25,4 @@ passport.deserializeUser((obj, done) => {
 });
 
 export { passport };
+

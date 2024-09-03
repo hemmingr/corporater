@@ -2,8 +2,8 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import http from "http";
-import { config } from "./config/config.js";
-import setupMiddleware from "./middleware/index.js";
+import { initializeConfig } from "./config/config.js";
+import { setupMiddleware } from "./middleware/index.js"; // Use named import
 import setupLogging from "./logging/index.js";
 import setupRoutes from "./routes/index.js";
 import setupSwagger from "./doc/swaggerSetup.js";
@@ -11,6 +11,7 @@ import fetchIpInfo from "./services/ipService.js";
 import { passport } from "./config/auth.js"; // Use named import
 import session from "express-session";
 import dotenv from 'dotenv';
+import { initializeRabbitMQ } from "./services/messageQueue.js";
 
 dotenv.config();
 
@@ -21,12 +22,15 @@ const app = express();
 const server = http.createServer(app);
 
 const initializeServer = async () => {
+  const config = await initializeConfig();
   const serverIpInfo = await fetchIpInfo();
 
   app.set("trust proxy", 1);
 
-  setupMiddleware(app); // Setup middleware
-  setupLogging(app, server);
+  setupMiddleware(app, config); // Pass config to middleware setup
+  await setupLogging(app, server); // Await setupLogging to ensure config is loaded
+  await initializeRabbitMQ(config); // Initialize RabbitMQ with config
+  setupSwagger(app, config); // Pass config to Swagger setup
 
   // Configure session middleware
   app.use(session({
@@ -46,7 +50,6 @@ const initializeServer = async () => {
   });
 
   app.use("/", setupRoutes); // Use your existing routes
-  setupSwagger(app); // Use the new Swagger setup module
 
   app.use(express.static(path.join(__dirname, "public")));
 
