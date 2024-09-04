@@ -99,7 +99,7 @@
               "enabled": true
             },
             {
-              "type": "Property",
+              "type": "Properties",
               "enabled": true
             }
           ]
@@ -126,7 +126,7 @@
               "enabled": true
             },
             {
-              "type": "Property",
+              "type": "Properties",
               "enabled": true
             }
           ]
