@@ -96,7 +96,7 @@
             },
             {
               "type": "Enterprise Tasks",
-              "enabled": false
+              "enabled": true
             },
             {
               "type": "Property",
