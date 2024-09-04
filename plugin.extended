@@ -60,3 +60,4 @@ _apie5.add(EndpointParameter, id := '1495', name := 'Release', key := 'keyreleas
 _apie5.add(EndpointParameter, id := '1496', name := 'Filter', key := 'keyfilter')
 _apie5.add(EndpointParameter, id := '1497', name := 'Page', key := 'keypage')
 _apie5.add(EndpointParameter, id := '1498', name := 'Limit', key := 'keylimit')
+_cat.add(RemoteResource, id := '1527')
