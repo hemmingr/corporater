@@ -1,3 +1,5 @@
+// routes/apiRoutes.js
+
 import express from "express";
 import authOrApiKey from '../middleware/authOrApiKey.js'; // Import the combined auth middleware
 import checkApiKey from '../middleware/checkApiKey.js';
@@ -59,20 +61,7 @@ router.get("/latest-diff", (req, res) => {
     });
   }
 });
-/*
-router.get("/config", (req, res) => {
-  res.json(configData);
-});
 
-router.post("/update-config", (req, res) => {
-  try {
-    configData = req.body;
-    res.status(200).json({ message: "Configuration updated successfully." });
-  } catch (error) {
-    res.status(400).json({ error: "Invalid JSON data." });
-  }
-});
-*/
 router.post("/openai", (req, res) => {
   try {
     const inputData = req.body;

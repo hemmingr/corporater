@@ -1,3 +1,5 @@
+// services/ipService.js
+
 import axios from "axios";
 
 const fetchIpInfo = async () => {

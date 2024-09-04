@@ -1,3 +1,4 @@
+// logging/index.js
 import winston from "winston";
 import expressWinston from "express-winston";
 import { WebSocketServer } from "ws";

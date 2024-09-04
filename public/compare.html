@@ -16,20 +16,28 @@
   </head>
   <body>
     <h1>Deployment Test</h1>
+    <!-- Added Transfer Select -->
     <select id="transferSelect">
       <option value="">Select a transfer</option>
     </select>
+
+    <!-- Added Transfer Options Select -->
+    <select id="transferOptionsSelect">
+      <option value="">Select an option</option>
+    </select>
+
     <button id="compareButton">Compare Objects</button>
     <button id="deployButton">Deploy Differences</button>
     <button id="toggleThemeButton">Toggle Theme</button>
+    <h2>Result JSON</h2>
     <textarea id="resultArea" rows="20" cols="100"></textarea>
     <h2>Transformed JSON</h2>
     <textarea id="transformedArea" rows="20" cols="100"></textarea>
     <h2>Logs</h2>
     <textarea id="logsArea" rows="10" cols="100" readonly></textarea>
+    <button id="clearLogsButton">Clear Logs</button>
     <h2>Remote Logs</h2>
     <textarea id="remoteLogsArea" rows="10" cols="100" readonly></textarea>
-    
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/javascript/javascript.min.js"></script>

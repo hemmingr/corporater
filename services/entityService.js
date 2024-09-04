@@ -1,3 +1,5 @@
+// services/entityService.js
+
 function mergeEntityData(existingEntity, newEntity) {
   const updatedEntity = { ...existingEntity };
 

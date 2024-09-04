@@ -1,4 +1,5 @@
 // config/auth.js
+
 import passport from 'passport';
 import { OIDCStrategy } from 'passport-azure-ad';
 

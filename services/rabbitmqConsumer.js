@@ -1,3 +1,5 @@
+// services/rabbitmqConsumer.js
+
 import amqplib from "amqplib";
 import { config } from "../config/config.js";
 import { entityConfig } from "../config/entityConfig.js";

@@ -1,3 +1,5 @@
+// services/idProcessor.js
+
 export function processIds(input, typeMappingsPrefix) {
   const typeMappings = {
     Page: "Page",

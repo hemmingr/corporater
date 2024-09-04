@@ -1,3 +1,5 @@
+// public/js/idprocessor.js
+
 document.addEventListener("DOMContentLoaded", function () {
   const inputTextArea = document.getElementById("inputText");
   const outputTextArea = document.getElementById("output");

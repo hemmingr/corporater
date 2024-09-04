@@ -1,3 +1,6 @@
+// public/js/file-structure.js
+
+
 let currentStyle = "visual";
 let apiKey = "";
 

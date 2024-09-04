@@ -2,8 +2,15 @@ console.log("compare.js script loaded");
 
 document.addEventListener("DOMContentLoaded", async () => {
   console.log("DOM fully loaded and parsed");
+
   const logsArea = document.getElementById("logsArea");
   const remoteLogsArea = document.getElementById("remoteLogsArea");
+  const transferSelect = document.getElementById("transferSelect");
+  const transferOptionsSelect = document.getElementById(
+    "transferOptionsSelect"
+  );
+  const deployButton = document.getElementById("deployButton");
+  const transformedArea = document.getElementById("transformedArea");
 
   function logAction(message) {
     if (logsArea) {
@@ -22,7 +29,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function compareJson(json1, json2) {
-    // Implement your JSON comparison logic here
     const diff = {};
     for (const key in json1) {
       if (json1[key] !== json2[key]) {
@@ -32,9 +38,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     return diff;
   }
 
-  function transformJson(diff) {
+  function transformJson(diff, pushtype) {
     const transformed = {
-      pushtype: "user",
+      pushtype: pushtype,
       expressions: [],
     };
 
@@ -51,8 +57,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     return transformed;
   }
 
+  let transformedEditor;
+  let editor;
+
+  function toggleDeployButton() {
+    if (transformedEditor) {
+      if (transformedEditor.getValue().trim().length > 0) {
+        deployButton.style.display = "inline-block";
+      } else {
+        deployButton.style.display = "none";
+      }
+    } else {
+      console.error("transformedEditor is not defined");
+    }
+  }
+
   try {
-    // Fetch the configuration from the /config endpoint
     const configResponse = await fetch("/github/config");
     logAction("Fetching configuration...");
     if (!configResponse.ok) {
@@ -62,8 +82,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const config = await configResponse.json();
     logAction("Configuration fetched successfully.");
 
-    // Populate the transfer selection box
-    const transferSelect = document.getElementById("transferSelect");
     config.setup.transfer_rules.allowed_transfers.forEach((transfer) => {
       const option = document.createElement("option");
       option.value = `${transfer.source}-${transfer.destination}`;
@@ -72,7 +90,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
     logAction("Transfer selection populated.");
 
-    // Fetch credentials once and store them for reuse
     const credentialsResponse = await fetch("/credentials");
     logAction("Fetching credentials...");
     if (!credentialsResponse.ok) {
@@ -80,30 +97,60 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     const { username, password } = await credentialsResponse.json();
-    logAction("Credentials fetched successfully.");
 
-    // Define headers here so they are accessible in the entire scope
     const headers = new Headers();
     headers.set("Authorization", "Basic " + btoa(username + ":" + password));
 
-    // Initialize CodeMirror
-    const editor = CodeMirror.fromTextArea(
-      document.getElementById("resultArea"),
-      {
-        mode: "application/json",
-        lineNumbers: true,
-        theme: "dracula", // Set Dracula as the default theme
-      }
-    );
+    // Initialize editors
+    editor = CodeMirror.fromTextArea(document.getElementById("resultArea"), {
+      mode: "application/json",
+      lineNumbers: true,
+      theme: "dracula", // Default theme
+    });
 
-    const transformedEditor = CodeMirror.fromTextArea(
+    transformedEditor = CodeMirror.fromTextArea(
       document.getElementById("transformedArea"),
       {
         mode: "application/json",
         lineNumbers: true,
-        theme: "dracula", // Set Dracula as the default theme
+        theme: "dracula", // Default theme
       }
     );
+
+    const keyidspaceMap = {
+      users: "user",
+      plugin: "plugin",
+      "Enterprise Templates": "enterprisetemplate",
+      "Enterprise Tasks": "enterprisetask", // Added
+      Properties: "property", // Added
+    };
+
+    transferSelect.addEventListener("change", () => {
+      const selectedTransfer = transferSelect.value;
+      transferOptionsSelect.innerHTML =
+        '<option value="">Select an option</option>';
+
+      if (selectedTransfer) {
+        const [sourceStage, destinationStage] = selectedTransfer.split("-");
+        const selectedTransferObj =
+          config.setup.transfer_rules.allowed_transfers.find(
+            (transfer) =>
+              transfer.source === sourceStage &&
+              transfer.destination === destinationStage
+          );
+
+        if (selectedTransferObj) {
+          selectedTransferObj.options.forEach((option) => {
+            if (option.enabled) {
+              const opt = document.createElement("option");
+              opt.value = option.type;
+              opt.textContent = option.type;
+              transferOptionsSelect.appendChild(opt);
+            }
+          });
+        }
+      }
+    });
 
     document
       .getElementById("compareButton")
@@ -114,6 +161,13 @@ document.addEventListener("DOMContentLoaded", async () => {
           if (!selectedTransfer) {
             throw new Error("Please select a transfer");
           }
+
+          const selectedOption = transferOptionsSelect.value;
+          if (!selectedOption) {
+            throw new Error("Please select an option");
+          }
+
+          const keyidspace = keyidspaceMap[selectedOption] || "user";
 
           const [sourceStage, destinationStage] = selectedTransfer.split("-");
           logAction(`Selected transfer: ${sourceStage} to ${destinationStage}`);
@@ -135,8 +189,8 @@ document.addEventListener("DOMContentLoaded", async () => {
           logAction(`Fetching data from: ${endpoint1}`);
           logAction(`Fetching data from: ${endpoint2}`);
 
-          const params1 = new URLSearchParams({
-            keyidspace: "user",
+          const params = new URLSearchParams({
+            keyidspace: keyidspace,
             keymethod: "generate",
             keyfilter: "testfilter",
             keypage: "1",
@@ -145,8 +199,8 @@ document.addEventListener("DOMContentLoaded", async () => {
           });
 
           const [response1, response2] = await Promise.all([
-            fetch(`${endpoint1}?${params1.toString()}`, { headers }),
-            fetch(endpoint2, { headers }),
+            fetch(`${endpoint1}?${params.toString()}`, { headers }),
+            fetch(`${endpoint2}?${params.toString()}`, { headers }),
           ]);
 
           if (!response1.ok || !response2.ok) {
@@ -161,19 +215,34 @@ document.addEventListener("DOMContentLoaded", async () => {
           logAction("JSON comparison completed.");
 
           // Transform the JSON differences to match the schema
-          const transformedResult = transformJson(result);
+          const pushtypeMap = {
+            user: "user",
+            plugin: "plugin",
+            enterprisetemplate: "enterprisetemplate",
+            enterprisetask: "enterprisetask", // Added
+            property: "property", // Added
+          };
+
+          const transformedResult = transformJson(
+            result,
+            pushtypeMap[keyidspace]
+          );
           transformedEditor.setValue(
             JSON.stringify(transformedResult, null, 2)
           );
           logAction("JSON transformation completed.");
+
+          // Update the deploy button visibility
+          toggleDeployButton();
         } catch (error) {
-          console.error("Error:", error); // Log the error
-          editor.setValue(`Error: ${error.message}`);
+          console.error("Error:", error); // Log the full error object to the console
+          editor.setValue(
+            `Error: ${error.message}\nStack trace: ${error.stack}`
+          );
           logAction(`Error: ${error.message}`);
         }
       });
 
-    // Deploy differences button
     document
       .getElementById("deployButton")
       .addEventListener("click", async () => {
@@ -184,103 +253,100 @@ document.addEventListener("DOMContentLoaded", async () => {
             throw new Error("Please select a transfer");
           }
 
+          const selectedOption = transferOptionsSelect.value;
+          if (!selectedOption) {
+            throw new Error("Please select an option");
+          }
+
+          const keyidspace = keyidspaceMap[selectedOption] || "user";
+
           const [sourceStage, destinationStage] = selectedTransfer.split("-");
           logAction(`Selected transfer: ${sourceStage} to ${destinationStage}`);
 
           const targetHost = config.setup.hosts.find(
             (host) => host.stage === destinationStage
           );
+
           if (!targetHost) {
             throw new Error("Target host not found");
           }
 
-          const endpoint = `https://${targetHost.name}.${config.setup.common.domain}/CorpoWebserver/api/control/push`;
-          logAction(`Deploying to endpoint: ${endpoint}`);
+          const pushtypeMap = {
+            user: "user",
+            plugin: "plugin",
+            enterprisetemplate: "enterprisetemplate",
+            enterprisetask: "enterprisetask", // Added
+            property: "property", // Added
+          };
 
-          const transformedDifferences = transformedEditor.getValue();
-          logAction("Transformed differences payload prepared.");
+          const pushtype = pushtypeMap[keyidspace];
 
-          const deployResponse = await fetch(endpoint, {
+          const deployRequestBody = {
+            pushtype: pushtype,
+            expressions: [],
+          };
+
+          const jsonResult = JSON.parse(transformedEditor.getValue());
+
+          jsonResult.expressions.forEach((exp) => {
+            deployRequestBody.expressions.push(exp);
+          });
+
+          const deployEndpoint = `https://${targetHost.name}.${config.setup.common.domain}/CorpoWebserver/api/control/push`;
+
+          const response = await fetch(deployEndpoint, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
               Authorization: "Basic " + btoa(username + ":" + password),
             },
-            body: transformedDifferences,
+            body: JSON.stringify(deployRequestBody),
           });
 
-          logAction(`Deploy response status: ${deployResponse.status}`);
-          const responseBody = await deployResponse.text();
-          logAction(`Deploy response body: ${responseBody}`);
-
-          if (!deployResponse.ok) {
-            throw new Error(`Failed to deploy differences: ${responseBody}`);
+          if (!response.ok) {
+            throw new Error("Failed to deploy differences");
           }
 
-          logAction("Differences deployed successfully.");
-          alert("Differences deployed successfully!");
-
-          // Fetch remote logs with no-cors mode
-          const logsEndpoint = `https://${targetHost.name}.${config.setup.common.domain}/CorpoWebserver/api/control/logs`;
-          logAction(`Fetching remote logs from: ${logsEndpoint}`);
-          const logsResponse = await fetch(logsEndpoint, {
-            method: "GET",
-            mode: "no-cors", // Use no-cors mode
-            headers: {
-              Authorization: "Basic " + btoa(username + ":" + password),
-            },
-          });
-
-          logAction(`Remote logs response status: ${logsResponse.status}`);
-          // Since no-cors mode doesn’t allow access to response body, you can only check if the request was successful
-          if (logsResponse.ok) {
-            logRemote(
-              "Logs fetched but cannot access content in no-cors mode."
-            );
-          } else {
-            logRemote(
-              "Failed to fetch logs. No-cors mode doesn't allow content access."
-            );
+          let result;
+          try {
+            result = await response.json();
+          } catch (e) {
+            result = "No JSON response from deployment";
           }
-          logAction("Remote logs fetching attempt completed.");
+
+          logAction("Deployment completed successfully.");
+          logRemote(JSON.stringify(result, null, 2));
         } catch (error) {
-          console.error("Error:", error); // Log the error
-          alert(`Error: ${error.message}`);
+          console.error("Error:", error);
           logAction(`Error: ${error.message}`);
         }
       });
 
+    // Toggle theme button functionality
     document
       .getElementById("toggleThemeButton")
       .addEventListener("click", () => {
-        const body = document.body;
-        const textareas = document.querySelectorAll("textarea");
-        const editors = [editor, transformedEditor]; // Assuming you have these CodeMirror instances
-
-        if (body.classList.contains("light-theme")) {
-          body.classList.remove("light-theme");
-          body.classList.add("dark-theme");
-          textareas.forEach((textarea) => {
-            textarea.classList.remove("light-theme");
-            textarea.classList.add("dark-theme");
-          });
-          editors.forEach((editor) => {
-            editor.setOption("theme", "dracula");
-          });
+        if (transformedEditor) {
+          const currentTheme = transformedEditor.getOption("theme");
+          const newTheme = currentTheme === "dracula" ? "default" : "dracula";
+          transformedEditor.setOption("theme", newTheme);
+          if (editor) {
+            editor.setOption("theme", newTheme);
+          }
         } else {
-          body.classList.remove("dark-theme");
-          body.classList.add("light-theme");
-          textareas.forEach((textarea) => {
-            textarea.classList.remove("dark-theme");
-            textarea.classList.add("light-theme");
-          });
-          editors.forEach((editor) => {
-            editor.setOption("theme", "default");
-          });
+          console.error("transformedEditor is not defined");
         }
       });
+
+    document.getElementById("clearLogsButton").addEventListener("click", () => {
+      if (logsArea) {
+        logsArea.value = "";
+      }
+      if (remoteLogsArea) {
+        remoteLogsArea.value = "";
+      }
+    });
   } catch (error) {
-    console.error("Error:", error); // Log the error
-    logAction(`Error: ${error.message}`);
+    console.error("Error during initialization:", error);
   }
 });

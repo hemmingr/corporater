@@ -1,85 +1,88 @@
-/* Light Theme */
-body.light-theme {
-  background-color: #f0f0f0;
-  color: #333;
+/* General Styles */
+body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  position: relative; /* Add this to position elements absolutely within body */
 }
 
-button.light-theme {
-  background-color: #333;
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+header h1 {
+  margin: 0;
+}
+
+/* Toggle Theme Button */
+#toggleThemeButton {
+  background-color: #007bff;
   color: #fff;
   border: none;
   padding: 10px 20px;
-  border-radius: 10px;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background-color 0.3s ease;
+  position: absolute; /* Position it absolutely within the body */
+  top: 20px; /* Adjust as needed */
+  right: 20px; /* Adjust as needed */
 }
 
-button.light-theme:hover {
-  background-color: #555;
+#toggleThemeButton:hover {
+  background-color: #0056b3;
 }
 
-button.light-theme:disabled {
+/* Pulldown Menus */
+select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+  transition: border-color 0.3s ease;
+}
+
+select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Buttons */
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
 
-/* Dark Theme */
-body.dark-theme {
-  background-color: #121212;
-  color: #e0e0e0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* Deploy Button Initial Visibility */
+#deployButton {
+  display: none; /* Initially hidden */
 }
 
-button.dark-theme {
-  background-color: #444;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-button.dark-theme:hover {
-  background-color: #666;
-}
-
-button.dark-theme:disabled {
-  background-color: #555;
-  cursor: not-allowed;
-}
-
-/* Ensure CodeMirror themes are also applied */
-.CodeMirror {
-  border: 1px solid #ddd;
-  height: 500px;
-}
-
-.CodeMirror.cm-s-dracula {
-  background-color: #282a36;
-  color: #f8f8f2;
-}
-
-/* Button Container */
-.button-container {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-/* Summary Container */
-.summary-container {
-  margin-bottom: 20px;
-  font-size: 1.2em;
-  color: #333;
-}
-
-body.dark-theme .summary-container {
-  color: #e0e0e0;
-}
-
-/* Input and Output Text Areas */
+/* Text Areas */
 textarea {
   width: 100%;
   height: 150px;
@@ -90,12 +93,66 @@ textarea {
   transition: border-color 0.3s ease;
 }
 
-body.light-theme textarea:focus {
-  border-color: #333;
+textarea:focus {
+  border-color: #007bff;
+}
+
+/* Button Container */
+.button-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+/* Summary Container */
+.summary-container {
+  margin-bottom: 20px;
+  font-size: 1.2em;
+  color: #333;
+}
+
+/* Dark Theme Styles */
+body.dark-theme {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+body.dark-theme header {
+  border-bottom: 1px solid #444;
+}
+
+body.dark-theme select {
+  border-color: #444;
 }
 
 body.dark-theme textarea:focus {
   border-color: #444;
+}
+
+body.dark-theme #toggleThemeButton {
+  background-color: #555;
+}
+
+body.dark-theme #toggleThemeButton:hover {
+  background-color: #333;
+}
+
+body.dark-theme .button-container button {
+  background-color: #444;
+  color: #e0e0e0;
+}
+
+body.dark-theme .button-container button:hover {
+  background-color: #666;
+}
+
+body.dark-theme .summary-container {
+  color: #e0e0e0;
+}
+
+body.dark-theme .loading {
+  color: #e0e0e0;
 }
 
 /* Loading Indicator */
@@ -103,9 +160,4 @@ body.dark-theme textarea:focus {
   display: none;
   margin-top: 10px;
   font-size: 1.2em;
-  color: #333;
-}
-
-body.dark-theme .loading {
-  color: #e0e0e0;
 }

@@ -1,4 +1,5 @@
 // entityConfig.js
+
 const entityConfig = {
   user: {
     dependencies: ["card", "template"],

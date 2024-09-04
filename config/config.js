@@ -1,4 +1,5 @@
 // config/config.js
+
 import dotenv from "dotenv";
 import Joi from "joi";
 import { fetchAzureIpRanges } from "../services/azureIpService.js";
@@ -14,6 +15,8 @@ const schema = Joi.object({
     .uri()
     .default("https://innovation.corporater.dev"),
   LOG_LEVEL: Joi.string().default("info"),
+  HOSTS_USERNAME: Joi.string().required(),
+  HOSTS_PASSWORD: Joi.string().required(),
 });
 
 const { error, value: envVars } = schema.validate(process.env, {
@@ -43,7 +46,10 @@ const initializeConfig = async () => {
     sourceServerBaseUrl: envVars.SOURCE_SERVER_BASE_URL,
     allowedIpRanges: [...staticIpRanges, ...azureIpRanges],
     logLevel: envVars.LOG_LEVEL,
+    hostsUsername: envVars.HOSTS_USERNAME,
+    hostsPassword: envVars.HOSTS_PASSWORD,
   };
 };
 
 export { initializeConfig };
+

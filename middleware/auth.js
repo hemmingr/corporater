@@ -1,3 +1,4 @@
+// middleware/auth.js
 import { passport } from '../config/auth.js';
 import checkApiKey from './checkApiKey.js';
 

@@ -1,3 +1,5 @@
+// middleware/index.js
+
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import bodyParser from "body-parser";

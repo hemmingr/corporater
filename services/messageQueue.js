@@ -1,3 +1,5 @@
+// services/messageQueue.js
+
 import amqplib from "amqplib";
 import { initializeConfig } from "../config/config.js";
 

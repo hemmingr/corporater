@@ -1,3 +1,5 @@
+// routes/index.js
+
 import express from 'express';
 import path from 'path';
 import dns from 'dns';
@@ -83,8 +85,8 @@ router.get('/client-info', (req, res) => {
 
 router.get('/credentials', ensureAuthenticated, (req, res) => {
     res.json({
-        username: process.env.SOURCE_SERVER_USERNAME,
-        password: process.env.SOURCE_SERVER_PASSWORD
+        username: process.env.HOSTS_USERNAME,
+        password: process.env.HOSTS_PASSWORD
     });
 });
 
