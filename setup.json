@@ -97,6 +97,10 @@
             {
               "type": "Enterprise Tasks",
               "enabled": false
+            },
+            {
+              "type": "Property",
+              "enabled": true
             }
           ]
         },
@@ -119,6 +123,10 @@
             },
             {
               "type": "Enterprise Tasks",
+              "enabled": true
+            },
+            {
+              "type": "Property",
               "enabled": true
             }
           ]
