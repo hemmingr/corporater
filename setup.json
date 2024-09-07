@@ -101,6 +101,10 @@
             {
               "type": "Properties",
               "enabled": true
+            },
+            {
+              "type": "Groups",
+              "enabled": true
             }
           ]
         },
@@ -127,6 +131,10 @@
             },
             {
               "type": "Properties",
+              "enabled": true
+            },
+            {
+              "type": "Groups",
               "enabled": true
             }
           ]
@@ -275,19 +283,7 @@
       },
       "cloud": {
         "enabled": true,
-        "base_url": "https://cloud.corporater.dev",
-        "failover": {
-          "enabled": true,
-          "strategy": "manual",
-          "fallback_url": "https://onprem.corporater.local",
-          "notification": {
-            "enabled": true,
-            "method": "sms",
-            "recipients": [
-              "admin@corporater.com"
-            ]
-          }
-        }
+        "base_url": "https://cloud.corporater.dev"
       }
     }
   }
