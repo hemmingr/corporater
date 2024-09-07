@@ -84,7 +84,7 @@
           "options": [
             {
               "type": "Plugin",
-              "enabled": true
+              "enabled": false
             },
             {
               "type": "Users",
