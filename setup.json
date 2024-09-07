@@ -104,7 +104,7 @@
             },
             {
               "type": "Groups",
-              "enabled": true
+              "enabled": false
             }
           ]
         },
