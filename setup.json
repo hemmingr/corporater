@@ -25,6 +25,7 @@
     "version": "1.8.2",
     "check_environment_status_before_transfer": true,
     "transfer_userpasswords": false,
+    "traverse_dependencies": true,
     "common": {
       "domain": "innovation.corporater.dev"
     },
