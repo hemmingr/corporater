@@ -26,6 +26,7 @@
     "check_environment_status_before_transfer": true,
     "transfer_userpasswords": false,
     "traverse_dependencies": true,
+    "numeric_id_warning": true,
     "common": {
       "domain": "innovation.corporater.dev"
     },
@@ -35,21 +36,33 @@
         "uid": "f3a5b76e-1c4d-4f19-8d2b-1a3c33e73f1b",
         "name": "newfeaturemaster",
         "stage": "development",
-        "description": "Development environment where new features are developed and initially tested."
+        "description": "Development environment where new features are developed and initially tested.",
+        "auth": {
+          "clientId": "20ea04b4b90b0944ba6a11c3b86a84",
+          "clientSecret": "d8138eb91d9bfab656e6ba3270ec9c587004fd9ad768ae8ed321aa2c9d540153"
+        }
       },
       {
         "id": "host2",
         "uid": "b2c6a7e1-6cd5-4c88-a8f1-89f7cbb8f8c5",
         "name": "deployment",
         "stage": "testing",
-        "description": "Testing environment for thorough validation before production deployment."
+        "description": "Testing environment for thorough validation before production deployment.",
+        "auth": {
+          "clientId": "20ea04b4b90b0944ba6a11c3b86a84",
+          "clientSecret": "fdb3766660126b88c5783fb9a7a19d95627322a02ddb53f17c56ddbe6e8dce69"
+        }
       },
       {
         "id": "host3",
         "uid": "e4d7c72a-9e7a-4f99-bb91-f5c8d9b8b715",
         "name": "basic",
         "stage": "production",
-        "description": "Production environment where features are live and available to end-users."
+        "description": "Production environment where features are live and available to end-users.",
+        "auth": {
+          "clientId": "process.env.PROD_CLIENT_ID",
+          "clientSecret": "process.env.PROD_CLIENT_SECRET"
+        }
       }
     ],
     "feature_flags": {
