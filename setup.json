@@ -106,7 +106,7 @@
             },
             {
               "type": "Enterprise Templates",
-              "enabled": false
+              "enabled": true
             },
             {
               "type": "Enterprise Tasks",
