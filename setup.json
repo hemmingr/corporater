@@ -72,23 +72,10 @@
         "description": "Enable beta features for testing."
       }
     },
-    "health_checks": {
-      "development": {
-        "endpoint": "/health",
-        "interval": "5m"
-      },
-      "testing": {
-        "endpoint": "/health",
-        "interval": "5m"
-      },
-      "production": {
-        "endpoint": "/health",
-        "interval": "1m"
-      }
-    },
     "transfer_rules": {
       "allowed_transfers": [
         {
+          "id": "transfer_developement_to_testing",
           "source": "development",
           "destination": "testing",
           "description": "Transfer from Development to Testing for further validation.",
@@ -120,6 +107,7 @@
           ]
         },
         {
+          "id": "transfer_testing_to_production",
           "source": "testing",
           "destination": "production",
           "description": "Transfer from Testing to Production for live deployment.",
@@ -197,13 +185,13 @@
     },
     "process_descriptions": [
       {
-        "id": "process1",
+        "id": "process_development_to_testing",
         "name": "Development to Testing",
         "description": "Transfer from Development to Testing. Features are validated in the Testing environment. Post-transfer validation ensures quality before moving to Production.",
         "type": "forward"
       },
       {
-        "id": "process2",
+        "id": "process_testing_to_production",
         "name": "Testing to Production",
         "description": "Transfer from Testing to Production. Features become live for end-users. Issues detected in Production can be handled as required.",
         "type": "forward"
