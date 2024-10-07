@@ -38,8 +38,7 @@
         "stage": "development",
         "description": "Development environment where new features are developed and initially tested.",
         "auth": {
-          "clientId": "20ea04b4b90b0944ba6a11c3b86a84",
-          "clientSecret": "d8138eb91d9bfab656e6ba3270ec9c587004fd9ad768ae8ed321aa2c9d540153"
+          "clientId": "20ea04b4b90b0944ba6a11c3b86a84"
         }
       },
       {
@@ -49,8 +48,7 @@
         "stage": "testing",
         "description": "Testing environment for thorough validation before production deployment.",
         "auth": {
-          "clientId": "20ea04b4b90b0944ba6a11c3b86a84",
-          "clientSecret": "fdb3766660126b88c5783fb9a7a19d95627322a02ddb53f17c56ddbe6e8dce69"
+          "clientId": "20ea04b4b90b0944ba6a11c3b86a84"
         }
       },
       {
@@ -60,8 +58,7 @@
         "stage": "production",
         "description": "Production environment where features are live and available to end-users.",
         "auth": {
-          "clientId": "process.env.PROD_CLIENT_ID",
-          "clientSecret": "process.env.PROD_CLIENT_SECRET"
+          "clientId": "20ea04b4b90b0944ba6a11c3b86a84"
         }
       }
     ],
@@ -153,23 +150,6 @@
             }
           ]
         }
-      ],
-      "disallowed_transfers": [
-        {
-          "source": "development",
-          "destination": "production",
-          "description": "Direct transfer from Development to Production is not allowed to maintain stability."
-        },
-        {
-          "source": "production",
-          "destination": "testing",
-          "description": "Direct transfer from Production to Testing is not allowed to prevent overwriting Testing data."
-        },
-        {
-          "source": "testing",
-          "destination": "development",
-          "description": "Direct transfer from Testing to Development is not allowed to maintain data integrity."
-        }
       ]
     },
     "logging": {
@@ -229,7 +209,7 @@
         "type": "forward"
       }
     ],
-    "plugins": [
+    "scriptpackages": [
       {
         "plugin_uid": "b2c6a7e1-6cd5-4c88-a8f1-89f7cbb8f8c5",
         "name": "Deploy",
@@ -277,28 +257,6 @@
         },
         "owner": "f3a5b76e-1c4d-4f19-8d2b-1a3c33e73f19"
       }
-    ],
-    "hybrid_configuration": {
-      "on_prem": {
-        "enabled": true,
-        "base_url": "https://onprem.corporater.local",
-        "failover": {
-          "enabled": true,
-          "strategy": "automatic",
-          "fallback_url": "https://backup.corporater.local",
-          "notification": {
-            "enabled": true,
-            "method": "email",
-            "recipients": [
-              "admin@corporater.com"
-            ]
-          }
-        }
-      },
-      "cloud": {
-        "enabled": true,
-        "base_url": "https://cloud.corporater.dev"
-      }
-    }
+    ]
   }
 }
